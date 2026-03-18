@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REX Group</title>
+<title>REX</title>
 <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773854552/Logo_SVG_s6giav.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -713,7 +713,7 @@ footer::before {
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
-    <img src="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773853343/REX_Brown_Logo_zwsavl.svg" alt="REX Group">
+    <img src="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773853343/REX_Brown_Logo_zwsavl.svg" alt="REX">
   </a>
   <ul class="nav-links">
     <li><a href="#spaces">REX Spaces</a></li>
@@ -731,15 +731,14 @@ footer::before {
   <div class="hero-ring hero-ring-3"></div>
 
   <div class="hero-inner">
-    <img src="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773853343/REX_Brown_Logo_zwsavl.svg" alt="REX Group" class="hero-logo">
+    <img src="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773853343/REX_Brown_Logo_zwsavl.svg" alt="REX" class="hero-logo">
     <p class="hero-label">Brand Portfolio</p>
     <h1 class="hero-headline">
-      Building Nigeria's<br><em>Finest Spaces</em>
+      Spaces Finished Right.<br><em>Properties Placed Right.</em>
     </h1>
     <p class="hero-desc">
-      Two distinct brands. One unified vision. REX Group shapes the Nigerian
-      property landscape through world-class construction finishing and
-      exceptional real estate advisory.
+      REX shapes the Nigerian property landscape through world-class finishing
+      and exceptional real estate advisory.
     </p>
     <div class="hero-pills">
       <a href="#spaces" class="hero-pill">REX Spaces</a>
@@ -866,7 +865,7 @@ footer::before {
   <div class="footer-top">
     <div>
       <div class="footer-logo">
-        <img src="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773853343/REX_Brown_Logo_zwsavl.svg" alt="REX Group">
+        <img src="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773853343/REX_Brown_Logo_zwsavl.svg" alt="REX">
       </div>
       <p class="footer-about">
         Building and placing Nigeria's finest spaces through construction
@@ -894,13 +893,13 @@ footer::before {
       <ul class="footer-links">
         <li><a href="#">Abuja Office</a></li>
         <li><a href="#">Lagos Office</a></li>
-        <li><a href="mailto:hello@rexgroup.ng">hello@rexgroup.ng</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#b6ded3dadad9f6c4d3ced1c4d9c3c698d8d1"><span class="__cf_email__" data-cfemail="731b161f1f1c3301160b14011c06035d1d14">[email&#160;protected]</span></a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2025 REX Group · All rights reserved</p>
-    <p class="footer-tag">Building Nigeria's finest spaces</p>
+    <p class="footer-copy">© 2025 REX · All rights reserved</p>
+    <p class="footer-tag">Spaces Finished Right. Properties Placed Right.</p>
   </div>
 </footer>
 
@@ -913,8 +912,16 @@ footer::before {
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0, rootMargin: '0px 0px -60px 0px' });
   reveals.forEach(el => io.observe(el));
+
+  // Fallback: reveal anything already in view on load
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) el.classList.add('visible');
+    });
+  }, 300);
 </script>
 
 </body>
