@@ -408,11 +408,9 @@
     }
 
     .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      opacity: 1;
+      transform: none;
     }
-    .reveal.visible { opacity: 1; transform: none; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
@@ -435,7 +433,7 @@
 
 <!-- NAV -->
 <nav id="nav">
-  <a class="nav-logo" href="#">
+  <a class="nav-logo" href="https://rex.ng">
     <img src="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773853343/REX_Brown_Logo_zwsavl.svg" alt="REX Spaces" />
   </a>
   <ul class="nav-links">
@@ -554,7 +552,7 @@
       </div>
       <div>
         <p class="contact-item-label">Email</p>
-        <p class="contact-item-val">spaces@rex.ng</p>
+        <p class="contact-item-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c5f5c4d4f495f6c5e495402424b">[email&#160;protected]</a></p>
       </div>
       <div>
         <p class="contact-item-label">Phone</p>
@@ -607,28 +605,15 @@
   <p>Abuja, Nigeria · Premium Property Finishing</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Sticky nav
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => obs.observe(el));
+
 
   // Form
   document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const msg = document.getElementById('formMsg');
-    msg.textContent = 'Thank you — we\'ll be in touch shortly.';
-    this.reset();
-    setTimeout(() => msg.textContent = '', 5000);
-  });
-</script>
-</body>
-</html>
+    e.preventDefaul
