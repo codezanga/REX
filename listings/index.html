@@ -8,53 +8,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Josefin+Sans:wght@300;400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --primary:#AA7C5B;
-  --primary-dark:#8A6040;
-  --primary-light:#C49A7A;
+  --primary:#AA7C5B;--primary-dark:#8A6040;--primary-light:#C49A7A;
   --primary-dim:rgba(170,124,91,0.10);
-  --primary-dim2:rgba(170,124,91,0.06);
-  --bg:#FAF7F4;
-  --bg-2:#F3EDE6;
-  --bg-3:#EDE4DA;
-  --white:#FFFFFF;
-  --border:#E8DDD4;
-  --border-2:#DDD0C4;
-  --text:#2C1F14;
-  --text-2:#6B4E38;
-  --text-3:#A8896E;
-  --text-4:#C4AA94;
-  --sale:#2E9E6A;
-  --rent:#2E7EA8;
-  --sold:#C45A3A;
-  --offer:#7A5AAA;
-  --r:10px;
+  --bg:#FAF7F4;--bg-2:#F3EDE6;--bg-3:#EDE4DA;
+  --white:#FFFFFF;--border:#E8DDD4;--border-2:#DDD0C4;
+  --text:#2C1F14;--text-2:#6B4E38;--text-3:#A8896E;--text-4:#C4AA94;
+  --sale:#2E9E6A;--rent:#2E7EA8;--sold:#C45A3A;--offer:#7A5AAA;--r:10px;
 }
-
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:'Josefin Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
 
-/* HEADER */
-header{
-  background:rgba(255,255,255,0.95);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  padding:0 18px;
-  display:flex;align-items:center;justify-content:space-between;
-  height:62px;position:sticky;top:0;z-index:100;
-  box-shadow:0 1px 20px rgba(170,124,91,0.08);
-}
+header{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 18px;display:flex;align-items:center;justify-content:space-between;height:62px;position:sticky;top:0;z-index:100;box-shadow:0 1px 20px rgba(170,124,91,0.08);}
 .logo-img{height:30px;width:auto;object-fit:contain;}
 .header-right{display:flex;align-items:center;gap:10px;}
-.h-pill{
-  background:var(--primary-dim);
-  border:1px solid var(--border);
-  border-radius:20px;padding:5px 13px;
-  font-size:10px;letter-spacing:1px;
-  color:var(--text-3);
-  display:flex;align-items:center;gap:6px;
-}
+.h-pill{background:var(--primary-dim);border:1px solid var(--border);border-radius:20px;padding:5px 13px;font-size:10px;letter-spacing:1px;color:var(--text-3);display:flex;align-items:center;gap:6px;}
 .h-pill strong{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--primary);}
 .sync-wrap{display:flex;align-items:center;gap:5px;font-size:9px;letter-spacing:2px;color:var(--text-4);text-transform:uppercase;}
 .sync-dot{width:6px;height:6px;border-radius:50%;background:var(--sale);animation:pulse 2s infinite;}
@@ -63,37 +31,17 @@ header{
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
-/* MAIN */
 main{padding:22px 16px 100px;max-width:1200px;margin:0 auto;}
-
-/* PAGE TOP */
 .page-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px;}
 .page-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--text);letter-spacing:1px;line-height:1;}
 .page-title span{color:var(--primary);}
-.btn-add{
-  display:flex;align-items:center;gap:8px;
-  background:var(--primary);color:var(--white);
-  border:none;padding:12px 20px;border-radius:var(--r);
-  font-family:'Josefin Sans',sans-serif;
-  font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  cursor:pointer;font-weight:600;transition:all .2s;
-  white-space:nowrap;
-  box-shadow:0 4px 18px rgba(170,124,91,0.30);
-}
-.btn-add:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(170,124,91,0.35);}
+.btn-add{display:flex;align-items:center;gap:8px;background:var(--primary);color:var(--white);border:none;padding:12px 20px;border-radius:var(--r);font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:600;transition:all .2s;white-space:nowrap;box-shadow:0 4px 18px rgba(170,124,91,0.30);}
+.btn-add:hover{background:var(--primary-dark);transform:translateY(-2px);}
 .btn-add:active{transform:translateY(0);}
 
-/* STATS */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
 @media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr);}}
-.scard{
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:var(--r);padding:16px 18px;
-  position:relative;overflow:hidden;
-  animation:fadeUp .5s ease both;
-  box-shadow:0 2px 12px rgba(170,124,91,0.06);
-}
+.scard{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;position:relative;overflow:hidden;animation:fadeUp .5s ease both;box-shadow:0 2px 12px rgba(170,124,91,0.06);}
 .scard::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
 .scard:nth-child(1)::after{background:var(--primary);}
 .scard:nth-child(2)::after{background:var(--sale);}
@@ -106,55 +54,27 @@ main{padding:22px 16px 100px;max-width:1200px;margin:0 auto;}
 .scard:nth-child(3) .scard-val{color:var(--rent);}
 .scard:nth-child(4) .scard-val{color:var(--sold);}
 
-/* FILTERS */
 .filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;align-items:center;}
 .search-wrap{flex:1;min-width:180px;position:relative;}
 .search-wrap svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.4;}
-.search-box{
-  width:100%;background:var(--white);
-  border:1px solid var(--border);border-radius:var(--r);
-  padding:11px 14px 11px 38px;color:var(--text);
-  font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:.5px;
-  outline:none;transition:border-color .2s;
-  box-shadow:0 1px 6px rgba(170,124,91,0.05);
-}
+.search-box{width:100%;background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:11px 14px 11px 38px;color:var(--text);font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:.5px;outline:none;transition:border-color .2s;box-shadow:0 1px 6px rgba(170,124,91,0.05);}
 .search-box::placeholder{color:var(--text-4);}
 .search-box:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(170,124,91,0.1);}
 .filter-scroll{display:flex;gap:7px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;flex-shrink:0;}
 .filter-scroll::-webkit-scrollbar{display:none;}
-.fbtn{
-  background:var(--white);border:1px solid var(--border);
-  color:var(--text-3);padding:10px 14px;border-radius:var(--r);
-  font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:2px;
-  text-transform:uppercase;cursor:pointer;transition:all .2s;white-space:nowrap;
-}
+.fbtn{background:var(--white);border:1px solid var(--border);color:var(--text-3);padding:10px 14px;border-radius:var(--r);font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;white-space:nowrap;}
 .fbtn:hover,.fbtn.active{border-color:var(--primary);color:var(--primary);background:var(--primary-dim);}
-.fselect{
-  background:var(--white);border:1px solid var(--border);
-  color:var(--text-3);padding:10px 14px;border-radius:var(--r);
-  font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:2px;
-  text-transform:uppercase;cursor:pointer;outline:none;-webkit-appearance:none;
-}
+.fselect{background:var(--white);border:1px solid var(--border);color:var(--text-3);padding:10px 14px;border-radius:var(--r);font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;outline:none;-webkit-appearance:none;}
 .fselect:focus{border-color:var(--primary);}
 
-/* CARDS */
 .cards-grid{display:grid;grid-template-columns:1fr;gap:14px;}
 @media(min-width:580px){.cards-grid{grid-template-columns:repeat(2,1fr);}}
 @media(min-width:960px){.cards-grid{grid-template-columns:repeat(3,1fr);}}
 
-.pcard{
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:14px;padding:20px;
-  position:relative;overflow:hidden;
-  transition:transform .25s,box-shadow .25s,border-color .25s;
-  animation:fadeUp .4s ease both;cursor:pointer;
-  box-shadow:0 2px 14px rgba(170,124,91,0.07);
-}
+.pcard{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s;animation:fadeUp .4s ease both;cursor:pointer;box-shadow:0 2px 14px rgba(170,124,91,0.07);}
 .pcard:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(170,124,91,0.15);border-color:var(--primary-light);}
 .pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--primary-light));opacity:0;transition:opacity .25s;}
 .pcard:hover::before{opacity:1;}
-
 .pcard-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;}
 .pcard-name{font-family:'Lora',serif;font-size:15px;font-weight:600;color:var(--text);line-height:1.3;flex:1;}
 .pcard-loc{font-size:10px;color:var(--text-4);letter-spacing:1px;margin-top:4px;display:flex;align-items:center;gap:4px;}
@@ -167,7 +87,6 @@ main{padding:22px 16px 100px;max-width:1200px;margin:0 auto;}
 .btn-sm:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-dim);}
 .btn-sm.del:hover{border-color:var(--sold);color:var(--sold);background:rgba(196,90,58,0.06);}
 
-/* BADGES */
 .badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:8px;letter-spacing:2px;text-transform:uppercase;font-weight:600;white-space:nowrap;}
 .b-sale{background:rgba(46,158,106,.1);color:var(--sale);border:1px solid rgba(46,158,106,.2);}
 .b-rent{background:rgba(46,126,168,.1);color:var(--rent);border:1px solid rgba(46,126,168,.2);}
@@ -179,12 +98,10 @@ main{padding:22px 16px 100px;max-width:1200px;margin:0 auto;}
 .b-sl{background:rgba(207,127,155,.08);color:#B86080;}
 .b-meta{background:var(--bg-2);color:var(--text-4);border:1px solid var(--border);}
 
-/* EMPTY/LOADING */
 .state-box{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-4);}
 .state-box p{font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:14px;}
 .loader{display:inline-block;width:26px;height:26px;border:2px solid var(--border-2);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;}
 
-/* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(44,31,20,0.55);z-index:200;align-items:flex-end;justify-content:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
 .overlay.open{display:flex;}
 @media(min-width:600px){.overlay{align-items:center;padding:20px;}}
@@ -211,7 +128,7 @@ select option{background:var(--white);}
 textarea{resize:vertical;min-height:75px;}
 .modal-foot{padding:14px 20px 28px;display:flex;gap:10px;}
 .btn-cancel{flex:1;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3);padding:14px;border-radius:10px;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
-.btn-cancel:hover{color:var(--text);border-color:var(--text-3);}
+.btn-cancel:hover{color:var(--text);}
 .btn-save{flex:2;background:var(--primary);border:none;color:var(--white);padding:14px;border-radius:10px;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:600;transition:all .2s;box-shadow:0 4px 16px rgba(170,124,91,0.3);}
 .btn-save:hover{background:var(--primary-dark);}
 .btn-save:disabled{opacity:.5;cursor:not-allowed;}
@@ -220,7 +137,12 @@ textarea{resize:vertical;min-height:75px;}
 .dlabel{color:var(--text-4);letter-spacing:2px;font-size:8px;text-transform:uppercase;flex-shrink:0;}
 .dval{color:var(--text);text-align:right;}
 
-/* TOAST */
+/* PIN MODAL */
+.pin-icon{width:52px;height:52px;background:var(--primary-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+.pin-input-wrap{position:relative;}
+.pin-shake{animation:shake .4s ease;}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--white);border:1px solid var(--border);color:var(--text);padding:12px 24px;border-radius:30px;font-size:10px;letter-spacing:2px;text-transform:uppercase;z-index:999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;box-shadow:0 8px 30px rgba(44,31,20,0.15);}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
 .toast.success{border-color:var(--sale);color:var(--sale);}
@@ -245,7 +167,7 @@ textarea{resize:vertical;min-height:75px;}
 <main>
   <div class="page-top">
     <div class="page-title">Property <span>Listings</span></div>
-    <button class="btn-add" onclick="openAdd()">
+    <button class="btn-add" onclick="askPin('add')">
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       Add Listing
     </button>
@@ -283,6 +205,34 @@ textarea{resize:vertical;min-height:75px;}
     <div class="state-box"><div class="loader"></div><p>Loading listings</p></div>
   </div>
 </main>
+
+<!-- PIN MODAL -->
+<div class="overlay" id="m-pin">
+  <div class="modal" style="max-width:380px">
+    <div class="modal-handle"></div>
+    <div class="modal-head">
+      <div class="modal-title" id="pin-title">Enter PIN</div>
+      <button class="modal-close" onclick="closeM('m-pin')">✕</button>
+    </div>
+    <div class="modal-body" style="text-align:center;padding:24px 24px 8px">
+      <div class="pin-icon" id="pin-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="#AA7C5B" stroke-width="1.8"/><path d="M8 11V7a4 4 0 018 0v4" stroke="#AA7C5B" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <p id="pin-hint" style="font-size:11px;letter-spacing:1.5px;color:var(--text-3);margin-bottom:20px;line-height:1.5"></p>
+      <div class="pin-input-wrap">
+        <input id="pin-input" type="password" placeholder="Enter PIN" autocomplete="off"
+          style="text-align:center;font-size:18px;letter-spacing:6px;padding:14px;border-radius:10px"
+          oninput="document.getElementById('pin-error').textContent=''"
+          onkeydown="if(event.key==='Enter')checkPin()">
+      </div>
+      <p id="pin-error" style="color:var(--sold);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;margin-top:10px;min-height:18px"></p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeM('m-pin')">Cancel</button>
+      <button class="btn-save" style="flex:2" onclick="checkPin()">Confirm</button>
+    </div>
+  </div>
+</div>
 
 <!-- ADD/EDIT MODAL -->
 <div class="overlay" id="m-add">
@@ -330,129 +280,243 @@ textarea{resize:vertical;min-height:75px;}
 <div class="toast" id="toast"></div>
 
 <script>
-const API="https://script.google.com/macros/s/AKfycbwfZGPV6k3nBENtH9vvs87t8fNMs9_H7NfleaZS6X3Cz22VTF8EyD_4CY_sKmywKSYF/exec";
-let data=[],editId=null,filter='all';
+const API = "https://script.google.com/macros/s/AKfycbwfZGPV6k3nBENtH9vvs87t8fNMs9_H7NfleaZS6X3Cz22VTF8EyD_4CY_sKmywKSYF/exec";
+const PINS = { add: 'add', edit: 'edit', delete: '0704' };
+const PIN_LABELS = {
+  add: { title: 'Add Listing PIN', hint: 'Enter your PIN to add a new listing' },
+  edit: { title: 'Edit Listing PIN', hint: 'Enter your PIN to edit this listing' },
+  delete: { title: 'Delete Listing PIN', hint: 'Enter your PIN to permanently remove this listing' }
+};
 
-function toast(msg,type='success'){const t=document.getElementById('toast');t.textContent=msg;t.className=`toast ${type} show`;setTimeout(()=>t.className='toast',3000);}
-function sync(s){const d=document.getElementById('sync-dot'),l=document.getElementById('sync-label');d.className='sync-dot'+(s==='syncing'?' syncing':s==='error'?' error':'');l.textContent=s==='syncing'?'Syncing...':s==='error'?'Offline':'Live';}
+let data = [], editId = null, filter = 'all';
+let pinAction = null, pinTargetId = null;
 
-async function load(){
+// ── PIN SYSTEM ────────────────────────────
+function askPin(action, targetId = null) {
+  pinAction = action;
+  pinTargetId = targetId;
+  const cfg = PIN_LABELS[action];
+  document.getElementById('pin-title').textContent = cfg.title;
+  document.getElementById('pin-hint').textContent = cfg.hint;
+  document.getElementById('pin-input').value = '';
+  document.getElementById('pin-error').textContent = '';
+  // Icon color for delete = red tint
+  const icon = document.getElementById('pin-icon');
+  icon.style.background = action === 'delete' ? 'rgba(196,90,58,0.1)' : 'var(--primary-dim)';
+  icon.querySelector('svg').querySelectorAll('path,rect').forEach(el => {
+    el.setAttribute('stroke', action === 'delete' ? '#C45A3A' : '#AA7C5B');
+  });
+  document.getElementById('m-pin').classList.add('open');
+  setTimeout(() => document.getElementById('pin-input').focus(), 350);
+}
+
+function checkPin() {
+  const entered = document.getElementById('pin-input').value;
+  if (entered !== PINS[pinAction]) {
+    document.getElementById('pin-error').textContent = 'Incorrect PIN — try again';
+    const inp = document.getElementById('pin-input');
+    inp.value = '';
+    inp.classList.add('pin-shake');
+    inp.style.borderColor = 'var(--sold)';
+    inp.focus();
+    setTimeout(() => { inp.classList.remove('pin-shake'); inp.style.borderColor = ''; }, 500);
+    return;
+  }
+  closeM('m-pin');
+  if (pinAction === 'add') _openAdd();
+  if (pinAction === 'edit') _openEdit(pinTargetId);
+  if (pinAction === 'delete') _del(pinTargetId);
+}
+
+// ── TOAST & SYNC ──────────────────────────
+function toast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = `toast ${type} show`;
+  setTimeout(() => t.className = 'toast', 3000);
+}
+function sync(s) {
+  const d = document.getElementById('sync-dot'), l = document.getElementById('sync-label');
+  d.className = 'sync-dot' + (s === 'syncing' ? ' syncing' : s === 'error' ? ' error' : '');
+  l.textContent = s === 'syncing' ? 'Syncing...' : s === 'error' ? 'Offline' : 'Live';
+}
+
+// ── LOAD ──────────────────────────────────
+async function load() {
   sync('syncing');
-  try{
-    const r=await fetch(API),j=await r.json();
-    if(j.success){
-      data=j.data.filter(x=>x.ID).map(x=>({id:x.ID,name:x.Name,location:x.Location,type:x.Type,status:x.Status,price:x.Price,period:x.Period,beds:x.Beds,size:x.Size,agent:x.Agent,phone:x.Phone,notes:x.Notes,date:x.Date}));
-      sync('live');render();
-    }else throw new Error();
-  }catch{sync('error');document.getElementById('cards').innerHTML='<div class="state-box"><p>Could not load — check connection</p></div>';toast('Connection error','error');}
+  try {
+    const r = await fetch(API), j = await r.json();
+    if (j.success) {
+      data = j.data.filter(x => x.ID).map(x => ({
+        id: x.ID, name: x.Name, location: x.Location, type: x.Type,
+        status: x.Status, price: x.Price, period: x.Period,
+        beds: x.Beds, size: x.Size, agent: x.Agent,
+        phone: x.Phone, notes: x.Notes, date: x.Date
+      }));
+      sync('live'); render();
+    } else throw new Error();
+  } catch {
+    sync('error');
+    document.getElementById('cards').innerHTML = '<div class="state-box"><p>Could not load — check connection</p></div>';
+    toast('Connection error', 'error');
+  }
 }
 
-async function callAPI(payload){sync('syncing');const r=await fetch(API,{method:'POST',body:JSON.stringify(payload)});const j=await r.json();sync(j.success?'live':'error');return j;}
-
-const fmtDate=d=>{if(!d)return'—';const dt=new Date(d);return isNaN(dt)?d:dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});};
-const sBadge=s=>{const m={'For Sale':'b-sale','For Rent':'b-rent','Sold':'b-sold','Under Offer':'b-offer'};return`<span class="badge ${m[s]||'b-sale'}">${s}</span>`;};
-const tBadge=t=>{const m={'Residential':'b-res','Commercial':'b-com','Land':'b-land','Short Let':'b-sl'};return`<span class="badge ${m[t]||'b-res'}">${t}</span>`;};
-
-function updateStats(){
-  document.getElementById('s-total').textContent=data.length;
-  document.getElementById('s-sale').textContent=data.filter(x=>x.status==='For Sale').length;
-  document.getElementById('s-rent').textContent=data.filter(x=>x.status==='For Rent').length;
-  document.getElementById('s-closed').textContent=data.filter(x=>x.status==='Sold'||x.status==='Under Offer').length;
-  document.getElementById('header-total').textContent=data.length;
-  if(data.length)document.getElementById('hp-total').style.display='flex';
+async function callAPI(payload) {
+  sync('syncing');
+  const r = await fetch(API, { method: 'POST', body: JSON.stringify(payload) });
+  const j = await r.json();
+  sync(j.success ? 'live' : 'error');
+  return j;
 }
 
-function getFiltered(){
-  const q=document.getElementById('search').value.toLowerCase();
-  const tf=document.getElementById('type-f').value;
-  return data.filter(l=>{
-    const ms=filter==='all'||l.status===filter;
-    const mt=tf==='all'||l.type===tf;
-    const mq=!q||(l.name||'').toLowerCase().includes(q)||(l.location||'').toLowerCase().includes(q)||(l.agent||'').toLowerCase().includes(q);
-    return ms&&mt&&mq;
+// ── HELPERS ───────────────────────────────
+const fmtDate = d => { if (!d) return '—'; const dt = new Date(d); return isNaN(dt) ? d : dt.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); };
+const sBadge = s => { const m = { 'For Sale': 'b-sale', 'For Rent': 'b-rent', 'Sold': 'b-sold', 'Under Offer': 'b-offer' }; return `<span class="badge ${m[s] || 'b-sale'}">${s}</span>`; };
+const tBadge = t => { const m = { 'Residential': 'b-res', 'Commercial': 'b-com', 'Land': 'b-land', 'Short Let': 'b-sl' }; return `<span class="badge ${m[t] || 'b-res'}">${t}</span>`; };
+
+function updateStats() {
+  document.getElementById('s-total').textContent = data.length;
+  document.getElementById('s-sale').textContent = data.filter(x => x.status === 'For Sale').length;
+  document.getElementById('s-rent').textContent = data.filter(x => x.status === 'For Rent').length;
+  document.getElementById('s-closed').textContent = data.filter(x => x.status === 'Sold' || x.status === 'Under Offer').length;
+  document.getElementById('header-total').textContent = data.length;
+  if (data.length) document.getElementById('hp-total').style.display = 'flex';
+}
+
+function getFiltered() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const tf = document.getElementById('type-f').value;
+  return data.filter(l => {
+    const ms = filter === 'all' || l.status === filter;
+    const mt = tf === 'all' || l.type === tf;
+    const mq = !q || (l.name || '').toLowerCase().includes(q) || (l.location || '').toLowerCase().includes(q) || (l.agent || '').toLowerCase().includes(q);
+    return ms && mt && mq;
   });
 }
 
-function setF(f,btn){filter=f;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render();}
+function setF(f, btn) {
+  filter = f;
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); render();
+}
 
-function render(){
+function render() {
   updateStats();
-  const filtered=getFiltered();
-  const grid=document.getElementById('cards');
-  if(!filtered.length){grid.innerHTML=`<div class="state-box"><p>${data.length?'No listings match filters':'No listings yet — add your first one'}</p></div>`;return;}
-  grid.innerHTML=filtered.map((l,i)=>`
-    <div class="pcard" style="animation-delay:${i*.05}s" onclick="view('${l.id}')">
+  const filtered = getFiltered();
+  const grid = document.getElementById('cards');
+  if (!filtered.length) { grid.innerHTML = `<div class="state-box"><p>${data.length ? 'No listings match filters' : 'No listings yet — add your first one'}</p></div>`; return; }
+  grid.innerHTML = filtered.map((l, i) => `
+    <div class="pcard" style="animation-delay:${i * .05}s" onclick="view('${l.id}')">
       <div class="pcard-top">
         <div style="flex:1">
-          <div class="pcard-name">${l.name||'Unnamed Property'}</div>
+          <div class="pcard-name">${l.name || 'Unnamed Property'}</div>
           <div class="pcard-loc">
             <svg width="9" height="10" viewBox="0 0 10 12" fill="none"><path d="M5 1C3 1 1 2.8 1 5c0 3 4 7 4 7s4-4 4-7c0-2.2-2-4-4-4z" stroke="#C4AA94" stroke-width="1.2" fill="none"/><circle cx="5" cy="5" r="1.2" fill="#C4AA94"/></svg>
-            ${l.location||'—'}
+            ${l.location || '—'}
           </div>
         </div>
         ${sBadge(l.status)}
       </div>
-      <div class="pcard-badges">${tBadge(l.type)}${l.beds?`<span class="badge b-meta">${l.beds}</span>`:''}${l.size?`<span class="badge b-meta">${l.size}</span>`:''}</div>
-      <div class="pcard-price">₦${l.price||'—'}</div>
-      <div class="pcard-period">${l.period||''}</div>
-      ${l.agent?`<div class="pcard-agent"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2.5" stroke="#A8896E" stroke-width="1.2"/><path d="M1.5 11c0-2.485 2.015-4.5 4.5-4.5s4.5 2.015 4.5 4.5" stroke="#A8896E" stroke-width="1.2" stroke-linecap="round"/></svg>${l.agent}</div>`:''}
+      <div class="pcard-badges">${tBadge(l.type)}${l.beds ? `<span class="badge b-meta">${l.beds}</span>` : ''}${l.size ? `<span class="badge b-meta">${l.size}</span>` : ''}</div>
+      <div class="pcard-price">₦${l.price || '—'}</div>
+      <div class="pcard-period">${l.period || ''}</div>
+      ${l.agent ? `<div class="pcard-agent"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2.5" stroke="#A8896E" stroke-width="1.2"/><path d="M1.5 11c0-2.485 2.015-4.5 4.5-4.5s4.5 2.015 4.5 4.5" stroke="#A8896E" stroke-width="1.2" stroke-linecap="round"/></svg>${l.agent}</div>` : ''}
       <div class="pcard-actions" onclick="event.stopPropagation()">
         <button class="btn-sm" onclick="view('${l.id}')">View</button>
-        <button class="btn-sm" onclick="edit('${l.id}')">Edit</button>
-        <button class="btn-sm del" onclick="del('${l.id}')">Delete</button>
+        <button class="btn-sm" onclick="askPin('edit','${l.id}')">Edit</button>
+        <button class="btn-sm del" onclick="askPin('delete','${l.id}')">Delete</button>
       </div>
     </div>
   `).join('');
 }
 
-function openAdd(){editId=null;document.getElementById('m-title').textContent='Add Listing';['name','loc','price','beds','size','agent','phone','notes'].forEach(f=>document.getElementById('f-'+f).value='');document.getElementById('f-type').value='Residential';document.getElementById('f-status').value='For Sale';document.getElementById('f-period').value='Outright';document.getElementById('m-add').classList.add('open');}
-
-function edit(id){
-  const l=data.find(x=>String(x.id)===String(id));if(!l)return;
-  editId=id;document.getElementById('m-title').textContent='Edit Listing';
-  document.getElementById('f-name').value=l.name||'';document.getElementById('f-loc').value=l.location||'';
-  document.getElementById('f-type').value=l.type||'Residential';document.getElementById('f-status').value=l.status||'For Sale';
-  document.getElementById('f-price').value=l.price||'';document.getElementById('f-period').value=l.period||'Outright';
-  document.getElementById('f-beds').value=l.beds||'';document.getElementById('f-size').value=l.size||'';
-  document.getElementById('f-agent').value=l.agent||'';document.getElementById('f-phone').value=l.phone||'';
-  document.getElementById('f-notes').value=l.notes||'';document.getElementById('m-add').classList.add('open');
+// ── PRIVATE ACTIONS (after PIN verified) ──
+function _openAdd() {
+  editId = null;
+  document.getElementById('m-title').textContent = 'Add Listing';
+  ['name', 'loc', 'price', 'beds', 'size', 'agent', 'phone', 'notes'].forEach(f => document.getElementById('f-' + f).value = '');
+  document.getElementById('f-type').value = 'Residential';
+  document.getElementById('f-status').value = 'For Sale';
+  document.getElementById('f-period').value = 'Outright';
+  document.getElementById('m-add').classList.add('open');
 }
 
-async function save(){
-  const name=document.getElementById('f-name').value.trim();
-  const loc=document.getElementById('f-loc').value.trim();
-  if(!name||!loc){toast('Name and Location required','error');return;}
-  const btn=document.getElementById('btn-save');btn.disabled=true;btn.textContent='Saving...';
-  const payload={id:editId||Date.now().toString(),name,location:loc,type:document.getElementById('f-type').value,status:document.getElementById('f-status').value,price:document.getElementById('f-price').value.trim(),period:document.getElementById('f-period').value,beds:document.getElementById('f-beds').value.trim(),size:document.getElementById('f-size').value.trim(),agent:document.getElementById('f-agent').value.trim(),phone:document.getElementById('f-phone').value.trim(),notes:document.getElementById('f-notes').value.trim(),date:new Date().toISOString().split('T')[0],action:editId?'edit':'add'};
-  try{const r=await callAPI(payload);if(r.success){toast(editId?'Listing updated ✓':'Listing added ✓','success');closeM('m-add');await load();}else toast('Error saving','error');}catch{toast('Connection error','error');}
-  btn.disabled=false;btn.textContent='Save Listing';
+function _openEdit(id) {
+  const l = data.find(x => String(x.id) === String(id)); if (!l) return;
+  editId = id;
+  document.getElementById('m-title').textContent = 'Edit Listing';
+  document.getElementById('f-name').value = l.name || '';
+  document.getElementById('f-loc').value = l.location || '';
+  document.getElementById('f-type').value = l.type || 'Residential';
+  document.getElementById('f-status').value = l.status || 'For Sale';
+  document.getElementById('f-price').value = l.price || '';
+  document.getElementById('f-period').value = l.period || 'Outright';
+  document.getElementById('f-beds').value = l.beds || '';
+  document.getElementById('f-size').value = l.size || '';
+  document.getElementById('f-agent').value = l.agent || '';
+  document.getElementById('f-phone').value = l.phone || '';
+  document.getElementById('f-notes').value = l.notes || '';
+  document.getElementById('m-add').classList.add('open');
 }
 
-async function del(id){
-  if(!confirm('Remove this listing?'))return;
-  try{const r=await callAPI({action:'delete',id});if(r.success){toast('Listing removed','success');await load();}else toast('Could not delete','error');}catch{toast('Connection error','error');}
+async function save() {
+  const name = document.getElementById('f-name').value.trim();
+  const loc = document.getElementById('f-loc').value.trim();
+  if (!name || !loc) { toast('Name and Location required', 'error'); return; }
+  const btn = document.getElementById('btn-save');
+  btn.disabled = true; btn.textContent = 'Saving...';
+  const payload = {
+    id: editId || Date.now().toString(), name, location: loc,
+    type: document.getElementById('f-type').value,
+    status: document.getElementById('f-status').value,
+    price: document.getElementById('f-price').value.trim(),
+    period: document.getElementById('f-period').value,
+    beds: document.getElementById('f-beds').value.trim(),
+    size: document.getElementById('f-size').value.trim(),
+    agent: document.getElementById('f-agent').value.trim(),
+    phone: document.getElementById('f-phone').value.trim(),
+    notes: document.getElementById('f-notes').value.trim(),
+    date: new Date().toISOString().split('T')[0],
+    action: editId ? 'edit' : 'add'
+  };
+  try {
+    const r = await callAPI(payload);
+    if (r.success) { toast(editId ? 'Listing updated ✓' : 'Listing added ✓', 'success'); closeM('m-add'); await load(); }
+    else toast('Error saving', 'error');
+  } catch { toast('Connection error', 'error'); }
+  btn.disabled = false; btn.textContent = 'Save Listing';
 }
 
-function view(id){
-  const l=data.find(x=>String(x.id)===String(id));if(!l)return;
-  document.getElementById('v-title').textContent=l.name||'Property Details';
-  document.getElementById('v-body').innerHTML=`
-    <div class="drow"><span class="dlabel">Location</span><span class="dval">${l.location||'—'}</span></div>
+async function _del(id) {
+  try {
+    const r = await callAPI({ action: 'delete', id });
+    if (r.success) { toast('Listing removed', 'success'); await load(); }
+    else toast('Could not delete', 'error');
+  } catch { toast('Connection error', 'error'); }
+}
+
+function view(id) {
+  const l = data.find(x => String(x.id) === String(id)); if (!l) return;
+  document.getElementById('v-title').textContent = l.name || 'Property Details';
+  document.getElementById('v-body').innerHTML = `
+    <div class="drow"><span class="dlabel">Location</span><span class="dval">${l.location || '—'}</span></div>
     <div class="drow"><span class="dlabel">Type</span><span class="dval">${tBadge(l.type)}</span></div>
     <div class="drow"><span class="dlabel">Status</span><span class="dval">${sBadge(l.status)}</span></div>
-    <div class="drow"><span class="dlabel">Price</span><span class="dval" style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--primary)">₦${l.price||'—'}<span style="font-size:9px;color:var(--text-4);margin-left:6px">${l.period||''}</span></span></div>
-    <div class="drow"><span class="dlabel">Bedrooms</span><span class="dval">${l.beds||'—'}</span></div>
-    <div class="drow"><span class="dlabel">Size</span><span class="dval">${l.size||'—'}</span></div>
-    <div class="drow"><span class="dlabel">Agent</span><span class="dval">${l.agent||'—'}</span></div>
-    <div class="drow"><span class="dlabel">Phone</span><span class="dval">${l.phone||'—'}</span></div>
+    <div class="drow"><span class="dlabel">Price</span><span class="dval" style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--primary)">₦${l.price || '—'}<span style="font-size:9px;color:var(--text-4);margin-left:6px">${l.period || ''}</span></span></div>
+    <div class="drow"><span class="dlabel">Bedrooms</span><span class="dval">${l.beds || '—'}</span></div>
+    <div class="drow"><span class="dlabel">Size</span><span class="dval">${l.size || '—'}</span></div>
+    <div class="drow"><span class="dlabel">Agent</span><span class="dval">${l.agent || '—'}</span></div>
+    <div class="drow"><span class="dlabel">Phone</span><span class="dval">${l.phone || '—'}</span></div>
     <div class="drow"><span class="dlabel">Listed</span><span class="dval">${fmtDate(l.date)}</span></div>
-    ${l.notes?`<div class="drow"><span class="dlabel">Notes</span><span class="dval" style="max-width:65%;text-align:right;color:var(--text-2);font-size:11px">${l.notes}</span></div>`:''}
+    ${l.notes ? `<div class="drow"><span class="dlabel">Notes</span><span class="dval" style="max-width:65%;text-align:right;color:var(--text-2);font-size:11px">${l.notes}</span></div>` : ''}
   `;
   document.getElementById('m-view').classList.add('open');
 }
 
-function closeM(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.overlay').forEach(o=>{o.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});});
+function closeM(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.overlay').forEach(o => {
+  o.addEventListener('click', function (e) { if (e.target === this) this.classList.remove('open'); });
+});
 
 load();
 </script>
