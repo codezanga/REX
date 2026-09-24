@@ -19,33 +19,52 @@
   --safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%}
 body{font-family:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100dvh}
 button,input,select,textarea{font:inherit;color:inherit}
-button{background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button{background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent;text-align:inherit}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 :focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:8px}
 .hide-sm{display:none}
 @media(min-width:720px){.hide-sm{display:inline-flex}.hide-lg{display:none!important}}
 
+/* Login */
+.login{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:calc(24px + var(--safe-t)) 18px calc(24px + var(--safe-b));background:var(--soft)}
+.login-card{width:100%;max-width:400px;background:#fff;border-radius:24px;padding:32px 24px 26px;box-shadow:0 24px 60px -28px rgba(40,28,18,.3)}
+.login-card .logo{height:30px;margin-bottom:26px}
+.login-card h1{font-size:25px;font-weight:800;letter-spacing:-.02em}
+.login-card .lead{font-size:15px;color:var(--ink-3);margin:6px 0 22px;line-height:1.45}
+.pw{position:relative}
+.pw input{padding-right:70px!important}
+.pw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);height:36px;padding:0 12px;border-radius:9px;font-size:13px;font-weight:700;color:var(--brand-d)}
+.form-err{min-height:20px;font-size:14px;color:var(--sold);font-weight:600;margin:2px 0 12px}
+.btn-block{width:100%}
+
 /* Header */
 .top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.88);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line);padding-top:var(--safe-t)}
 .top-in{max-width:1200px;margin:0 auto;height:60px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .logo{height:26px;width:auto}
-.top-r{display:flex;align-items:center;gap:14px}
+.top-r{display:flex;align-items:center;gap:12px}
 .sync{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--ink-3)}
 .sync i{width:8px;height:8px;border-radius:50%;background:var(--sale);box-shadow:0 0 0 3px rgba(31,138,91,.15)}
 .sync.busy i{background:var(--brand);box-shadow:0 0 0 3px rgba(170,124,91,.18);animation:blink 1s infinite}
 .sync.err i{background:var(--sold);box-shadow:0 0 0 3px rgba(184,69,44,.15)}
 @keyframes blink{50%{opacity:.35}}
+.me-btn{width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;font-size:14px;font-weight:700;display:grid;place-items:center;text-align:center}
 
 /* Page */
 .wrap{max-width:1200px;margin:0 auto;padding:22px 16px calc(120px + var(--safe-b))}
-@media(min-width:720px){.wrap{padding:32px 24px 80px}.top-in{padding:0 24px}}
+@media(min-width:720px){.wrap{padding:30px 24px 80px}.top-in{padding:0 24px}}
 .intro h1{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
-.intro p{font-size:15px;color:var(--ink-3);margin-top:6px}
+.intro p{font-size:15px;color:var(--ink-3);margin-top:6px;max-width:60ch;line-height:1.45}
 @media(min-width:720px){.intro h1{font-size:38px}}
+.tabs{display:inline-flex;gap:4px;padding:4px;background:var(--soft);border-radius:14px;margin-bottom:18px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{height:38px;padding:0 16px;border-radius:10px;font-size:14px;font-weight:600;color:var(--ink-2);white-space:nowrap;display:inline-flex;align-items:center;gap:7px;transition:background .15s}
+.tab.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(30,20,12,.1)}
+.tab em{font-style:normal;font-size:11px;font-weight:700;min-width:20px;height:20px;padding:0 6px;border-radius:99px;background:var(--sold);color:#fff;display:inline-grid;place-items:center}
 
 .tools{position:sticky;top:calc(60px + var(--safe-t));z-index:30;background:var(--bg);margin:18px -16px 0;padding:10px 16px 12px;border-bottom:1px solid transparent;transition:border-color .2s}
 .tools.stuck{border-bottom-color:var(--line)}
@@ -55,7 +74,7 @@ img{display:block;max-width:100%}
 .search input{width:100%;height:48px;border:1px solid var(--line);background:var(--soft);border-radius:14px;padding:0 16px 0 44px;font-size:16px;outline:none;transition:border-color .15s,background .15s;-webkit-appearance:none}
 .search input::placeholder{color:var(--ink-3)}
 .search input:focus{background:#fff;border-color:var(--brand)}
-.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:10px -16px 0;padding:0 16px;scroll-padding:0 16px}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:10px -16px 0;padding:0 16px}
 .chips::-webkit-scrollbar{display:none}
 @media(min-width:720px){.chips{margin:12px 0 0;padding:0}}
 .chip{flex:0 0 auto;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:14px;font-weight:600;color:var(--ink-2);white-space:nowrap;display:inline-flex;align-items:center;gap:6px;transition:background .15s,color .15s,border-color .15s}
@@ -65,7 +84,7 @@ img{display:block;max-width:100%}
 .chips.t .chip{height:32px;font-size:13px;font-weight:500}
 .chips.t .chip.on{background:var(--brand-50);border-color:var(--brand-100);color:var(--brand-d)}
 
-/* Grid + cards */
+/* Listing cards */
 .grid{display:grid;grid-template-columns:1fr;gap:28px 20px;margin-top:18px}
 @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
@@ -83,11 +102,9 @@ img{display:block;max-width:100%}
 .car-nav{position:absolute;top:50%;z-index:2;width:34px;height:34px;margin-top:-17px;border-radius:50%;background:rgba(255,255,255,.95);color:var(--ink);display:none;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.15);opacity:0;transition:opacity .2s}
 .car-nav.p{left:10px}.car-nav.n{right:10px}
 @media(hover:hover){.car-nav{display:grid}.car:hover .car-nav{opacity:1}}
-
 .pill{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:99px;background:#fff;font-size:12px;font-weight:700}
 .pill::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor}
 .s-sale{color:var(--sale)}.s-rent{color:var(--rent)}.s-offer{color:var(--offer)}.s-sold{color:var(--sold)}
-
 .cb{padding:12px 2px 0}
 .cb-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
 .price{font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
@@ -104,25 +121,58 @@ img{display:block;max-width:100%}
 .ibtn:hover{background:var(--soft);color:var(--ink)}
 .ibtn.del:hover{background:#FBEDE9;color:var(--sold)}
 
+/* Rows (team, trash) */
+.list{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
+.row{display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+button.row{transition:background .15s}
+button.row:hover{background:#FBFAF9}
+.row-t{flex:1;min-width:0}
+.row-t b{display:block;font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row-t span{display:block;font-size:13px;color:var(--ink-3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .chev{color:#C9C0B8;flex-shrink:0}
+.av{width:40px;height:40px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px;flex-shrink:0}
+.row.off .av{background:#CFC7C0}
+.row.off .row-t b{color:var(--ink-3)}
+.role{font-size:12px;font-weight:700;padding:5px 10px;border-radius:99px;white-space:nowrap;flex-shrink:0}
+.r-super_admin{background:var(--ink);color:#fff}
+.r-admin{background:var(--brand-50);color:var(--brand-d)}
+.r-sales_rep{background:#EAF1F9;color:var(--rent)}
+.r-off{background:var(--soft);color:var(--ink-3)}
+.note{margin-top:14px;font-size:14px;color:var(--ink-3);line-height:1.55;max-width:62ch}
+.note b{color:var(--ink-2);font-weight:600}
+
+.tr{display:flex;gap:14px;padding:14px;border-top:1px solid var(--line)}
+.tr:first-child{border-top:0}
+.tr-thumb{width:92px;height:74px;border-radius:12px;overflow:hidden;background:var(--soft);flex-shrink:0;display:grid;place-items:center;color:var(--ink-3)}
+.tr-thumb img{width:100%;height:100%;object-fit:cover}
+.tr-body{flex:1;min-width:0}
+.tr-body .name{margin-top:0;font-size:15px;font-weight:700}
+.tr-meta{font-size:13px;color:var(--ink-3);margin-top:2px}
+.tr-acts{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.tr-acts .btn{height:38px;font-size:13px;padding:0 14px;border-radius:10px}
+
 /* Skeleton / states */
 .sk{background:linear-gradient(90deg,#F1EEEB 25%,#F8F6F4 45%,#F1EEEB 65%);background-size:300% 100%;animation:sh 1.3s ease-in-out infinite;border-radius:8px}
 @keyframes sh{0%{background-position:100% 0}100%{background-position:0 0}}
 .sk-img{aspect-ratio:4/3;border-radius:18px}
 .sk-line{height:14px;margin-top:10px}
-.empty{grid-column:1/-1;text-align:center;padding:64px 20px;color:var(--ink-3)}
+.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--ink-3)}
 .empty h3{font-size:18px;color:var(--ink);font-weight:700;margin-bottom:6px}
-.empty p{font-size:15px;max-width:32ch;margin:0 auto}
-.empty .btn{margin-top:18px;display:inline-flex;width:auto;padding:0 20px}
+.empty p{font-size:15px;max-width:34ch;margin:0 auto;line-height:1.45}
+.empty .btn{margin-top:18px;width:auto;padding:0 20px}
 
 /* Buttons */
-.btn{height:50px;border-radius:14px;padding:0 18px;font-size:15px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background .15s,transform .1s}
+.btn{height:50px;border-radius:14px;padding:0 18px;font-size:15px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background .15s,transform .1s;text-align:center}
 .btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.55;cursor:default;transform:none}
 .btn-p{background:var(--brand);color:#fff}
 .btn-p:hover{background:var(--brand-d)}
-.btn-p:disabled{opacity:.55;cursor:default}
 .btn-g{background:var(--soft);color:var(--ink-2)}
 .btn-g:hover{background:#EDE9E5}
 .btn-d{background:#FBEDE9;color:var(--sold)}
+.btn-d:hover{background:#F6DED7}
+.btn-x{background:var(--sold);color:#fff}
 .btn-sm{height:42px;font-size:14px;border-radius:12px}
 .fab{position:fixed;right:16px;bottom:calc(18px + var(--safe-b));z-index:35;height:56px;padding:0 22px 0 18px;border-radius:99px;background:var(--brand);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;box-shadow:0 10px 28px -8px rgba(142,100,70,.55)}
 .fab:active{transform:scale(.97)}
@@ -136,23 +186,29 @@ img{display:block;max-width:100%}
 .sheet.open .panel{transform:none}
 .grab{width:40px;height:5px;border-radius:99px;background:#DCD6D0;margin:9px auto 0;flex-shrink:0}
 .p-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px 10px 20px;flex-shrink:0}
-.p-head h2{font-size:19px;font-weight:800;letter-spacing:-.02em}
+.p-head h2{font-size:19px;font-weight:800;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .p-body{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:4px 20px 22px}
 .p-foot{display:flex;gap:10px;padding:12px 20px calc(12px + var(--safe-b));border-top:1px solid var(--line);flex-shrink:0;background:#fff}
 .p-foot .btn{flex:1}
-.p-foot .btn-p{flex:1.6}
+.p-foot .btn-p,.p-foot .btn-x{flex:1.6}
 @media(min-width:720px){
   .panel{left:50%;right:auto;bottom:auto;top:50%;width:min(600px,calc(100vw - 48px));max-height:min(90dvh,920px);border-radius:24px;transform:translate(-50%,-47%) scale(.98);opacity:0;transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .2s;box-shadow:0 30px 80px -20px rgba(30,20,12,.35)}
   .sheet.open .panel{transform:translate(-50%,-50%);opacity:1}
   .grab{display:none}
   .p-head{padding:18px 20px 10px 24px}.p-body{padding:4px 24px 24px}.p-foot{padding:14px 24px}
   .sheet.wide .panel{width:min(720px,calc(100vw - 48px))}
+  .sheet.small .panel{width:min(420px,calc(100vw - 48px))}
 }
-/* centered dialog (PIN) on all screens */
-.sheet.dialog .panel{left:50%;right:auto;bottom:auto;top:38%;width:min(380px,calc(100vw - 32px));border-radius:24px;transform:translate(-50%,-46%) scale(.97);opacity:0;transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .2s}
+.sheet.dialog .panel{left:50%;right:auto;bottom:auto;top:40%;width:min(400px,calc(100vw - 32px));border-radius:24px;transform:translate(-50%,-46%) scale(.97);opacity:0;transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .2s;box-shadow:0 30px 80px -20px rgba(30,20,12,.35)}
 .sheet.dialog.open .panel{transform:translate(-50%,-50%);opacity:1}
-.sheet.dialog .grab{display:none}
 .sheet.dialog .p-foot{border-top:0;padding-top:4px;padding-bottom:20px}
+.dlg-t{font-size:19px;font-weight:800;letter-spacing:-.02em;margin-top:10px}
+.dlg-p{font-size:15px;color:var(--ink-2);margin-top:6px;line-height:1.5}
+.cred{margin-top:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.cred div{padding:10px 14px;border-top:1px solid var(--line)}
+.cred div:first-child{border-top:0}
+.cred span{display:block;font-size:12px;color:var(--ink-3)}
+.cred b{display:block;font-size:15px;font-weight:700;word-break:break-all;user-select:all}
 
 /* Form */
 .fsec{padding-top:18px}
@@ -163,12 +219,27 @@ img{display:block;max-width:100%}
 .fld{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;min-width:0}
 .fld label{font-size:13px;font-weight:600;color:var(--ink-2)}
 .fld input,.fld select,.fld textarea{width:100%;height:48px;border:1px solid var(--line);background:var(--soft);border-radius:12px;padding:0 14px;font-size:16px;outline:none;transition:border-color .15s,background .15s;-webkit-appearance:none;appearance:none}
+.fld input:disabled{color:var(--ink-3)}
 .fld textarea{height:auto;min-height:92px;padding:12px 14px;resize:vertical;line-height:1.5}
 .fld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%238F847B' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
 .fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--brand);background:#fff}
 .fld input::placeholder,.fld textarea::placeholder{color:#B3A9A1}
+.fld small{font-size:13px;color:var(--ink-3);line-height:1.4}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .hint{font-size:13px;color:var(--ink-3);margin-top:10px}
+.gen{display:flex;gap:8px}
+.gen input{flex:1}
+.gen .btn{height:48px;flex-shrink:0;font-size:14px}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px;border-radius:14px;background:var(--soft);margin-bottom:14px}
+.toggle-row b{display:block;font-size:15px;font-weight:700}
+.toggle-row span{display:block;font-size:13px;color:var(--ink-3);margin-top:2px;line-height:1.4}
+.switch{position:relative;width:50px;height:30px;flex-shrink:0}
+.switch input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;z-index:1}
+.switch i{position:absolute;inset:0;border-radius:99px;background:#D6CEC7;transition:background .2s}
+.switch i::after{content:'';position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}
+.switch input:checked+i{background:var(--sale)}
+.switch input:checked+i::after{transform:translateX(20px)}
+.switch input:focus-visible+i{outline:2px solid var(--brand);outline-offset:2px}
 
 .ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 @media(min-width:520px){.ph-grid{grid-template-columns:repeat(4,1fr)}}
@@ -185,7 +256,7 @@ img{display:block;max-width:100%}
 
 /* Detail */
 .d-car{margin:0 -20px}
-.d-car .car{border-radius:0;aspect-ratio:4/3}
+.d-car .car{border-radius:0}
 @media(min-width:720px){.d-car{margin:0}.d-car .car{border-radius:18px;aspect-ratio:16/10}}
 .d-top{padding-top:16px}
 .d-price{font-size:28px;font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-top:10px}
@@ -194,34 +265,35 @@ img{display:block;max-width:100%}
 .d-top .loc{font-size:15px;margin-top:4px}
 .d-top .loc span{white-space:normal}
 .specs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:18px}
-.spec{background:#fff;padding:12px 14px}
+@media(min-width:520px){.specs{grid-template-columns:repeat(3,1fr)}}
+.spec{background:#fff;padding:12px 14px;min-width:0}
 .spec span{display:block;font-size:12px;color:var(--ink-3);font-weight:500}
-.spec b{display:block;font-size:15px;font-weight:700;margin-top:2px}
+.spec b{display:block;font-size:15px;font-weight:700;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .d-sec{margin-top:20px}
 .d-sec h3{font-size:15px;font-weight:700;margin-bottom:6px}
 .d-sec p{font-size:15px;line-height:1.6;color:var(--ink-2);white-space:pre-line;max-width:62ch}
 .agent{display:flex;align-items:center;gap:12px;margin-top:20px;padding:14px;border-radius:16px;background:var(--soft)}
-.av{width:44px;height:44px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0}
+.agent .av{width:44px;height:44px;font-size:15px}
 .agent-t{flex:1;min-width:0}
 .agent-t b{display:block;font-size:15px;font-weight:700}
 .agent-t span{display:block;font-size:13px;color:var(--ink-3);margin-top:1px}
-.agent a{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--ink);border:1px solid var(--line)}
+.agent a{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--ink);border:1px solid var(--line);flex-shrink:0}
 .agent a.wa{color:#1FA855}
 
-/* PIN */
-.pin-ico{width:56px;height:56px;border-radius:50%;background:var(--brand-50);color:var(--brand-d);display:grid;place-items:center;margin:8px auto 14px}
-.pin-t{text-align:center;font-size:19px;font-weight:800;letter-spacing:-.02em}
-.pin-h{text-align:center;font-size:14px;color:var(--ink-3);margin:6px auto 18px;max-width:28ch;line-height:1.45}
-#pin-in{width:100%;height:54px;text-align:center;font-size:20px;letter-spacing:.35em;border:1px solid var(--line);background:var(--soft);border-radius:14px;outline:none}
-#pin-in:focus{border-color:var(--brand);background:#fff}
-#pin-in.bad{border-color:var(--sold);animation:shake .35s}
-.pin-err{min-height:20px;text-align:center;font-size:13px;color:var(--sold);font-weight:600;margin-top:8px}
-.sheet.danger .pin-ico{background:#FBEDE9;color:var(--sold)}
-.sheet.danger #pin-go{background:var(--sold)}
-@keyframes shake{25%,75%{transform:translateX(-6px)}50%{transform:translateX(6px)}}
+/* Account menu */
+.me-card{display:flex;align-items:center;gap:14px;padding:6px 0 18px}
+.me-card .av{width:52px;height:52px;font-size:18px;background:var(--ink)}
+.me-card b{display:block;font-size:17px;font-weight:800}
+.me-card span{display:block;font-size:14px;color:var(--ink-3);margin-top:1px;word-break:break-all}
+.me-card .role{display:inline-block;margin-top:6px}
+.mbtn{display:flex;align-items:center;gap:12px;width:100%;height:52px;padding:0 12px;border-radius:14px;font-size:15px;font-weight:600;transition:background .15s}
+.mbtn:hover{background:var(--soft)}
+.mbtn svg{color:var(--ink-3)}
+.mbtn.out{color:var(--sold)}
+.mbtn.out svg{color:var(--sold)}
 
 /* Lightbox */
-.lb{position:fixed;inset:0;z-index:300;background:#0D0A08;opacity:0;visibility:hidden;transition:opacity .22s,visibility 0s .22s;touch-action:pan-x pinch-zoom}
+.lb{position:fixed;inset:0;z-index:300;background:#0D0A08;opacity:0;visibility:hidden;transition:opacity .22s,visibility 0s .22s}
 .lb.open{opacity:1;visibility:visible;transition:opacity .22s}
 .lb-track{position:absolute;inset:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior:contain}
 .lb-track::-webkit-scrollbar{display:none}
@@ -240,63 +312,91 @@ img{display:block;max-width:100%}
 .lb-dots i.on{width:18px;background:#fff}
 
 /* Toast */
-.toast{position:fixed;left:50%;bottom:calc(88px + var(--safe-b));z-index:400;transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;font-weight:600;max-width:calc(100vw - 32px);text-align:center;transition:opacity .22s,transform .22s;box-shadow:0 12px 30px -10px rgba(0,0,0,.4)}
+.toast{position:fixed;left:50%;bottom:calc(88px + var(--safe-b));z-index:400;transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;font-weight:600;width:max-content;max-width:calc(100vw - 32px);text-align:center;line-height:1.4;transition:opacity .22s,transform .22s;box-shadow:0 12px 30px -10px rgba(0,0,0,.4)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .toast.err{background:var(--sold)}
 @media(min-width:720px){.toast{bottom:28px}}
 
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
 
-<header class="top">
-  <div class="top-in">
+<!-- LOGIN -->
+<div class="login" id="login" hidden>
+  <div class="login-card">
     <img class="logo" src="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773853343/REX_Brown_Logo_zwsavl.svg" alt="REX RealtyCo">
-    <div class="top-r">
-      <span class="sync" id="sync"><i></i><span id="sync-t">Live</span></span>
-      <button class="btn btn-p btn-sm hide-sm" data-act="add"><span id="i-plus-top"></span>Add listing</button>
-    </div>
+    <h1>Log in</h1>
+    <p class="lead">Use the email and password your REX admin gave you.</p>
+    <div class="fld"><label for="l-email">Email</label><input id="l-email" type="email" inputmode="email" autocomplete="username" autocapitalize="off" spellcheck="false"></div>
+    <div class="fld"><label for="l-pass">Password</label><div class="pw"><input id="l-pass" type="password" autocomplete="current-password"><button type="button" data-pw="l-pass">Show</button></div></div>
+    <div class="form-err" id="l-err" role="alert"></div>
+    <button class="btn btn-p btn-block" id="l-go">Log in</button>
   </div>
-</header>
+</div>
 
-<main class="wrap">
-  <section class="intro">
-    <h1>Property listings</h1>
-    <p id="sub">Loading listings…</p>
-  </section>
-
-  <div class="tools" id="tools">
-    <div class="search">
-      <span id="i-search"></span>
-      <input id="q" type="search" placeholder="Search property, area or agent" autocomplete="off" enterkeyhint="search" aria-label="Search listings">
+<!-- APP -->
+<div id="app" hidden>
+  <header class="top">
+    <div class="top-in">
+      <img class="logo" src="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773853343/REX_Brown_Logo_zwsavl.svg" alt="REX RealtyCo">
+      <div class="top-r">
+        <span class="sync" id="sync"><i></i><span id="sync-t">Live</span></span>
+        <button class="btn btn-p btn-sm hide-sm" data-act="primary"><span class="ico-plus"></span><span class="lbl">Add listing</span></button>
+        <button class="me-btn" id="me-btn" data-act="menu" aria-label="Your account"></button>
+      </div>
     </div>
-    <div class="chips" id="chips-s" role="tablist" aria-label="Filter by status"></div>
-    <div class="chips t" id="chips-t" aria-label="Filter by type"></div>
-  </div>
+  </header>
 
-  <div class="grid" id="grid"></div>
-</main>
+  <main class="wrap">
+    <nav class="tabs" id="tabs" hidden aria-label="Sections"></nav>
+    <section class="intro">
+      <h1 id="h1">Property listings</h1>
+      <p id="sub">Loading listings…</p>
+    </section>
 
-<button class="fab hide-lg" data-act="add" aria-label="Add listing"><span id="i-plus-fab"></span>Add listing</button>
+    <section id="v-listings">
+      <div class="tools" id="tools">
+        <div class="search">
+          <span class="ico-search"></span>
+          <input id="q" type="search" placeholder="Search property, area or agent" autocomplete="off" enterkeyhint="search" aria-label="Search listings">
+        </div>
+        <div class="chips" id="chips-s" aria-label="Filter by status"></div>
+        <div class="chips t" id="chips-t" aria-label="Filter by type"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="v-trash" hidden>
+      <div id="trash-list" style="margin-top:18px"></div>
+    </section>
+
+    <section id="v-team" hidden>
+      <div class="list" id="team-list" style="margin-top:18px"></div>
+      <p class="note"><b>Sales reps</b> can view and add listings. <b>Admins</b> can also edit listings and move them to the trash. Only you can restore listings or delete them permanently.</p>
+    </section>
+  </main>
+
+  <button class="fab hide-lg" data-act="primary"><span class="ico-plus"></span><span class="lbl">Add listing</span></button>
+</div>
 
 <!-- Detail -->
 <div class="sheet wide" id="sh-detail" aria-hidden="true">
   <div class="sheet-bg" data-close></div>
-  <section class="panel" role="dialog" aria-modal="true" aria-label="Listing details">
+  <section class="panel" role="dialog" aria-modal="true" aria-labelledby="d-title">
     <div class="grab"></div>
-    <div class="p-head"><h2 id="d-title">Listing</h2><button class="ibtn" data-close aria-label="Close" id="d-x"></button></div>
+    <div class="p-head"><h2 id="d-title">Listing</h2><button class="ibtn ico-x" data-close aria-label="Close"></button></div>
     <div class="p-body" id="d-body"></div>
     <div class="p-foot" id="d-foot"></div>
   </section>
 </div>
 
-<!-- Add / edit -->
+<!-- Listing form -->
 <div class="sheet" id="sh-form" aria-hidden="true">
   <div class="sheet-bg" data-close></div>
   <section class="panel" role="dialog" aria-modal="true" aria-labelledby="f-title">
     <div class="grab"></div>
-    <div class="p-head"><h2 id="f-title">New listing</h2><button class="ibtn" data-close aria-label="Close" id="f-x"></button></div>
+    <div class="p-head"><h2 id="f-title">New listing</h2><button class="ibtn ico-x" data-close aria-label="Close"></button></div>
     <div class="p-body" id="f-body">
       <div class="fsec" style="padding-top:6px">
         <div class="fsec-h"><h3>Photos</h3><span id="ph-count">0 of 10</span></div>
@@ -331,35 +431,93 @@ img{display:block;max-width:100%}
     </div>
     <div class="p-foot">
       <button class="btn btn-g" data-close>Cancel</button>
-      <button class="btn btn-p" id="btn-save">Save listing</button>
+      <button class="btn btn-p" id="f-save">Save listing</button>
     </div>
   </section>
 </div>
 
-<!-- PIN -->
-<div class="sheet dialog" id="sh-pin" aria-hidden="true">
+<!-- Team member form -->
+<div class="sheet" id="sh-user" aria-hidden="true">
   <div class="sheet-bg" data-close></div>
-  <section class="panel" role="dialog" aria-modal="true" aria-labelledby="pin-t">
-    <div class="p-body" style="padding-top:18px">
-      <div class="pin-ico" id="pin-ico"></div>
-      <div class="pin-t" id="pin-t">Enter PIN</div>
-      <p class="pin-h" id="pin-h"></p>
-      <input id="pin-in" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="PIN">
-      <div class="pin-err" id="pin-err" role="alert"></div>
+  <section class="panel" role="dialog" aria-modal="true" aria-labelledby="u-title">
+    <div class="grab"></div>
+    <div class="p-head"><h2 id="u-title">Add team member</h2><button class="ibtn ico-x" data-close aria-label="Close"></button></div>
+    <div class="p-body">
+      <div class="fld" style="margin-top:6px"><label for="u-name">Full name</label><input id="u-name" placeholder="e.g. Habiba Musa" autocomplete="off"></div>
+      <div class="fld"><label for="u-email">Email</label><input id="u-email" type="email" inputmode="email" placeholder="name@rex.ng" autocapitalize="off" spellcheck="false" autocomplete="off"></div>
+      <div class="fld"><label for="u-role">Role</label>
+        <select id="u-role"><option value="sales_rep">Sales rep: view and add listings</option><option value="admin">Admin: add, edit and delete listings</option></select>
+      </div>
+      <div class="fld"><label for="u-pass" id="u-pass-l">Temporary password</label>
+        <div class="gen"><input id="u-pass" autocomplete="new-password" autocapitalize="off" spellcheck="false"><button type="button" class="btn btn-g" data-act="gen">Generate</button></div>
+        <small id="u-pass-h"></small>
+      </div>
+      <div class="toggle-row" id="u-active-row">
+        <div><b>Can log in</b><span>Turn off to block this person without deleting their account.</span></div>
+        <label class="switch"><input type="checkbox" id="u-active" aria-label="Can log in"><i></i></label>
+      </div>
     </div>
     <div class="p-foot">
       <button class="btn btn-g" data-close>Cancel</button>
-      <button class="btn btn-p" id="pin-go">Continue</button>
+      <button class="btn btn-p" id="u-save">Add member</button>
+    </div>
+  </section>
+</div>
+
+<!-- Change password -->
+<div class="sheet small" id="sh-pass" aria-hidden="true">
+  <div class="sheet-bg" data-close></div>
+  <section class="panel" role="dialog" aria-modal="true" aria-labelledby="pw-title">
+    <div class="grab"></div>
+    <div class="p-head"><h2 id="pw-title">Change password</h2><button class="ibtn ico-x" data-close aria-label="Close"></button></div>
+    <div class="p-body">
+      <div class="fld" style="margin-top:6px"><label for="p-cur">Current password</label><input id="p-cur" type="password" autocomplete="current-password"></div>
+      <div class="fld"><label for="p-new">New password</label><input id="p-new" type="password" autocomplete="new-password"><small>At least 8 characters.</small></div>
+      <div class="fld"><label for="p-new2">Confirm new password</label><input id="p-new2" type="password" autocomplete="new-password"></div>
+    </div>
+    <div class="p-foot">
+      <button class="btn btn-g" data-close>Cancel</button>
+      <button class="btn btn-p" id="p-save">Change password</button>
+    </div>
+  </section>
+</div>
+
+<!-- Account menu -->
+<div class="sheet small" id="sh-menu" aria-hidden="true">
+  <div class="sheet-bg" data-close></div>
+  <section class="panel" role="dialog" aria-modal="true" aria-label="Your account">
+    <div class="grab"></div>
+    <div class="p-head"><h2>Account</h2><button class="ibtn ico-x" data-close aria-label="Close"></button></div>
+    <div class="p-body" style="padding-bottom:calc(18px + var(--safe-b))">
+      <div class="me-card" id="me-card"></div>
+      <button class="mbtn" data-act="pass"><span class="ico-lock"></span>Change password</button>
+      <button class="mbtn out" data-act="logout"><span class="ico-out"></span>Log out</button>
+    </div>
+  </section>
+</div>
+
+<!-- Confirm dialog -->
+<div class="sheet dialog" id="sh-dialog" aria-hidden="true">
+  <div class="sheet-bg" data-close></div>
+  <section class="panel" role="alertdialog" aria-modal="true" aria-labelledby="dlg-t">
+    <div class="p-body" style="padding-top:18px">
+      <div class="dlg-t" id="dlg-t"></div>
+      <p class="dlg-p" id="dlg-p"></p>
+      <div id="dlg-x"></div>
+    </div>
+    <div class="p-foot">
+      <button class="btn btn-g" id="dlg-no">Cancel</button>
+      <button class="btn btn-p" id="dlg-ok">OK</button>
     </div>
   </section>
 </div>
 
 <!-- Lightbox -->
 <div class="lb" id="lb" aria-hidden="true" role="dialog" aria-label="Photo viewer">
-  <div class="lb-bar"><span class="lb-count" id="lb-count">1 / 1</span><button class="lb-btn" data-lb="close" aria-label="Close photos" id="lb-x"></button></div>
+  <div class="lb-bar"><span class="lb-count" id="lb-count">1 / 1</span><button class="lb-btn ico-x" data-lb="close" aria-label="Close photos"></button></div>
   <div class="lb-track" id="lb-track"></div>
-  <button class="lb-btn lb-nav p" data-lb="-1" aria-label="Previous photo" id="lb-p"></button>
-  <button class="lb-btn lb-nav n" data-lb="1" aria-label="Next photo" id="lb-n"></button>
+  <button class="lb-btn lb-nav p" id="lb-p" data-lb="-1" aria-label="Previous photo"></button>
+  <button class="lb-btn lb-nav n" id="lb-n" data-lb="1" aria-label="Next photo"></button>
   <div class="lb-dots" id="lb-dots"></div>
 </div>
 
@@ -367,22 +525,38 @@ img{display:block;max-width:100%}
 
 <script>
 const API = "https://script.google.com/macros/s/AKfycbwfZGPV6k3nBENtH9vvs87t8fNMs9_H7NfleaZS6X3Cz22VTF8EyD_4CY_sKmywKSYF/exec";
-const CLD = { cloud: 'dvqgqgo4c', preset: 'rex-listings' };
-const PINS = { add: 'add', edit: 'edit', delete: '0704' };
 const MAX_PHOTOS = 10;
 const STATUSES = ['For Sale', 'For Rent', 'Under Offer', 'Sold'];
 const TYPES = ['Residential', 'Commercial', 'Land', 'Short Let'];
 const ST_CLASS = { 'For Sale': 's-sale', 'For Rent': 's-rent', 'Under Offer': 's-offer', 'Sold': 's-sold' };
+const ROLE = { super_admin: 'Super admin', admin: 'Admin', sales_rep: 'Sales rep' };
+const TOKEN_KEY = 'rex_token';
 
-const S = { data: [], status: 'all', type: 'all', q: '', editId: null, photos: [], pin: null, lb: { imgs: [], i: 0 } };
+const store = {
+  get() { try { return localStorage.getItem(TOKEN_KEY) || ''; } catch { return ''; } },
+  set(v) { try { v ? localStorage.setItem(TOKEN_KEY, v) : localStorage.removeItem(TOKEN_KEY); } catch {} }
+};
+const S = {
+  token: store.get(), user: null, view: 'listings',
+  data: null, trash: null, users: null,
+  status: 'all', type: 'all', q: '',
+  editId: null, photos: [], editUserId: null,
+  lb: { imgs: [], i: 0 }, sigP: null, sigAt: 0, dlg: null, lastLoad: 0
+};
+const can = {
+  edit: () => S.user && (S.user.role === 'admin' || S.user.role === 'super_admin'),
+  super: () => S.user && S.user.role === 'super_admin'
+};
 const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
 
-// ── Icons ─────────────────────────────────
-const sv = (w, d, extra = '') => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ${extra}>${d}</svg>`;
+/* ── Icons ── */
+const sv = (w, d, x = '') => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${x}>${d}</svg>`;
 const I = {
   search: sv(18, '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>'),
   plus: sv(20, '<path d="M12 5v14M5 12h14"/>', 'stroke-width="2.4"'),
   x: sv(20, '<path d="M18 6L6 18M6 6l12 12"/>'),
+  xs: sv(14, '<path d="M18 6L6 18M6 6l12 12"/>', 'stroke-width="2.4"'),
   l: sv(20, '<path d="M15 18l-6-6 6-6"/>', 'stroke-width="2.4"'),
   r: sv(20, '<path d="M9 18l6-6-6-6"/>', 'stroke-width="2.4"'),
   pin: sv(15, '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),
@@ -391,27 +565,28 @@ const I = {
   home: sv(15, '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'),
   edit: sv(18, '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>'),
   trash: sv(18, '<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/>'),
+  restore: sv(16, '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>'),
   cam: sv(13, '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>', 'stroke-width="2.2"'),
-  img: sv(30, '<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>', 'stroke-width="1.6"'),
-  addimg: sv(24, '<path d="M12 5v14M5 12h14"/>'),
+  img: sv(28, '<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>', 'stroke-width="1.6"'),
   star: sv(14, '<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/>'),
-  lock: sv(24, '<rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>', 'stroke-width="1.9"'),
+  lock: sv(20, '<rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>'),
+  out: sv(20, '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>'),
   phone: sv(19, '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>'),
-  wa: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.4 3.5 3.5 0 0 0-1.1 2.6 6 6 0 0 0 1.3 3.2 13.8 13.8 0 0 0 5.3 4.7c2 .8 2.7.9 3.7.7.6-.1 1.8-.7 2-1.5.3-.7.3-1.3.2-1.5l-.5-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>'
+  wa: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.4 3.5 3.5 0 0 0-1.1 2.6 6 6 0 0 0 1.3 3.2 13.8 13.8 0 0 0 5.3 4.7c2 .8 2.7.9 3.7.7.6-.1 1.8-.7 2-1.5.3-.7.3-1.3.2-1.5l-.5-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>'
 };
-$('#i-search').innerHTML = I.search;
-$('#i-plus-top').innerHTML = I.plus;
-$('#i-plus-fab').innerHTML = I.plus;
-['#d-x', '#f-x', '#lb-x'].forEach(s => $(s).innerHTML = I.x);
+$$('.ico-search').forEach(e => e.innerHTML = I.search);
+$$('.ico-plus').forEach(e => e.innerHTML = I.plus);
+$$('.ico-x').forEach(e => e.innerHTML = I.x);
+$$('.ico-lock').forEach(e => e.innerHTML = I.lock);
+$$('.ico-out').forEach(e => e.innerHTML = I.out);
 $('#lb-p').innerHTML = I.l; $('#lb-n').innerHTML = I.r;
-$('#pin-ico').innerHTML = I.lock;
 
-// ── Helpers ───────────────────────────────
+/* ── Helpers ── */
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const cld = (u, w) => (/res\.cloudinary\.com/.test(u) && u.includes('/upload/') && !/\/upload\/(f_|q_|w_|c_)/.test(u))
   ? u.replace('/upload/', `/upload/f_auto,q_auto,c_limit,w_${w}/`) : u;
 const imgsOf = l => String(l.images || '').split(',').map(s => s.trim()).filter(Boolean);
-const find = id => S.data.find(x => String(x.id) === String(id));
+const find = id => (S.data || []).find(x => String(x.id) === String(id)) || (S.trash || []).find(x => String(x.id) === String(id));
 const money = p => {
   const s = String(p ?? '').trim();
   if (!s) return 'Price on request';
@@ -420,65 +595,160 @@ const money = p => {
 };
 const per = p => ({ 'Per Annum': '/yr', 'Per Month': '/mo', 'Per Night': '/night' }[p] || '');
 const beds = b => { const s = String(b ?? '').trim(); return !s ? '' : /^\d+$/.test(s) ? `${s} bed${s === '1' ? '' : 's'}` : s; };
-const initials = n => String(n || '').trim().split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase();
+const initials = n => String(n || '').trim().split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase() || '?';
 const fmtDate = d => { if (!d) return '—'; const t = new Date(d); return isNaN(t) ? esc(d) : t.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); };
 const waLink = ph => { let d = String(ph || '').replace(/\D/g, ''); if (d.startsWith('0')) d = '234' + d.slice(1); return 'https://wa.me/' + d; };
 const pill = s => `<span class="pill status ${ST_CLASS[s] || 's-sale'}">${esc(s || 'For Sale')}</span>`;
+const plural = (n, a, b) => `${n} ${n === 1 ? a : b}`;
 
 let toastT;
 function toast(msg, err = false) {
   const t = $('#toast'); t.textContent = msg; t.className = 'toast show' + (err ? ' err' : '');
-  clearTimeout(toastT); toastT = setTimeout(() => t.className = 'toast' + (err ? ' err' : ''), 2800);
+  clearTimeout(toastT); toastT = setTimeout(() => t.className = 'toast' + (err ? ' err' : ''), err ? 4200 : 2800);
 }
-function sync(state) {
-  $('#sync').className = 'sync' + (state === 'busy' ? ' busy' : state === 'err' ? ' err' : '');
-  $('#sync-t').textContent = state === 'busy' ? 'Syncing' : state === 'err' ? 'Offline' : 'Live';
+let busyN = 0;
+function busy(d) { busyN = Math.max(0, busyN + d); setSync(busyN ? 'busy' : 'ok'); }
+function setSync(s) {
+  $('#sync').className = 'sync' + (s === 'busy' ? ' busy' : s === 'err' ? ' err' : '');
+  $('#sync-t').textContent = s === 'busy' ? 'Syncing' : s === 'err' ? 'Offline' : 'Live';
 }
 
-// ── Data ──────────────────────────────────
-async function load() {
-  sync('busy');
+/* ── API ── */
+async function api(action, params = {}) {
+  busy(1);
+  let j;
   try {
-    const r = await fetch(API); const j = await r.json();
-    if (!j.success) throw new Error();
-    S.data = j.data.filter(x => x.ID).map(x => ({
-      id: x.ID, name: x.Name, location: x.Location, type: x.Type, status: x.Status,
-      price: x.Price, period: x.Period, beds: x.Beds, size: x.Size, agent: x.Agent,
-      phone: x.Phone, notes: x.Notes, date: x.Date, images: x.Images || ''
-    })).reverse();
-    sync('ok'); render();
+    const r = await fetch(API, { method: 'POST', body: JSON.stringify(Object.assign({ action, token: S.token }, params)) });
+    j = await r.json();
   } catch {
-    sync('err');
+    busy(-1); setSync('err');
+    throw new Error("Couldn't reach the server. Check your connection and try again.");
+  }
+  busy(-1);
+  if (!j.success) {
+    if (j.code === 'AUTH' && action !== 'login') endSession(j.error);
+    const e = new Error(j.error || 'Something went wrong. Try again.'); e.code = j.code; throw e;
+  }
+  return j;
+}
+
+/* ── Session ── */
+async function boot() {
+  if (!S.token) return showLogin();
+  $('#app').hidden = false;
+  skeleton();
+  try { const r = await api('me'); S.user = r.user; startApp(); }
+  catch (e) { if (e.code !== 'AUTH') showLogin(e.message); }
+}
+function showLogin(msg = '') {
+  $('#app').hidden = true; $('#login').hidden = false;
+  $('#l-err').textContent = msg;
+  setTimeout(() => $('#l-email').focus(), 50);
+}
+async function doLogin() {
+  const email = $('#l-email').value.trim(), password = $('#l-pass').value;
+  if (!email || !password) { $('#l-err').textContent = 'Enter your email and password.'; return; }
+  const b = $('#l-go'); b.disabled = true; b.textContent = 'Logging in…'; $('#l-err').textContent = '';
+  try {
+    const r = await api('login', { email, password });
+    S.token = r.token; store.set(r.token); S.user = r.user;
+    $('#l-pass').value = '';
+    startApp();
+  } catch (e) { $('#l-err').textContent = e.message; }
+  b.disabled = false; b.textContent = 'Log in';
+}
+function startApp() {
+  $('#login').hidden = true; $('#app').hidden = false;
+  S.view = 'listings'; S.data = null; S.trash = null; S.users = null;
+  $('#me-btn').textContent = initials(S.user.name);
+  renderShell(); skeleton();
+  loadListings();
+  if (can.super()) loadTrash();
+}
+function endSession(msg) {
+  S.token = ''; store.set(''); S.user = null;
+  $$('.sheet.open').forEach(s => closeSheet(s)); closeLB();
+  showLogin(msg || '');
+}
+async function logout() {
+  closeSheet($('#sh-menu'));
+  try { await api('logout'); } catch {}
+  endSession('You have logged out.');
+}
+
+/* ── Loading ── */
+async function loadListings() {
+  try {
+    const r = await api('listings');
+    S.data = r.listings.reverse(); S.lastLoad = Date.now();
+    if (S.view === 'listings') renderListings();
+  } catch (e) {
+    if (e.code === 'AUTH' || S.view !== 'listings') return;
     $('#sub').textContent = 'Listings could not load';
-    $('#grid').innerHTML = `<div class="empty"><h3>Couldn't reach the listings sheet</h3><p>Check your internet connection, then try again.</p><button class="btn btn-p" data-act="retry">Try again</button></div>`;
+    $('#grid').innerHTML = errBox(e.message, 'reload');
   }
 }
-async function post(payload) {
-  sync('busy');
-  const r = await fetch(API, { method: 'POST', body: JSON.stringify(payload) });
-  const j = await r.json(); sync(j.success ? 'ok' : 'err'); return j;
+async function loadTrash() {
+  try {
+    const r = await api('trash'); S.trash = r.listings.reverse();
+    renderTabs(); if (S.view === 'trash') renderTrash();
+  } catch (e) { if (e.code !== 'AUTH' && S.view === 'trash') $('#trash-list').innerHTML = errBox(e.message, 'reload'); }
+}
+async function loadUsers() {
+  try {
+    const r = await api('users'); S.users = r.users;
+    if (S.view === 'team') renderTeam();
+  } catch (e) { if (e.code !== 'AUTH' && S.view === 'team') $('#team-list').innerHTML = errBox(e.message, 'reload'); }
+}
+function reloadView() {
+  if (S.view === 'listings') { skeleton(); loadListings(); }
+  if (S.view === 'trash') { S.trash = null; renderTrash(); loadTrash(); }
+  if (S.view === 'team') { S.users = null; renderTeam(); loadUsers(); }
+}
+const errBox = (msg, act) => `<div class="empty"><h3>Couldn't load this page</h3><p>${esc(msg)}</p><button class="btn btn-p" data-act="${act}">Try again</button></div>`;
+
+/* ── Shell & views ── */
+function renderTabs() {
+  const t = $('#tabs');
+  t.hidden = !can.super();
+  if (!can.super()) return;
+  const n = S.trash ? S.trash.length : 0;
+  t.innerHTML = [['listings', 'Listings'], ['trash', 'Trash', n], ['team', 'Team']]
+    .map(([v, l, c]) => `<button class="tab${S.view === v ? ' on' : ''}" data-view="${v}" aria-current="${S.view === v}">${l}${c ? `<em>${c}</em>` : ''}</button>`).join('');
+}
+function renderShell() {
+  renderTabs();
+  ['listings', 'trash', 'team'].forEach(v => $('#v-' + v).hidden = S.view !== v);
+  $('#h1').textContent = { listings: 'Property listings', trash: 'Trash', team: 'Team' }[S.view];
+  const prim = { listings: 'Add listing', team: 'Add member' }[S.view] || '';
+  $$('[data-act="primary"]').forEach(b => { b.hidden = !prim; b.querySelector('.lbl').textContent = prim; });
+}
+function setView(v) {
+  if (v === S.view) return;
+  S.view = v; renderShell(); window.scrollTo({ top: 0 });
+  if (v === 'listings') S.data ? renderListings() : (skeleton(), loadListings());
+  if (v === 'trash') { renderTrash(); loadTrash(); }
+  if (v === 'team') { renderTeam(); loadUsers(); }
 }
 
-// ── Render ────────────────────────────────
+/* Listings */
 function skeleton() {
   $('#grid').innerHTML = Array.from({ length: 6 }, () => `<div><div class="sk sk-img"></div><div class="sk sk-line" style="width:45%;height:18px;margin-top:14px"></div><div class="sk sk-line" style="width:75%"></div><div class="sk sk-line" style="width:55%"></div></div>`).join('');
 }
-
-function carHTML(l, w, opts = {}) {
+function carHTML(l, w, badge = true) {
   const imgs = imgsOf(l);
-  const badge = opts.badge === false ? '' : pill(l.status);
-  if (!imgs.length) return `<div class="car"><div class="car-empty">${I.img}<span>No photos yet</span></div>${badge}</div>`;
+  const b = badge ? pill(l.status) : '';
+  if (!imgs.length) return `<div class="car"><div class="car-empty">${I.img}<span>No photos yet</span></div>${b}</div>`;
   const multi = imgs.length > 1;
   return `<div class="car" data-car="${esc(l.id)}">
-    <div class="car-track">${imgs.map((u, i) => `<img src="${esc(cld(u, w))}" alt="${esc(l.name)} photo ${i + 1}" loading="lazy" decoding="async" data-img="${i}" draggable="false">`).join('')}</div>
+    <div class="car-track">${imgs.map((u, i) => `<img src="${esc(cld(u, w))}" alt="${esc(l.name)}, photo ${i + 1}" loading="lazy" decoding="async" data-img="${i}" draggable="false">`).join('')}</div>
     ${multi ? `<div class="car-dots">${imgs.map((_, i) => `<i class="${i ? '' : 'on'}"></i>`).join('')}</div>
       <button class="car-nav p" data-nav="-1" aria-label="Previous photo">${I.l}</button>
-      <button class="car-nav n" data-nav="1" aria-label="Next photo">${I.r}</button>` : ''}
-    ${badge}
-    ${multi ? `<span class="car-count">${I.cam}${imgs.length}</span>` : ''}
+      <button class="car-nav n" data-nav="1" aria-label="Next photo">${I.r}</button>
+      <span class="car-count">${I.cam}${imgs.length}</span>` : ''}
+    ${b}
   </div>`;
 }
-
 function cardHTML(l) {
   const b = beds(l.beds);
   return `<article class="card" data-open="${esc(l.id)}">
@@ -490,10 +760,10 @@ function cardHTML(l) {
           <div class="name">${esc(l.name) || 'Untitled listing'}</div>
           <div class="loc">${I.pin}<span>${esc(l.location) || '—'}</span></div>
         </div>
-        <div class="acts">
+        ${can.edit() ? `<div class="acts">
           <button class="ibtn" data-edit="${esc(l.id)}" aria-label="Edit listing">${I.edit}</button>
-          <button class="ibtn del" data-del="${esc(l.id)}" aria-label="Delete listing">${I.trash}</button>
-        </div>
+          <button class="ibtn del" data-del="${esc(l.id)}" aria-label="Move listing to trash">${I.trash}</button>
+        </div>` : ''}
       </div>
       <div class="facts">
         <span>${I.home}${esc(l.type || 'Residential')}</span>
@@ -503,44 +773,75 @@ function cardHTML(l) {
     </div>
   </article>`;
 }
-
-function filtered() {
-  const q = S.q.toLowerCase();
-  return S.data.filter(l =>
-    (S.status === 'all' || l.status === S.status) &&
-    (S.type === 'all' || l.type === S.type) &&
-    (!q || [l.name, l.location, l.agent, l.notes].some(v => String(v || '').toLowerCase().includes(q))));
-}
-
-function render() {
-  const count = s => S.data.filter(x => x.status === s).length;
+function renderListings() {
+  const data = S.data || [];
+  const count = s => data.filter(x => x.status === s).length;
   const avail = count('For Sale') + count('For Rent');
-  $('#sub').textContent = S.data.length ? `${S.data.length} ${S.data.length === 1 ? 'property' : 'properties'}, ${avail} available` : 'No properties listed yet';
-
-  $('#chips-s').innerHTML = [['all', 'All', S.data.length], ...STATUSES.map(s => [s, s, count(s)])]
-    .map(([v, t, n]) => `<button class="chip${S.status === v ? ' on' : ''}" data-status="${esc(v)}" role="tab" aria-selected="${S.status === v}">${t}<em>${n}</em></button>`).join('');
+  $('#sub').textContent = data.length ? `${plural(data.length, 'property', 'properties')}, ${avail} available` : 'No properties listed yet';
+  $('#chips-s').innerHTML = [['all', 'All', data.length], ...STATUSES.map(s => [s, s, count(s)])]
+    .map(([v, t, n]) => `<button class="chip${S.status === v ? ' on' : ''}" data-status="${esc(v)}" aria-pressed="${S.status === v}">${t}<em>${n}</em></button>`).join('');
   $('#chips-t').innerHTML = [['all', 'All types'], ...TYPES.map(t => [t, t])]
-    .map(([v, t]) => `<button class="chip${S.type === v ? ' on' : ''}" data-type="${esc(v)}">${t}</button>`).join('');
+    .map(([v, t]) => `<button class="chip${S.type === v ? ' on' : ''}" data-type="${esc(v)}" aria-pressed="${S.type === v}">${t}</button>`).join('');
 
-  const list = filtered();
+  const q = S.q.toLowerCase();
+  const list = data.filter(l =>
+    (S.status === 'all' || l.status === S.status) && (S.type === 'all' || l.type === S.type) &&
+    (!q || [l.name, l.location, l.agent, l.notes, l.addedBy].some(v => String(v || '').toLowerCase().includes(q))));
   const grid = $('#grid');
-  if (!S.data.length) {
-    grid.innerHTML = `<div class="empty"><h3>No listings yet</h3><p>Add your first property with photos, price and agent details.</p><button class="btn btn-p" data-act="add">${I.plus}Add listing</button></div>`;
-    return;
-  }
-  if (!list.length) {
-    grid.innerHTML = `<div class="empty"><h3>No matches</h3><p>Try a different search or clear the filters.</p><button class="btn btn-g" data-act="clear">Clear filters</button></div>`;
-    return;
-  }
+  if (!data.length) { grid.innerHTML = `<div class="empty"><h3>No listings yet</h3><p>Add your first property with photos, price and agent details.</p><button class="btn btn-p" data-act="primary">${I.plus}Add listing</button></div>`; return; }
+  if (!list.length) { grid.innerHTML = `<div class="empty"><h3>No matches</h3><p>Try a different search or clear the filters.</p><button class="btn btn-g" data-act="clear">Clear filters</button></div>`; return; }
   grid.innerHTML = list.map(cardHTML).join('');
   bindCars(grid);
 }
 
-// Carousel dot syncing
+/* Trash */
+function renderTrash() {
+  const box = $('#trash-list');
+  if (!S.trash) { $('#sub').textContent = 'Loading trash…'; box.className = 'list'; box.innerHTML = Array.from({ length: 3 }, () => `<div class="tr"><div class="tr-thumb sk"></div><div class="tr-body"><div class="sk sk-line" style="width:60%;margin-top:4px"></div><div class="sk sk-line" style="width:40%"></div></div></div>`).join(''); return; }
+  const n = S.trash.length;
+  $('#sub').textContent = n ? `${plural(n, 'listing', 'listings')} deleted by admins. Restore them, or delete them permanently along with their photos.` : 'Listings that admins delete appear here until you restore or permanently delete them.';
+  if (!n) { box.className = ''; box.innerHTML = `<div class="empty"><h3>Trash is empty</h3><p>Nothing is waiting for review.</p></div>`; return; }
+  box.className = 'list';
+  box.innerHTML = S.trash.map(l => {
+    const imgs = imgsOf(l);
+    return `<div class="tr">
+      <button class="tr-thumb" ${imgs.length ? `data-thumb="${esc(l.id)}" aria-label="View photos"` : 'tabindex="-1"'}>${imgs.length ? `<img src="${esc(cld(imgs[0], 240))}" alt="" loading="lazy">` : I.img}</button>
+      <div class="tr-body">
+        <div class="name">${esc(l.name) || 'Untitled listing'}</div>
+        <div class="tr-meta">${money(l.price)}${per(l.period)} in ${esc(l.location) || '—'}</div>
+        <div class="tr-meta">Deleted by ${esc(l.deletedBy || 'an admin')} on ${fmtDate(l.deletedAt)}${imgs.length ? `, ${plural(imgs.length, 'photo', 'photos')}` : ''}</div>
+        <div class="tr-acts">
+          <button class="btn btn-g" data-restore="${esc(l.id)}">${I.restore}Restore</button>
+          <button class="btn btn-d" data-purge="${esc(l.id)}">${I.trash}Delete permanently</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* Team */
+function renderTeam() {
+  const box = $('#team-list');
+  if (!S.users) { $('#sub').textContent = 'Loading team…'; box.innerHTML = Array.from({ length: 3 }, () => `<div class="row"><div class="av sk"></div><div class="row-t"><div class="sk sk-line" style="width:50%;margin:0"></div><div class="sk sk-line" style="width:70%;margin-top:8px"></div></div></div>`).join(''); return; }
+  const active = S.users.filter(u => u.active).length;
+  $('#sub').textContent = `${plural(active, 'person', 'people')} can log in. Add sales reps and admins, change their roles, or block access.`;
+  const order = { super_admin: 0, admin: 1, sales_rep: 2 };
+  const list = [...S.users].sort((a, b) => (b.active - a.active) || (order[a.role] - order[b.role]) || String(a.name).localeCompare(b.name));
+  box.innerHTML = list.map(u => {
+    const locked = u.role === 'super_admin', tag = locked ? 'div' : 'button';
+    return `<${tag} class="row${u.active ? '' : ' off'}" ${locked ? '' : `data-user="${esc(u.id)}"`}>
+      <div class="av">${esc(initials(u.name))}</div>
+      <div class="row-t"><b>${esc(u.name)}${u.id === S.user.id ? ' (you)' : ''}</b><span>${esc(u.email)}</span></div>
+      <span class="role ${u.active ? 'r-' + u.role : 'r-off'}">${u.active ? ROLE[u.role] || u.role : 'Blocked'}</span>
+      ${locked ? '' : `<span class="chev">${I.r}</span>`}
+    </${tag}>`;
+  }).join('');
+}
+
+/* ── Carousels ── */
 function bindCars(root) {
   root.querySelectorAll('.car-track').forEach(t => {
-    if (t._bound) return; t._bound = true;
-    let raf;
+    if (t._b) return; t._b = 1; let raf;
     t.addEventListener('scroll', () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
@@ -552,53 +853,34 @@ function bindCars(root) {
 }
 function stepCar(track, dir) {
   const n = track.children.length, w = track.clientWidth;
-  const i = (Math.round(track.scrollLeft / w) + dir + n) % n;
-  track.scrollTo({ left: i * w, behavior: 'smooth' });
+  track.scrollTo({ left: ((Math.round(track.scrollLeft / w) + dir + n) % n) * w, behavior: 'smooth' });
 }
 
-// ── Sheets ────────────────────────────────
+/* ── Sheets & dialog ── */
 function openSheet(id) { const s = $('#' + id); s.classList.add('open'); s.setAttribute('aria-hidden', 'false'); lockScroll(); }
-function closeSheet(s) { if (!s) return; s.classList.remove('open'); s.setAttribute('aria-hidden', 'true'); lockScroll(); }
+function closeSheet(s) {
+  if (!s || !s.classList.contains('open')) return;
+  s.classList.remove('open'); s.setAttribute('aria-hidden', 'true'); lockScroll();
+  if (s.id === 'sh-dialog' && S.dlg) { const r = S.dlg; S.dlg = null; r(false); }
+}
 function lockScroll() { document.documentElement.style.overflow = document.querySelector('.sheet.open, .lb.open') ? 'hidden' : ''; }
-
-// ── PIN ───────────────────────────────────
-const PIN_TXT = {
-  add: ['Add a listing', 'Enter the add PIN to create a new listing.'],
-  edit: ['Edit listing', 'Enter the edit PIN to change this listing.'],
-  delete: ['Delete listing', 'Enter the delete PIN. This removes the listing for everyone.']
-};
-function askPin(action, id = null) {
-  S.pin = { action, id };
-  $('#pin-t').textContent = PIN_TXT[action][0];
-  $('#pin-h').textContent = PIN_TXT[action][1];
-  $('#pin-go').textContent = action === 'delete' ? 'Delete' : 'Continue';
-  $('#pin-in').value = ''; $('#pin-err').textContent = '';
-  $('#sh-pin').classList.toggle('danger', action === 'delete');
-  openSheet('sh-pin');
-  setTimeout(() => $('#pin-in').focus(), 220);
+function dialog({ title, text = '', html = '', ok = 'OK', cancel = 'Cancel', danger = false }) {
+  if (S.dlg) { const r = S.dlg; S.dlg = null; r(false); }
+  $('#dlg-t').textContent = title; $('#dlg-p').textContent = text; $('#dlg-x').innerHTML = html;
+  $('#dlg-ok').textContent = ok; $('#dlg-ok').className = 'btn ' + (danger ? 'btn-x' : 'btn-p');
+  $('#dlg-no').textContent = cancel; $('#dlg-no').hidden = !cancel;
+  openSheet('sh-dialog');
+  return new Promise(res => { S.dlg = res; });
 }
-function checkPin() {
-  const inp = $('#pin-in');
-  if (inp.value.trim() !== PINS[S.pin.action]) {
-    $('#pin-err').textContent = 'That PIN is incorrect. Try again.';
-    inp.value = ''; inp.classList.remove('bad'); void inp.offsetWidth; inp.classList.add('bad'); inp.focus();
-    return;
-  }
-  inp.blur(); closeSheet($('#sh-pin'));
-  const { action, id } = S.pin;
-  if (action !== 'add') closeSheet($('#sh-detail'));
-  if (action === 'add') openForm();
-  else if (action === 'edit') openForm(id);
-  else removeListing(id);
-}
+function answer(v) { const r = S.dlg; S.dlg = null; closeSheet($('#sh-dialog')); if (r) r(v); }
 
-// ── Detail ────────────────────────────────
+/* ── Detail ── */
 function openDetail(id) {
   const l = find(id); if (!l) return;
-  $('#d-title').textContent = l.name || 'Listing';
   const b = beds(l.beds);
+  $('#d-title').textContent = l.name || 'Listing';
   $('#d-body').innerHTML = `
-    ${imgsOf(l).length ? `<div class="d-car">${carHTML(l, 1200, { badge: false })}</div>` : ''}
+    ${imgsOf(l).length ? `<div class="d-car">${carHTML(l, 1200, false)}</div>` : ''}
     <div class="d-top">
       ${pill(l.status)}
       <div class="d-price">${money(l.price)}<small>${per(l.period)}</small></div>
@@ -609,65 +891,70 @@ function openDetail(id) {
       <div class="spec"><span>Type</span><b>${esc(l.type || '—')}</b></div>
       <div class="spec"><span>Bedrooms</span><b>${esc(b || '—')}</b></div>
       <div class="spec"><span>Size</span><b>${esc(l.size || '—')}</b></div>
+      <div class="spec"><span>Payment</span><b>${esc(l.period || 'Outright')}</b></div>
       <div class="spec"><span>Listed</span><b>${fmtDate(l.date)}</b></div>
+      <div class="spec"><span>Added by</span><b>${esc(l.addedBy || '—')}</b></div>
     </div>
     ${l.notes ? `<div class="d-sec"><h3>Notes</h3><p>${esc(l.notes)}</p></div>` : ''}
     ${l.agent || l.phone ? `<div class="agent">
-      <div class="av">${esc(initials(l.agent) || 'R')}</div>
+      <div class="av">${esc(initials(l.agent))}</div>
       <div class="agent-t"><b>${esc(l.agent || 'REX agent')}</b><span>${esc(l.phone || 'No phone added')}</span></div>
       ${l.phone ? `<a href="tel:${esc(String(l.phone).replace(/\s/g, ''))}" aria-label="Call agent">${I.phone}</a><a class="wa" href="${waLink(l.phone)}" target="_blank" rel="noopener" aria-label="WhatsApp agent">${I.wa}</a>` : ''}
     </div>` : ''}`;
-  $('#d-foot').innerHTML = `
-    <button class="btn btn-d" data-del="${esc(l.id)}">${I.trash}Delete</button>
-    <button class="btn btn-p" data-edit="${esc(l.id)}">${I.edit}Edit listing</button>`;
-  openSheet('sh-detail');
-  $('#d-body').scrollTop = 0;
-  bindCars($('#d-body'));
+  $('#d-foot').innerHTML = can.edit()
+    ? `<button class="btn btn-d" data-del="${esc(l.id)}">${I.trash}Delete</button><button class="btn btn-p" data-edit="${esc(l.id)}">${I.edit}Edit listing</button>`
+    : `<button class="btn btn-g" data-close>Close</button>`;
+  openSheet('sh-detail'); $('#d-body').scrollTop = 0; bindCars($('#d-body'));
 }
 
-// ── Form ──────────────────────────────────
+/* ── Listing form ── */
 const F = ['name', 'loc', 'type', 'status', 'price', 'period', 'beds', 'size', 'agent', 'phone', 'notes'];
 const KEY = { loc: 'location' };
 function openForm(id) {
   const l = id ? find(id) : null;
   S.editId = l ? l.id : null;
   $('#f-title').textContent = l ? 'Edit listing' : 'New listing';
-  const defaults = { type: 'Residential', status: 'For Sale', period: 'Outright' };
-  F.forEach(f => { $('#f-' + f).value = l ? (l[KEY[f] || f] ?? '') : (defaults[f] || ''); });
+  const def = { type: 'Residential', status: 'For Sale', period: 'Outright', agent: S.user.name };
+  F.forEach(f => { $('#f-' + f).value = l ? (l[KEY[f] || f] ?? '') : (def[f] || ''); });
   S.photos = l ? imgsOf(l).map(url => ({ url })) : [];
-  renderPhotos();
-  openSheet('sh-form');
-  $('#f-body').scrollTop = 0;
+  renderPhotos(); closeSheet($('#sh-detail')); openSheet('sh-form'); $('#f-body').scrollTop = 0;
 }
-
 function renderPhotos() {
   $('#ph-count').textContent = `${S.photos.length} of ${MAX_PHOTOS}`;
   $('#ph-grid').innerHTML = S.photos.map((p, i) => `<div class="ph">
       <img src="${esc(p.url ? cld(p.url, 300) : p.local)}" alt="Photo ${i + 1}">
       ${p.busy ? '<div class="ph-busy"><div class="spin"></div></div>' : `
-        <button type="button" class="ph-x" data-rm="${i}" aria-label="Remove photo">${I.x.replace(/width="20" height="20"/, 'width="14" height="14"')}</button>
+        <button type="button" class="ph-x" data-rm="${i}" aria-label="Remove photo">${I.xs}</button>
         ${i === 0 ? '<span class="ph-cover">Cover</span>' : `<button type="button" class="ph-star" data-cover="${i}" aria-label="Make cover photo">${I.star}</button>`}`}
     </div>`).join('')
-    + (S.photos.length < MAX_PHOTOS ? `<label class="ph ph-add">${I.addimg}<span>Add photos</span><input type="file" id="ph-in" accept="image/*" multiple hidden></label>` : '');
+    + (S.photos.length < MAX_PHOTOS ? `<label class="ph ph-add">${I.plus}<span>Add photos</span><input type="file" id="ph-in" accept="image/*" multiple hidden></label>` : '');
   const inp = $('#ph-in'); if (inp) inp.onchange = e => { addFiles(e.target.files); e.target.value = ''; };
 }
-
+function getSig() {
+  if (!S.sigP || Date.now() - S.sigAt > 45 * 60e3) {
+    S.sigAt = Date.now();
+    S.sigP = api('signUpload').catch(e => { S.sigP = null; throw e; });
+  }
+  return S.sigP;
+}
 async function compress(file) {
   try {
     const bmp = await createImageBitmap(file, { imageOrientation: 'from-image' });
-    const s = Math.min(1, 2000 / Math.max(bmp.width, bmp.height));
-    if (s === 1 && file.size < 2.5e6) return file;
+    const k = Math.min(1, 2000 / Math.max(bmp.width, bmp.height));
+    if (k === 1 && file.size < 2.5e6) return file;
     const c = document.createElement('canvas');
-    c.width = Math.round(bmp.width * s); c.height = Math.round(bmp.height * s);
+    c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
     c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
     return await new Promise(res => c.toBlob(b => res(b || file), 'image/jpeg', .85));
   } catch { return file; }
 }
 async function uploadPhoto(file) {
+  const sig = await getSig();
   const fd = new FormData();
   fd.append('file', await compress(file));
-  fd.append('upload_preset', CLD.preset);
-  const r = await fetch(`https://api.cloudinary.com/v1_1/${CLD.cloud}/image/upload`, { method: 'POST', body: fd });
+  fd.append('api_key', sig.apiKey); fd.append('timestamp', sig.timestamp);
+  fd.append('signature', sig.signature); fd.append('upload_preset', sig.preset);
+  const r = await fetch(`https://api.cloudinary.com/v1_1/${sig.cloud}/image/upload`, { method: 'POST', body: fd });
   const j = await r.json();
   if (!j.secure_url) throw new Error(j.error?.message || 'Upload failed');
   return j.secure_url;
@@ -680,48 +967,139 @@ function addFiles(files) {
     const p = { local: URL.createObjectURL(f), busy: true };
     S.photos.push(p); renderPhotos();
     try { p.url = await uploadPhoto(f); p.busy = false; }
-    catch { S.photos.splice(S.photos.indexOf(p), 1); toast(`${f.name} didn't upload. Try it again.`, true); }
-    URL.revokeObjectURL(p.local);
+    catch (e) { S.photos.splice(S.photos.indexOf(p), 1); toast(`${f.name} didn't upload. ${e.message}`, true); }
     renderPhotos();
   });
 }
-
-async function save() {
+async function saveListing() {
   if (S.photos.some(p => p.busy)) return toast('Photos are still uploading. Save once they finish.', true);
   const v = f => $('#f-' + f).value.trim();
   if (!v('name')) { $('#f-name').focus(); return toast('Add a property name to save.', true); }
   if (!v('loc')) { $('#f-loc').focus(); return toast('Add a location to save.', true); }
-  const existing = S.editId ? find(S.editId) : null;
-  const btn = $('#btn-save'); btn.disabled = true; btn.textContent = 'Saving…';
-  const payload = {
-    action: S.editId ? 'edit' : 'add',
-    id: S.editId || Date.now().toString(),
-    name: v('name'), location: v('loc'), type: v('type'), status: v('status'),
-    price: v('price'), period: v('period'), beds: v('beds'), size: v('size'),
-    agent: v('agent'), phone: v('phone'), notes: v('notes'),
-    date: existing?.date || new Date().toISOString().split('T')[0],
+  const b = $('#f-save'); b.disabled = true; b.textContent = 'Saving…';
+  const listing = {
+    name: v('name'), location: v('loc'), type: v('type'), status: v('status'), price: v('price'), period: v('period'),
+    beds: v('beds'), size: v('size'), agent: v('agent'), phone: v('phone'), notes: v('notes'),
     images: S.photos.map(p => p.url).filter(Boolean).join(',')
   };
   try {
-    const r = await post(payload);
-    if (!r.success) throw new Error();
-    closeSheet($('#sh-form'));
-    toast(S.editId ? 'Listing saved' : 'Listing added');
-    await load();
-  } catch { toast("The listing didn't save. Check your connection and try again.", true); }
-  btn.disabled = false; btn.textContent = 'Save listing';
+    await api(S.editId ? 'editListing' : 'addListing', { id: S.editId, listing });
+    closeSheet($('#sh-form')); toast(S.editId ? 'Listing saved' : 'Listing added');
+    await loadListings();
+  } catch (e) { if (e.code !== 'AUTH') toast(e.message, true); }
+  b.disabled = false; b.textContent = 'Save listing';
 }
 
-async function removeListing(id) {
-  toast('Deleting listing…');
+/* ── Delete, restore, purge ── */
+async function softDelete(id) {
+  const l = find(id); if (!l) return;
+  const ok = await dialog({ title: 'Move to trash?', text: `"${l.name}" will be removed from listings. The super admin can restore it or delete it permanently.`, ok: 'Move to trash', danger: true });
+  if (!ok) return;
+  closeSheet($('#sh-detail'));
   try {
-    const r = await post({ action: 'delete', id });
-    if (!r.success) throw new Error();
-    toast('Listing deleted'); await load();
-  } catch { toast("The listing wasn't deleted. Try again.", true); }
+    await api('deleteListing', { id });
+    S.data = S.data.filter(x => String(x.id) !== String(id)); renderListings();
+    toast('Moved to trash');
+    if (can.super()) loadTrash();
+  } catch (e) { if (e.code !== 'AUTH') toast(e.message, true); }
+}
+async function restore(id) {
+  try {
+    await api('restoreListing', { id });
+    S.trash = S.trash.filter(x => String(x.id) !== String(id));
+    renderTabs(); renderTrash(); toast('Listing restored');
+    loadListings();
+  } catch (e) { if (e.code !== 'AUTH') toast(e.message, true); }
+}
+async function purge(id) {
+  const l = find(id); if (!l) return;
+  const n = imgsOf(l).length;
+  const ok = await dialog({
+    title: 'Delete permanently?',
+    text: `"${l.name}"${n ? ` and its ${plural(n, 'photo', 'photos')} on Cloudinary` : ''} will be deleted. This can't be undone.`,
+    ok: 'Delete permanently', danger: true
+  });
+  if (!ok) return;
+  toast('Deleting listing and photos…');
+  try {
+    const r = await api('purgeListing', { id });
+    S.trash = S.trash.filter(x => String(x.id) !== String(id));
+    renderTabs(); renderTrash();
+    toast(r.photos ? `Deleted permanently, with ${plural(r.photos, 'photo', 'photos')}` : 'Deleted permanently');
+  } catch (e) { if (e.code !== 'AUTH') toast(e.message, true); }
 }
 
-// ── Lightbox ──────────────────────────────
+/* ── Team ── */
+function genPass() {
+  const a = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+  return [...crypto.getRandomValues(new Uint32Array(12))].map(x => a[x % a.length]).join('');
+}
+function openUserForm(id) {
+  const u = id ? (S.users || []).find(x => x.id === id) : null;
+  S.editUserId = u ? u.id : null;
+  $('#u-title').textContent = u ? 'Edit team member' : 'Add team member';
+  $('#u-name').value = u ? u.name : '';
+  $('#u-email').value = u ? u.email : ''; $('#u-email').disabled = !!u;
+  $('#u-role').value = u ? u.role : 'sales_rep';
+  $('#u-pass').value = u ? '' : genPass();
+  $('#u-pass').placeholder = u ? 'Leave blank to keep current password' : '';
+  $('#u-pass-l').textContent = u ? 'Reset password' : 'Temporary password';
+  $('#u-pass-h').textContent = u ? 'Only fill this in to give them a new password. It logs them out on every device.' : 'You will get a chance to copy their login details next.';
+  $('#u-active-row').hidden = !u; $('#u-active').checked = u ? u.active : true;
+  $('#u-save').textContent = u ? 'Save changes' : 'Add member';
+  openSheet('sh-user');
+}
+async function saveUser() {
+  const name = $('#u-name').value.trim(), email = $('#u-email').value.trim(), role = $('#u-role').value, password = $('#u-pass').value.trim();
+  const editing = !!S.editUserId;
+  if (!name) { $('#u-name').focus(); return toast('Add their full name.', true); }
+  if (!editing && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { $('#u-email').focus(); return toast('Enter a valid email address.', true); }
+  if ((!editing || password) && password.length < 8) { $('#u-pass').focus(); return toast('Passwords need at least 8 characters.', true); }
+  const b = $('#u-save'); b.disabled = true; b.textContent = 'Saving…';
+  try {
+    if (editing) await api('updateUser', { id: S.editUserId, name, role, active: $('#u-active').checked, password: password || undefined });
+    else await api('createUser', { name, email, role, password });
+    closeSheet($('#sh-user'));
+    loadUsers();
+    if (!editing || password) {
+      const link = location.origin + location.pathname;
+      const copy = await dialog({
+        title: editing ? 'Password reset' : `${name} can now log in`,
+        text: 'Send them these details. The password is only shown this once.',
+        html: `<div class="cred"><div><span>Link</span><b>${esc(link)}</b></div><div><span>Email</span><b>${esc(email)}</b></div><div><span>Password</span><b>${esc(password)}</b></div></div>`,
+        ok: 'Copy details', cancel: 'Done'
+      });
+      if (copy) {
+        const txt = `REX listings login\nLink: ${link}\nEmail: ${email}\nPassword: ${password}`;
+        navigator.clipboard.writeText(txt).then(() => toast('Login details copied')).catch(() => toast("Couldn't copy. Select the details and copy them manually.", true));
+      }
+    } else toast('Changes saved');
+  } catch (e) { if (e.code !== 'AUTH') toast(e.message, true); }
+  b.disabled = false; b.textContent = editing ? 'Save changes' : 'Add member';
+}
+
+/* ── Account ── */
+function openMenu() {
+  $('#me-card').innerHTML = `<div class="av">${esc(initials(S.user.name))}</div><div style="min-width:0"><b>${esc(S.user.name)}</b><span>${esc(S.user.email)}</span><span class="role r-${S.user.role}">${ROLE[S.user.role]}</span></div>`;
+  openSheet('sh-menu');
+}
+function openPass() {
+  closeSheet($('#sh-menu'));
+  ['p-cur', 'p-new', 'p-new2'].forEach(i => $('#' + i).value = '');
+  openSheet('sh-pass'); setTimeout(() => $('#p-cur').focus(), 250);
+}
+async function savePass() {
+  const cur = $('#p-cur').value, nw = $('#p-new').value, nw2 = $('#p-new2').value;
+  if (!cur) return toast('Enter your current password.', true);
+  if (nw.length < 8) return toast('Your new password needs at least 8 characters.', true);
+  if (nw !== nw2) return toast("The new passwords don't match.", true);
+  const b = $('#p-save'); b.disabled = true; b.textContent = 'Saving…';
+  try { await api('changePassword', { current: cur, next: nw }); closeSheet($('#sh-pass')); toast('Password changed'); }
+  catch (e) { if (e.code !== 'AUTH') toast(e.message, true); }
+  b.disabled = false; b.textContent = 'Change password';
+}
+
+/* ── Lightbox ── */
 function openLB(id, i) {
   const l = find(id); const imgs = l ? imgsOf(l) : [];
   if (!imgs.length) return;
@@ -733,61 +1111,68 @@ function openLB(id, i) {
   requestAnimationFrame(() => { const t = $('#lb-track'); t.scrollLeft = i * t.clientWidth; lbSync(); });
 }
 function lbSync() {
-  const t = $('#lb-track'); const i = Math.round(t.scrollLeft / (t.clientWidth || 1));
+  const t = $('#lb-track'), i = Math.round(t.scrollLeft / (t.clientWidth || 1));
   S.lb.i = i;
   $('#lb-count').textContent = `${i + 1} / ${S.lb.imgs.length}`;
-  document.querySelectorAll('#lb-dots i').forEach((d, k) => d.classList.toggle('on', k === i));
+  $$('#lb-dots i').forEach((d, k) => d.classList.toggle('on', k === i));
 }
-function lbStep(dir) {
-  const t = $('#lb-track'), n = S.lb.imgs.length;
-  const i = (S.lb.i + dir + n) % n;
-  t.scrollTo({ left: i * t.clientWidth, behavior: 'smooth' });
-}
+function lbStep(d) { const t = $('#lb-track'), n = S.lb.imgs.length; t.scrollTo({ left: ((S.lb.i + d + n) % n) * t.clientWidth, behavior: 'smooth' }); }
 function closeLB() {
-  const lb = $('#lb'); lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); lockScroll();
+  const lb = $('#lb'); if (!lb.classList.contains('open')) return;
+  lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); lockScroll();
   setTimeout(() => { if (!lb.classList.contains('open')) $('#lb-track').innerHTML = ''; }, 260);
 }
 let lbRaf;
 $('#lb-track').addEventListener('scroll', () => { cancelAnimationFrame(lbRaf); lbRaf = requestAnimationFrame(lbSync); }, { passive: true });
-// swipe down to close
 (() => {
   let y0 = null, x0 = null; const lb = $('#lb');
   lb.addEventListener('touchstart', e => { if (e.touches.length === 1) { y0 = e.touches[0].clientY; x0 = e.touches[0].clientX; } else y0 = null; }, { passive: true });
-  lb.addEventListener('touchend', e => {
-    if (y0 == null) return; const t = e.changedTouches[0];
-    if (t.clientY - y0 > 90 && Math.abs(t.clientX - x0) < 50) closeLB(); y0 = null;
-  }, { passive: true });
+  lb.addEventListener('touchend', e => { if (y0 == null) return; const t = e.changedTouches[0]; if (t.clientY - y0 > 90 && Math.abs(t.clientX - x0) < 50) closeLB(); y0 = null; }, { passive: true });
 })();
 window.addEventListener('resize', () => { if ($('#lb').classList.contains('open')) { const t = $('#lb-track'); t.scrollLeft = S.lb.i * t.clientWidth; } });
 
-// ── Events ────────────────────────────────
+/* ── Events ── */
 document.addEventListener('click', e => {
   const t = e.target; let el;
   if ((el = t.closest('[data-lb]'))) { const a = el.dataset.lb; return a === 'close' ? closeLB() : lbStep(+a); }
+  if ((el = t.closest('[data-pw]'))) { const i = $('#' + el.dataset.pw); i.type = i.type === 'password' ? 'text' : 'password'; el.textContent = i.type === 'password' ? 'Show' : 'Hide'; return; }
   if ((el = t.closest('[data-close]'))) return closeSheet(el.closest('.sheet'));
   if ((el = t.closest('[data-act]'))) {
     const a = el.dataset.act;
-    if (a === 'add') return askPin('add');
-    if (a === 'retry') { skeleton(); return load(); }
-    if (a === 'clear') { S.status = 'all'; S.type = 'all'; S.q = ''; $('#q').value = ''; return render(); }
+    if (a === 'primary') return S.view === 'team' ? openUserForm() : openForm();
+    if (a === 'menu') return openMenu();
+    if (a === 'logout') return logout();
+    if (a === 'pass') return openPass();
+    if (a === 'gen') { $('#u-pass').value = genPass(); return; }
+    if (a === 'reload') return reloadView();
+    if (a === 'clear') { S.status = 'all'; S.type = 'all'; S.q = ''; $('#q').value = ''; return renderListings(); }
   }
-  if ((el = t.closest('[data-edit]'))) return askPin('edit', el.dataset.edit);
-  if ((el = t.closest('[data-del]'))) return askPin('delete', el.dataset.del);
+  if ((el = t.closest('[data-view]'))) return setView(el.dataset.view);
+  if ((el = t.closest('[data-edit]'))) return openForm(el.dataset.edit);
+  if ((el = t.closest('[data-del]'))) return softDelete(el.dataset.del);
+  if ((el = t.closest('[data-restore]'))) return restore(el.dataset.restore);
+  if ((el = t.closest('[data-purge]'))) return purge(el.dataset.purge);
+  if ((el = t.closest('[data-thumb]'))) return openLB(el.dataset.thumb, 0);
+  if ((el = t.closest('[data-user]'))) return openUserForm(el.dataset.user);
   if ((el = t.closest('[data-nav]'))) return stepCar(el.parentElement.querySelector('.car-track'), +el.dataset.nav);
   if ((el = t.closest('[data-img]'))) { const car = el.closest('[data-car]'); if (car) return openLB(car.dataset.car, +el.dataset.img); }
-  if ((el = t.closest('[data-status]'))) { S.status = el.dataset.status; return render(); }
-  if ((el = t.closest('[data-type]'))) { S.type = el.dataset.type; return render(); }
+  if ((el = t.closest('[data-status]'))) { S.status = el.dataset.status; return renderListings(); }
+  if ((el = t.closest('[data-type]'))) { S.type = el.dataset.type; return renderListings(); }
   if ((el = t.closest('[data-rm]'))) { S.photos.splice(+el.dataset.rm, 1); return renderPhotos(); }
   if ((el = t.closest('[data-cover]'))) { const [p] = S.photos.splice(+el.dataset.cover, 1); S.photos.unshift(p); return renderPhotos(); }
   if ((el = t.closest('[data-open]'))) return openDetail(el.dataset.open);
 });
 
+$('#l-go').addEventListener('click', doLogin);
+['#l-email', '#l-pass'].forEach(s => $(s).addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); }));
+$('#f-save').addEventListener('click', saveListing);
+$('#u-save').addEventListener('click', saveUser);
+$('#p-save').addEventListener('click', savePass);
+$('#p-new2').addEventListener('keydown', e => { if (e.key === 'Enter') savePass(); });
+$('#dlg-ok').addEventListener('click', () => answer(true));
+$('#dlg-no').addEventListener('click', () => answer(false));
 let qT;
-$('#q').addEventListener('input', e => { clearTimeout(qT); qT = setTimeout(() => { S.q = e.target.value.trim(); render(); }, 140); });
-$('#pin-go').addEventListener('click', checkPin);
-$('#pin-in').addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
-$('#pin-in').addEventListener('input', () => { $('#pin-err').textContent = ''; });
-$('#btn-save').addEventListener('click', save);
+$('#q').addEventListener('input', e => { clearTimeout(qT); qT = setTimeout(() => { S.q = e.target.value.trim(); renderListings(); }, 140); });
 
 document.addEventListener('keydown', e => {
   if ($('#lb').classList.contains('open')) {
@@ -796,15 +1181,14 @@ document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight') return lbStep(1);
     return;
   }
-  if (e.key === 'Escape') { const open = [...document.querySelectorAll('.sheet.open')].pop(); if (open) closeSheet(open); }
+  if (e.key === 'Escape') { const open = [...$$('.sheet.open')].pop(); if (open) closeSheet(open); }
 });
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && S.user && Date.now() - S.lastLoad > 60e3) { loadListings(); if (can.super()) loadTrash(); }
+});
+new IntersectionObserver(([en]) => $('#tools').classList.toggle('stuck', !en.isIntersecting), { rootMargin: '-61px 0px 0px 0px' }).observe($('.intro'));
 
-// border under sticky tools once scrolled
-new IntersectionObserver(([en]) => $('#tools').classList.toggle('stuck', !en.isIntersecting), { rootMargin: '-61px 0px 0px 0px' })
-  .observe($('.intro'));
-
-skeleton();
-load();
+boot();
 </script>
 </body>
 </html>
