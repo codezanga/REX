@@ -2,689 +2,808 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>REX REALTYCO — Property Listings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<title>Listings · REX RealtyCo</title>
 <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773854552/Logo_SVG_s6giav.svg">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Josefin+Sans:wght@300;400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --primary:#AA7C5B;--primary-dark:#8A6040;--primary-light:#C49A7A;
-  --primary-dim:rgba(170,124,91,0.10);
-  --bg:#FAF7F4;--bg-2:#F3EDE6;--bg-3:#EDE4DA;
-  --white:#FFFFFF;--border:#E8DDD4;--border-2:#DDD0C4;
-  --text:#2C1F14;--text-2:#6B4E38;--text-3:#A8896E;--text-4:#C4AA94;
-  --sale:#2E9E6A;--rent:#2E7EA8;--sold:#C45A3A;--offer:#7A5AAA;--r:10px;
+:root{
+  --brand:#AA7C5B;--brand-d:#8E6446;--brand-50:#F6EFE9;--brand-100:#EBDCCF;
+  --ink:#1D1814;--ink-2:#574C44;--ink-3:#8F847B;
+  --bg:#FFFFFF;--soft:#F5F3F1;--line:#ECE8E4;
+  --sale:#1F8A5B;--rent:#2B6CB0;--offer:#7A55B8;--sold:#B8452C;
+  --safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px);
 }
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'Josefin Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100dvh}
+button,input,select,textarea{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:8px}
+.hide-sm{display:none}
+@media(min-width:720px){.hide-sm{display:inline-flex}.hide-lg{display:none!important}}
 
-header{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 18px;display:flex;align-items:center;justify-content:space-between;height:62px;position:sticky;top:0;z-index:100;box-shadow:0 1px 20px rgba(170,124,91,0.08);}
-.logo-img{height:30px;width:auto;object-fit:contain;}
-.header-right{display:flex;align-items:center;gap:10px;}
-.h-pill{background:var(--primary-dim);border:1px solid var(--border);border-radius:20px;padding:5px 13px;font-size:10px;letter-spacing:1px;color:var(--text-3);display:flex;align-items:center;gap:6px;}
-.h-pill strong{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--primary);}
-.sync-wrap{display:flex;align-items:center;gap:5px;font-size:9px;letter-spacing:2px;color:var(--text-4);text-transform:uppercase;}
-.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--sale);animation:pulse 2s infinite;}
-.sync-dot.syncing{background:var(--primary);border-radius:2px;animation:spin .8s linear infinite;}
-.sync-dot.error{background:var(--sold);animation:none;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+/* Header */
+.top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.88);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line);padding-top:var(--safe-t)}
+.top-in{max-width:1200px;margin:0 auto;height:60px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{height:26px;width:auto}
+.top-r{display:flex;align-items:center;gap:14px}
+.sync{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--ink-3)}
+.sync i{width:8px;height:8px;border-radius:50%;background:var(--sale);box-shadow:0 0 0 3px rgba(31,138,91,.15)}
+.sync.busy i{background:var(--brand);box-shadow:0 0 0 3px rgba(170,124,91,.18);animation:blink 1s infinite}
+.sync.err i{background:var(--sold);box-shadow:0 0 0 3px rgba(184,69,44,.15)}
+@keyframes blink{50%{opacity:.35}}
 
-main{padding:22px 16px 100px;max-width:1200px;margin:0 auto;}
-.page-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px;}
-.page-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--text);letter-spacing:1px;line-height:1;}
-.page-title span{color:var(--primary);}
-.btn-add{display:flex;align-items:center;gap:8px;background:var(--primary);color:var(--white);border:none;padding:12px 20px;border-radius:var(--r);font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:600;transition:all .2s;white-space:nowrap;box-shadow:0 4px 18px rgba(170,124,91,0.30);}
-.btn-add:hover{background:var(--primary-dark);transform:translateY(-2px);}
-.btn-add:active{transform:translateY(0);}
+/* Page */
+.wrap{max-width:1200px;margin:0 auto;padding:22px 16px calc(120px + var(--safe-b))}
+@media(min-width:720px){.wrap{padding:32px 24px 80px}.top-in{padding:0 24px}}
+.intro h1{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.intro p{font-size:15px;color:var(--ink-3);margin-top:6px}
+@media(min-width:720px){.intro h1{font-size:38px}}
 
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
-@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr);}}
-.scard{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;position:relative;overflow:hidden;animation:fadeUp .5s ease both;box-shadow:0 2px 12px rgba(170,124,91,0.06);}
-.scard::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
-.scard:nth-child(1)::after{background:var(--primary);}
-.scard:nth-child(2)::after{background:var(--sale);}
-.scard:nth-child(3)::after{background:var(--rent);}
-.scard:nth-child(4)::after{background:var(--sold);}
-.scard-label{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--text-4);margin-bottom:8px;}
-.scard-val{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;line-height:1;}
-.scard:nth-child(1) .scard-val{color:var(--primary);}
-.scard:nth-child(2) .scard-val{color:var(--sale);}
-.scard:nth-child(3) .scard-val{color:var(--rent);}
-.scard:nth-child(4) .scard-val{color:var(--sold);}
+.tools{position:sticky;top:calc(60px + var(--safe-t));z-index:30;background:var(--bg);margin:18px -16px 0;padding:10px 16px 12px;border-bottom:1px solid transparent;transition:border-color .2s}
+.tools.stuck{border-bottom-color:var(--line)}
+@media(min-width:720px){.tools{margin:22px -24px 0;padding:10px 24px 14px}}
+.search{position:relative}
+.search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--ink-3);pointer-events:none}
+.search input{width:100%;height:48px;border:1px solid var(--line);background:var(--soft);border-radius:14px;padding:0 16px 0 44px;font-size:16px;outline:none;transition:border-color .15s,background .15s;-webkit-appearance:none}
+.search input::placeholder{color:var(--ink-3)}
+.search input:focus{background:#fff;border-color:var(--brand)}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:10px -16px 0;padding:0 16px;scroll-padding:0 16px}
+.chips::-webkit-scrollbar{display:none}
+@media(min-width:720px){.chips{margin:12px 0 0;padding:0}}
+.chip{flex:0 0 auto;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:14px;font-weight:600;color:var(--ink-2);white-space:nowrap;display:inline-flex;align-items:center;gap:6px;transition:background .15s,color .15s,border-color .15s}
+.chip em{font-style:normal;font-weight:500;font-size:12px;color:var(--ink-3)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip.on em{color:rgba(255,255,255,.6)}
+.chips.t .chip{height:32px;font-size:13px;font-weight:500}
+.chips.t .chip.on{background:var(--brand-50);border-color:var(--brand-100);color:var(--brand-d)}
 
-.filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;align-items:center;}
-.search-wrap{flex:1;min-width:180px;position:relative;}
-.search-wrap svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.4;}
-.search-box{width:100%;background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:11px 14px 11px 38px;color:var(--text);font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:.5px;outline:none;transition:border-color .2s;box-shadow:0 1px 6px rgba(170,124,91,0.05);}
-.search-box::placeholder{color:var(--text-4);}
-.search-box:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(170,124,91,0.1);}
-.filter-scroll{display:flex;gap:7px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;flex-shrink:0;}
-.filter-scroll::-webkit-scrollbar{display:none;}
-.fbtn{background:var(--white);border:1px solid var(--border);color:var(--text-3);padding:10px 14px;border-radius:var(--r);font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;white-space:nowrap;}
-.fbtn:hover,.fbtn.active{border-color:var(--primary);color:var(--primary);background:var(--primary-dim);}
-.fselect{background:var(--white);border:1px solid var(--border);color:var(--text-3);padding:10px 14px;border-radius:var(--r);font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;outline:none;-webkit-appearance:none;}
-.fselect:focus{border-color:var(--primary);}
+/* Grid + cards */
+.grid{display:grid;grid-template-columns:1fr;gap:28px 20px;margin-top:18px}
+@media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{cursor:pointer;min-width:0}
+.car{position:relative;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:var(--soft);isolation:isolate}
+.car-track{display:flex;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.car-track::-webkit-scrollbar{display:none}
+.car-track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;scroll-snap-stop:always;user-select:none;-webkit-user-drag:none;background:var(--soft)}
+.car-empty{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink-3);font-size:13px}
+.car-dots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:5px;pointer-events:none;z-index:2}
+.car-dots i{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.6);transition:width .2s,background .2s}
+.car-dots i.on{width:18px;background:#fff}
+.car .status{position:absolute;top:12px;left:12px;z-index:2}
+.car-count{position:absolute;top:12px;right:12px;z-index:2;display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 9px;border-radius:99px;background:rgba(20,15,11,.55);color:#fff;font-size:12px;font-weight:600;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.car-nav{position:absolute;top:50%;z-index:2;width:34px;height:34px;margin-top:-17px;border-radius:50%;background:rgba(255,255,255,.95);color:var(--ink);display:none;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.15);opacity:0;transition:opacity .2s}
+.car-nav.p{left:10px}.car-nav.n{right:10px}
+@media(hover:hover){.car-nav{display:grid}.car:hover .car-nav{opacity:1}}
 
-/* CARDS */
-.cards-grid{display:grid;grid-template-columns:1fr;gap:14px;}
-@media(min-width:580px){.cards-grid{grid-template-columns:repeat(2,1fr);}}
-@media(min-width:960px){.cards-grid{grid-template-columns:repeat(3,1fr);}}
+.pill{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:99px;background:#fff;font-size:12px;font-weight:700}
+.pill::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor}
+.s-sale{color:var(--sale)}.s-rent{color:var(--rent)}.s-offer{color:var(--offer)}.s-sold{color:var(--sold)}
 
-.pcard{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;position:relative;transition:transform .25s,box-shadow .25s,border-color .25s;animation:fadeUp .4s ease both;cursor:pointer;box-shadow:0 2px 14px rgba(170,124,91,0.07);}
-.pcard:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(170,124,91,0.15);border-color:var(--primary-light);}
+.cb{padding:12px 2px 0}
+.cb-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.price{font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+.price small{font-size:13px;font-weight:500;color:var(--ink-3);letter-spacing:0;margin-left:2px}
+.name{font-size:15px;font-weight:600;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.loc{display:flex;align-items:center;gap:5px;font-size:14px;color:var(--ink-3);margin-top:2px;min-width:0}
+.loc span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.loc svg{flex-shrink:0}
+.facts{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13px;color:var(--ink-2);font-weight:500}
+.facts span{display:inline-flex;align-items:center;gap:5px}
+.facts svg{color:var(--ink-3)}
+.acts{display:flex;gap:4px;flex-shrink:0;margin-top:-4px;margin-right:-6px}
+.ibtn{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:var(--ink-3);transition:background .15s,color .15s}
+.ibtn:hover{background:var(--soft);color:var(--ink)}
+.ibtn.del:hover{background:#FBEDE9;color:var(--sold)}
 
-/* Card image */
-.pcard-img{width:100%;height:180px;object-fit:cover;display:block;background:var(--bg-2);}
-.pcard-img-placeholder{width:100%;height:160px;background:var(--bg-2);display:flex;align-items:center;justify-content:center;}
-.pcard-img-count{position:absolute;top:12px;right:12px;background:rgba(0,0,0,0.55);color:#fff;font-size:9px;letter-spacing:2px;padding:3px 8px;border-radius:20px;backdrop-filter:blur(4px);}
+/* Skeleton / states */
+.sk{background:linear-gradient(90deg,#F1EEEB 25%,#F8F6F4 45%,#F1EEEB 65%);background-size:300% 100%;animation:sh 1.3s ease-in-out infinite;border-radius:8px}
+@keyframes sh{0%{background-position:100% 0}100%{background-position:0 0}}
+.sk-img{aspect-ratio:4/3;border-radius:18px}
+.sk-line{height:14px;margin-top:10px}
+.empty{grid-column:1/-1;text-align:center;padding:64px 20px;color:var(--ink-3)}
+.empty h3{font-size:18px;color:var(--ink);font-weight:700;margin-bottom:6px}
+.empty p{font-size:15px;max-width:32ch;margin:0 auto}
+.empty .btn{margin-top:18px;display:inline-flex;width:auto;padding:0 20px}
 
-.pcard-body{padding:16px 18px 18px;}
-.pcard-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px;}
-.pcard-name{font-family:'Lora',serif;font-size:15px;font-weight:600;color:var(--text);line-height:1.3;flex:1;}
-.pcard-loc{font-size:10px;color:var(--text-4);letter-spacing:1px;margin-top:4px;display:flex;align-items:center;gap:4px;}
-.pcard-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px;}
-.pcard-price{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--primary);line-height:1;margin-bottom:3px;}
-.pcard-period{font-size:9px;color:var(--text-4);letter-spacing:2px;text-transform:uppercase;}
-.pcard-agent{display:flex;align-items:center;gap:5px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:10px;color:var(--text-3);letter-spacing:1px;}
-.pcard-actions{display:flex;gap:7px;margin-top:12px;}
-.btn-sm{flex:1;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3);padding:9px 6px;border-radius:7px;font-size:9px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;font-family:'Josefin Sans',sans-serif;text-align:center;}
-.btn-sm:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-dim);}
-.btn-sm.del:hover{border-color:var(--sold);color:var(--sold);background:rgba(196,90,58,0.06);}
+/* Buttons */
+.btn{height:50px;border-radius:14px;padding:0 18px;font-size:15px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background .15s,transform .1s}
+.btn:active{transform:scale(.98)}
+.btn-p{background:var(--brand);color:#fff}
+.btn-p:hover{background:var(--brand-d)}
+.btn-p:disabled{opacity:.55;cursor:default}
+.btn-g{background:var(--soft);color:var(--ink-2)}
+.btn-g:hover{background:#EDE9E5}
+.btn-d{background:#FBEDE9;color:var(--sold)}
+.btn-sm{height:42px;font-size:14px;border-radius:12px}
+.fab{position:fixed;right:16px;bottom:calc(18px + var(--safe-b));z-index:35;height:56px;padding:0 22px 0 18px;border-radius:99px;background:var(--brand);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;box-shadow:0 10px 28px -8px rgba(142,100,70,.55)}
+.fab:active{transform:scale(.97)}
 
-/* BADGES */
-.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:8px;letter-spacing:2px;text-transform:uppercase;font-weight:600;white-space:nowrap;}
-.b-sale{background:rgba(46,158,106,.1);color:var(--sale);border:1px solid rgba(46,158,106,.2);}
-.b-rent{background:rgba(46,126,168,.1);color:var(--rent);border:1px solid rgba(46,126,168,.2);}
-.b-sold{background:rgba(196,90,58,.1);color:var(--sold);border:1px solid rgba(196,90,58,.2);}
-.b-offer{background:rgba(122,90,170,.1);color:var(--offer);border:1px solid rgba(122,90,170,.2);}
-.b-res{background:var(--primary-dim);color:var(--primary);border:1px solid rgba(170,124,91,.2);}
-.b-com{background:rgba(46,126,168,.08);color:var(--rent);}
-.b-land{background:rgba(46,158,106,.08);color:var(--sale);}
-.b-sl{background:rgba(207,127,155,.08);color:#B86080;}
-.b-meta{background:var(--bg-2);color:var(--text-4);border:1px solid var(--border);}
+/* Sheets */
+.sheet{position:fixed;inset:0;z-index:100;visibility:hidden;transition:visibility 0s .32s}
+.sheet.open{visibility:visible;transition:none}
+.sheet-bg{position:absolute;inset:0;background:rgba(22,16,11,.45);opacity:0;transition:opacity .3s}
+.sheet.open .sheet-bg{opacity:1}
+.panel{position:absolute;left:0;right:0;bottom:0;max-height:calc(100dvh - 20px - var(--safe-t));background:#fff;border-radius:24px 24px 0 0;display:flex;flex-direction:column;transform:translateY(102%);transition:transform .34s cubic-bezier(.2,.8,.2,1)}
+.sheet.open .panel{transform:none}
+.grab{width:40px;height:5px;border-radius:99px;background:#DCD6D0;margin:9px auto 0;flex-shrink:0}
+.p-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px 10px 20px;flex-shrink:0}
+.p-head h2{font-size:19px;font-weight:800;letter-spacing:-.02em}
+.p-body{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:4px 20px 22px}
+.p-foot{display:flex;gap:10px;padding:12px 20px calc(12px + var(--safe-b));border-top:1px solid var(--line);flex-shrink:0;background:#fff}
+.p-foot .btn{flex:1}
+.p-foot .btn-p{flex:1.6}
+@media(min-width:720px){
+  .panel{left:50%;right:auto;bottom:auto;top:50%;width:min(600px,calc(100vw - 48px));max-height:min(90dvh,920px);border-radius:24px;transform:translate(-50%,-47%) scale(.98);opacity:0;transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .2s;box-shadow:0 30px 80px -20px rgba(30,20,12,.35)}
+  .sheet.open .panel{transform:translate(-50%,-50%);opacity:1}
+  .grab{display:none}
+  .p-head{padding:18px 20px 10px 24px}.p-body{padding:4px 24px 24px}.p-foot{padding:14px 24px}
+  .sheet.wide .panel{width:min(720px,calc(100vw - 48px))}
+}
+/* centered dialog (PIN) on all screens */
+.sheet.dialog .panel{left:50%;right:auto;bottom:auto;top:38%;width:min(380px,calc(100vw - 32px));border-radius:24px;transform:translate(-50%,-46%) scale(.97);opacity:0;transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .2s}
+.sheet.dialog.open .panel{transform:translate(-50%,-50%);opacity:1}
+.sheet.dialog .grab{display:none}
+.sheet.dialog .p-foot{border-top:0;padding-top:4px;padding-bottom:20px}
 
-.state-box{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-4);}
-.state-box p{font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:14px;}
-.loader{display:inline-block;width:26px;height:26px;border:2px solid var(--border-2);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;}
+/* Form */
+.fsec{padding-top:18px}
+.fsec+.fsec{margin-top:6px;border-top:1px solid var(--line)}
+.fsec-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.fsec-h h3{font-size:15px;font-weight:700}
+.fsec-h span{font-size:13px;color:var(--ink-3)}
+.fld{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;min-width:0}
+.fld label{font-size:13px;font-weight:600;color:var(--ink-2)}
+.fld input,.fld select,.fld textarea{width:100%;height:48px;border:1px solid var(--line);background:var(--soft);border-radius:12px;padding:0 14px;font-size:16px;outline:none;transition:border-color .15s,background .15s;-webkit-appearance:none;appearance:none}
+.fld textarea{height:auto;min-height:92px;padding:12px 14px;resize:vertical;line-height:1.5}
+.fld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%238F847B' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--brand);background:#fff}
+.fld input::placeholder,.fld textarea::placeholder{color:#B3A9A1}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hint{font-size:13px;color:var(--ink-3);margin-top:10px}
 
-/* IMAGE UPLOAD */
-.img-upload-area{border:2px dashed var(--border-2);border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);}
-.img-upload-area:hover{border-color:var(--primary);background:var(--primary-dim);}
-.img-upload-area.dragover{border-color:var(--primary);background:var(--primary-dim);}
-.img-upload-area input{display:none;}
-.img-upload-icon{margin-bottom:8px;opacity:.5;}
-.img-upload-text{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);}
-.img-upload-sub{font-size:9px;color:var(--text-4);margin-top:4px;letter-spacing:1px;}
+.ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(min-width:520px){.ph-grid{grid-template-columns:repeat(4,1fr)}}
+.ph{position:relative;aspect-ratio:1;border-radius:14px;overflow:hidden;background:var(--soft)}
+.ph img{width:100%;height:100%;object-fit:cover}
+.ph-busy{position:absolute;inset:0;background:rgba(255,255,255,.6);display:grid;place-items:center}
+.spin{width:22px;height:22px;border:2.5px solid rgba(170,124,91,.25);border-top-color:var(--brand);border-radius:50%;animation:rot .8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.ph-x,.ph-star{position:absolute;top:6px;width:28px;height:28px;border-radius:50%;background:rgba(20,15,11,.6);color:#fff;display:grid;place-items:center;backdrop-filter:blur(4px)}
+.ph-x{right:6px}.ph-star{left:6px}
+.ph-cover{position:absolute;left:6px;bottom:6px;height:22px;padding:0 8px;border-radius:99px;background:#fff;color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center}
+.ph-add{border:1.5px dashed #D6CCC3;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--brand-d);font-size:13px;font-weight:600;cursor:pointer;transition:background .15s,border-color .15s}
+.ph-add:hover{background:var(--brand-50);border-color:var(--brand)}
 
-.img-previews{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;}
-.img-preview{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;}
-.img-preview img{width:100%;height:100%;object-fit:cover;display:block;}
-.img-preview-remove{position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.6);color:#fff;border:none;width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
-.img-preview-remove:hover{background:var(--sold);}
-.img-uploading{position:absolute;inset:0;background:rgba(255,255,255,0.8);display:flex;align-items:center;justify-content:center;}
-.img-progress{font-size:9px;letter-spacing:2px;color:var(--primary);text-transform:uppercase;}
+/* Detail */
+.d-car{margin:0 -20px}
+.d-car .car{border-radius:0;aspect-ratio:4/3}
+@media(min-width:720px){.d-car{margin:0}.d-car .car{border-radius:18px;aspect-ratio:16/10}}
+.d-top{padding-top:16px}
+.d-price{font-size:28px;font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-top:10px}
+.d-price small{font-size:15px;font-weight:500;color:var(--ink-3);letter-spacing:0;margin-left:3px}
+.d-name{font-size:18px;font-weight:700;margin-top:4px;line-height:1.3}
+.d-top .loc{font-size:15px;margin-top:4px}
+.d-top .loc span{white-space:normal}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:18px}
+.spec{background:#fff;padding:12px 14px}
+.spec span{display:block;font-size:12px;color:var(--ink-3);font-weight:500}
+.spec b{display:block;font-size:15px;font-weight:700;margin-top:2px}
+.d-sec{margin-top:20px}
+.d-sec h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.d-sec p{font-size:15px;line-height:1.6;color:var(--ink-2);white-space:pre-line;max-width:62ch}
+.agent{display:flex;align-items:center;gap:12px;margin-top:20px;padding:14px;border-radius:16px;background:var(--soft)}
+.av{width:44px;height:44px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0}
+.agent-t{flex:1;min-width:0}
+.agent-t b{display:block;font-size:15px;font-weight:700}
+.agent-t span{display:block;font-size:13px;color:var(--ink-3);margin-top:1px}
+.agent a{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--ink);border:1px solid var(--line)}
+.agent a.wa{color:#1FA855}
 
-/* IMAGE GALLERY in view modal */
-.img-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px;}
-.img-gallery img{width:100%;border-radius:8px;object-fit:cover;aspect-ratio:4/3;cursor:pointer;transition:opacity .2s;}
-.img-gallery img:first-child{grid-column:1/-1;aspect-ratio:16/9;}
-.img-gallery img:hover{opacity:.9;}
+/* PIN */
+.pin-ico{width:56px;height:56px;border-radius:50%;background:var(--brand-50);color:var(--brand-d);display:grid;place-items:center;margin:8px auto 14px}
+.pin-t{text-align:center;font-size:19px;font-weight:800;letter-spacing:-.02em}
+.pin-h{text-align:center;font-size:14px;color:var(--ink-3);margin:6px auto 18px;max-width:28ch;line-height:1.45}
+#pin-in{width:100%;height:54px;text-align:center;font-size:20px;letter-spacing:.35em;border:1px solid var(--line);background:var(--soft);border-radius:14px;outline:none}
+#pin-in:focus{border-color:var(--brand);background:#fff}
+#pin-in.bad{border-color:var(--sold);animation:shake .35s}
+.pin-err{min-height:20px;text-align:center;font-size:13px;color:var(--sold);font-weight:600;margin-top:8px}
+.sheet.danger .pin-ico{background:#FBEDE9;color:var(--sold)}
+.sheet.danger #pin-go{background:var(--sold)}
+@keyframes shake{25%,75%{transform:translateX(-6px)}50%{transform:translateX(6px)}}
 
-/* LIGHTBOX */
-.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:500;align-items:center;justify-content:center;}
-.lightbox.open{display:flex;}
-.lightbox img{max-width:94vw;max-height:88vh;border-radius:8px;object-fit:contain;}
-.lightbox-close{position:absolute;top:20px;right:20px;background:rgba(255,255,255,0.15);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;}
-.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.15);border:none;color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
-.lightbox-prev{left:16px;}
-.lightbox-next{right:16px;}
-.lightbox-prev:hover,.lightbox-next:hover{background:rgba(255,255,255,0.3);}
+/* Lightbox */
+.lb{position:fixed;inset:0;z-index:300;background:#0D0A08;opacity:0;visibility:hidden;transition:opacity .22s,visibility 0s .22s;touch-action:pan-x pinch-zoom}
+.lb.open{opacity:1;visibility:visible;transition:opacity .22s}
+.lb-track{position:absolute;inset:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior:contain}
+.lb-track::-webkit-scrollbar{display:none}
+.lb-slide{flex:0 0 100%;width:100%;height:100%;scroll-snap-align:center;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center}
+.lb-slide img{max-width:100vw;max-height:calc(100dvh - 150px - var(--safe-t) - var(--safe-b));object-fit:contain;user-select:none;-webkit-user-drag:none}
+@media(min-width:720px){.lb-slide img{max-width:calc(100vw - 160px);max-height:calc(100dvh - 140px);border-radius:6px}}
+.lb-bar{position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:calc(12px + var(--safe-t)) 16px 12px;color:#fff;background:linear-gradient(rgba(0,0,0,.45),transparent)}
+.lb-count{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+.lb-btn{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .15s}
+.lb-btn:hover{background:rgba(255,255,255,.26)}
+.lb-nav{position:absolute;top:50%;margin-top:-22px;z-index:2;display:none}
+.lb-nav.p{left:20px}.lb-nav.n{right:20px}
+@media(hover:hover){.lb-nav{display:grid}}
+.lb-dots{position:absolute;left:0;right:0;bottom:calc(22px + var(--safe-b));z-index:2;display:flex;justify-content:center;gap:6px}
+.lb-dots i{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.35);transition:width .2s,background .2s}
+.lb-dots i.on{width:18px;background:#fff}
 
-/* MODAL */
-.overlay{display:none;position:fixed;inset:0;background:rgba(44,31,20,0.55);z-index:200;align-items:flex-end;justify-content:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
-.overlay.open{display:flex;}
-@media(min-width:600px){.overlay{align-items:center;padding:20px;}}
-.modal{background:var(--white);border:1px solid var(--border);border-radius:20px 20px 0 0;width:100%;max-width:580px;max-height:93vh;overflow-y:auto;animation:slideUp .32s cubic-bezier(.32,0,.67,0);-webkit-overflow-scrolling:touch;box-shadow:0 -8px 40px rgba(170,124,91,0.15);}
-@media(min-width:600px){.modal{border-radius:16px;animation:modalIn .28s ease;box-shadow:0 20px 60px rgba(44,31,20,0.2);}}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-@keyframes modalIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
-.modal-handle{width:36px;height:4px;background:var(--border-2);border-radius:2px;margin:12px auto 0;}
-@media(min-width:600px){.modal-handle{display:none;}}
-.modal-head{padding:18px 20px 15px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.modal-title{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--text);}
-.modal-close{background:var(--bg-2);border:1px solid var(--border);color:var(--text-3);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
-.modal-close:hover{border-color:var(--sold);color:var(--sold);}
-.modal-body{padding:20px;}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-@media(max-width:480px){.form-grid{grid-template-columns:1fr;}}
-.fg-full{grid-column:1/-1;}
-.fg{display:flex;flex-direction:column;gap:7px;}
-label{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);}
-input,select,textarea{background:var(--bg);border:1px solid var(--border);color:var(--text);padding:12px 13px;border-radius:8px;font-family:'Josefin Sans',sans-serif;font-size:13px;letter-spacing:.5px;outline:none;transition:all .2s;width:100%;-webkit-appearance:none;}
-input:focus,select:focus,textarea:focus{border-color:var(--primary);background:var(--white);box-shadow:0 0 0 3px rgba(170,124,91,0.1);}
-input::placeholder,textarea::placeholder{color:var(--text-4);}
-select option{background:var(--white);}
-textarea{resize:vertical;min-height:75px;}
-.modal-foot{padding:14px 20px 28px;display:flex;gap:10px;}
-.btn-cancel{flex:1;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3);padding:14px;border-radius:10px;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
-.btn-cancel:hover{color:var(--text);}
-.btn-save{flex:2;background:var(--primary);border:none;color:var(--white);padding:14px;border-radius:10px;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:600;transition:all .2s;box-shadow:0 4px 16px rgba(170,124,91,0.3);}
-.btn-save:hover{background:var(--primary-dark);}
-.btn-save:disabled{opacity:.5;cursor:not-allowed;}
-.drow{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--bg-2);font-size:12px;gap:12px;}
-.drow:last-child{border-bottom:none;}
-.dlabel{color:var(--text-4);letter-spacing:2px;font-size:8px;text-transform:uppercase;flex-shrink:0;}
-.dval{color:var(--text);text-align:right;}
+/* Toast */
+.toast{position:fixed;left:50%;bottom:calc(88px + var(--safe-b));z-index:400;transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;font-weight:600;max-width:calc(100vw - 32px);text-align:center;transition:opacity .22s,transform .22s;box-shadow:0 12px 30px -10px rgba(0,0,0,.4)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast.err{background:var(--sold)}
+@media(min-width:720px){.toast{bottom:28px}}
 
-/* PIN MODAL */
-.pin-icon{width:52px;height:52px;background:var(--primary-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
-.pin-shake{animation:shake .4s ease;}
-@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
-
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--white);border:1px solid var(--border);color:var(--text);padding:12px 24px;border-radius:30px;font-size:10px;letter-spacing:2px;text-transform:uppercase;z-index:999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;box-shadow:0 8px 30px rgba(44,31,20,0.15);}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-.toast.success{border-color:var(--sale);color:var(--sale);}
-.toast.error{border-color:var(--sold);color:var(--sold);}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:2px;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 
-<header>
-  <img src="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773853343/REX_Brown_Logo_zwsavl.svg" class="logo-img" alt="REX">
-  <div class="header-right">
-    <div class="h-pill" id="hp-total" style="display:none">Listings <strong id="header-total">0</strong></div>
-    <div class="sync-wrap"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">Live</span></div>
+<header class="top">
+  <div class="top-in">
+    <img class="logo" src="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773853343/REX_Brown_Logo_zwsavl.svg" alt="REX RealtyCo">
+    <div class="top-r">
+      <span class="sync" id="sync"><i></i><span id="sync-t">Live</span></span>
+      <button class="btn btn-p btn-sm hide-sm" data-act="add"><span id="i-plus-top"></span>Add listing</button>
+    </div>
   </div>
 </header>
 
-<main>
-  <div class="page-top">
-    <div class="page-title">Property <span>Listings</span></div>
-    <button class="btn-add" onclick="askPin('add')">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      Add Listing
-    </button>
-  </div>
+<main class="wrap">
+  <section class="intro">
+    <h1>Property listings</h1>
+    <p id="sub">Loading listings…</p>
+  </section>
 
-  <div class="stats">
-    <div class="scard" style="animation-delay:.05s"><div class="scard-label">Total</div><div class="scard-val" id="s-total">—</div></div>
-    <div class="scard" style="animation-delay:.1s"><div class="scard-label">For Sale</div><div class="scard-val" id="s-sale">—</div></div>
-    <div class="scard" style="animation-delay:.15s"><div class="scard-label">For Rent</div><div class="scard-val" id="s-rent">—</div></div>
-    <div class="scard" style="animation-delay:.2s"><div class="scard-label">Closed</div><div class="scard-val" id="s-closed">—</div></div>
-  </div>
-
-  <div class="filters">
-    <div class="search-wrap">
-      <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="6" cy="6" r="4.5" stroke="#AA7C5B" stroke-width="1.4"/><path d="M9.5 9.5l3 3" stroke="#AA7C5B" stroke-width="1.4" stroke-linecap="round"/></svg>
-      <input class="search-box" type="text" placeholder="Search name, location, agent..." id="search" oninput="render()">
+  <div class="tools" id="tools">
+    <div class="search">
+      <span id="i-search"></span>
+      <input id="q" type="search" placeholder="Search property, area or agent" autocomplete="off" enterkeyhint="search" aria-label="Search listings">
     </div>
-    <div class="filter-scroll">
-      <button class="fbtn active" onclick="setF('all',this)">All</button>
-      <button class="fbtn" onclick="setF('For Sale',this)">For Sale</button>
-      <button class="fbtn" onclick="setF('For Rent',this)">For Rent</button>
-      <button class="fbtn" onclick="setF('Sold',this)">Sold</button>
-      <button class="fbtn" onclick="setF('Under Offer',this)">Under Offer</button>
-    </div>
-    <select class="fselect" id="type-f" onchange="render()">
-      <option value="all">All Types</option>
-      <option value="Residential">Residential</option>
-      <option value="Commercial">Commercial</option>
-      <option value="Land">Land</option>
-      <option value="Short Let">Short Let</option>
-    </select>
+    <div class="chips" id="chips-s" role="tablist" aria-label="Filter by status"></div>
+    <div class="chips t" id="chips-t" aria-label="Filter by type"></div>
   </div>
 
-  <div class="cards-grid" id="cards">
-    <div class="state-box"><div class="loader"></div><p>Loading listings</p></div>
-  </div>
+  <div class="grid" id="grid"></div>
 </main>
 
-<!-- PIN MODAL -->
-<div class="overlay" id="m-pin">
-  <div class="modal" style="max-width:380px">
-    <div class="modal-handle"></div>
-    <div class="modal-head">
-      <div class="modal-title" id="pin-title">Enter PIN</div>
-      <button class="modal-close" onclick="closeM('m-pin')">✕</button>
-    </div>
-    <div class="modal-body" style="text-align:center;padding:24px 24px 8px">
-      <div class="pin-icon" id="pin-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="#AA7C5B" stroke-width="1.8"/><path d="M8 11V7a4 4 0 018 0v4" stroke="#AA7C5B" stroke-width="1.8" stroke-linecap="round"/></svg>
-      </div>
-      <p id="pin-hint" style="font-size:11px;letter-spacing:1.5px;color:var(--text-3);margin-bottom:20px;line-height:1.5"></p>
-      <input id="pin-input" type="password" placeholder="Enter PIN" autocomplete="off"
-        style="text-align:center;font-size:18px;letter-spacing:6px;padding:14px;border-radius:10px"
-        oninput="document.getElementById('pin-error').textContent=''"
-        onkeydown="if(event.key==='Enter')checkPin()">
-      <p id="pin-error" style="color:var(--sold);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;margin-top:10px;min-height:18px"></p>
-    </div>
-    <div class="modal-foot">
-      <button class="btn-cancel" onclick="closeM('m-pin')">Cancel</button>
-      <button class="btn-save" style="flex:2" onclick="checkPin()">Confirm</button>
-    </div>
-  </div>
+<button class="fab hide-lg" data-act="add" aria-label="Add listing"><span id="i-plus-fab"></span>Add listing</button>
+
+<!-- Detail -->
+<div class="sheet wide" id="sh-detail" aria-hidden="true">
+  <div class="sheet-bg" data-close></div>
+  <section class="panel" role="dialog" aria-modal="true" aria-label="Listing details">
+    <div class="grab"></div>
+    <div class="p-head"><h2 id="d-title">Listing</h2><button class="ibtn" data-close aria-label="Close" id="d-x"></button></div>
+    <div class="p-body" id="d-body"></div>
+    <div class="p-foot" id="d-foot"></div>
+  </section>
 </div>
 
-<!-- ADD/EDIT MODAL -->
-<div class="overlay" id="m-add">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-head">
-      <div class="modal-title" id="m-title">Add Listing</div>
-      <button class="modal-close" onclick="closeM('m-add')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-grid">
-        <div class="fg fg-full"><label>Property Name</label><input id="f-name" placeholder="e.g. Ugomma Duplex, Awka"></div>
-        <div class="fg fg-full"><label>Location / Address</label><input id="f-loc" placeholder="e.g. Jahi, Abuja"></div>
-        <div class="fg"><label>Type</label><select id="f-type"><option>Residential</option><option>Commercial</option><option>Land</option><option>Short Let</option></select></div>
-        <div class="fg"><label>Status</label><select id="f-status"><option>For Sale</option><option>For Rent</option><option>Under Offer</option><option>Sold</option></select></div>
-        <div class="fg"><label>Price (₦)</label><input id="f-price" placeholder="e.g. 85,000,000"></div>
-        <div class="fg"><label>Period</label><select id="f-period"><option>Outright</option><option>Per Annum</option><option>Per Month</option><option>Per Night</option></select></div>
-        <div class="fg"><label>Bedrooms</label><input id="f-beds" placeholder="e.g. 4 Bedrooms"></div>
-        <div class="fg"><label>Size</label><input id="f-size" placeholder="e.g. 400sqm"></div>
-        <div class="fg"><label>Agent Name</label><input id="f-agent" placeholder="e.g. Chisom Okafor"></div>
-        <div class="fg"><label>Agent Phone</label><input id="f-phone" placeholder="e.g. 08012345678"></div>
-        <div class="fg fg-full"><label>Notes</label><textarea id="f-notes" placeholder="Additional notes..."></textarea></div>
-
-        <!-- IMAGE UPLOAD -->
-        <div class="fg fg-full">
-          <label>Property Photos <span style="color:var(--text-4);font-size:7px">(up to 6 images)</span></label>
-          <div class="img-upload-area" id="upload-area" onclick="document.getElementById('img-input').click()" ondragover="handleDrag(event)" ondrop="handleDrop(event)">
-            <input type="file" id="img-input" accept="image/*" multiple onchange="handleFiles(this.files)">
-            <div class="img-upload-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="#AA7C5B" stroke-width="1.5" stroke-linecap="round"/><polyline points="17 8 12 3 7 8" stroke="#AA7C5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="3" x2="12" y2="15" stroke="#AA7C5B" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </div>
-            <div class="img-upload-text">Tap to upload photos</div>
-            <div class="img-upload-sub">JPG, PNG — Max 10MB each</div>
-          </div>
-          <div class="img-previews" id="img-previews"></div>
+<!-- Add / edit -->
+<div class="sheet" id="sh-form" aria-hidden="true">
+  <div class="sheet-bg" data-close></div>
+  <section class="panel" role="dialog" aria-modal="true" aria-labelledby="f-title">
+    <div class="grab"></div>
+    <div class="p-head"><h2 id="f-title">New listing</h2><button class="ibtn" data-close aria-label="Close" id="f-x"></button></div>
+    <div class="p-body" id="f-body">
+      <div class="fsec" style="padding-top:6px">
+        <div class="fsec-h"><h3>Photos</h3><span id="ph-count">0 of 10</span></div>
+        <div class="ph-grid" id="ph-grid"></div>
+        <p class="hint">The first photo is the cover. Tap the star on any photo to make it the cover.</p>
+      </div>
+      <div class="fsec">
+        <div class="fsec-h"><h3>Property</h3></div>
+        <div class="fld"><label for="f-name">Property name</label><input id="f-name" placeholder="e.g. 4-bed terrace, Jahi" autocomplete="off"></div>
+        <div class="fld"><label for="f-loc">Location</label><input id="f-loc" placeholder="e.g. Jahi, Abuja" autocomplete="off"></div>
+        <div class="row2">
+          <div class="fld"><label for="f-type">Type</label><select id="f-type"><option>Residential</option><option>Commercial</option><option>Land</option><option>Short Let</option></select></div>
+          <div class="fld"><label for="f-status">Status</label><select id="f-status"><option>For Sale</option><option>For Rent</option><option>Under Offer</option><option>Sold</option></select></div>
         </div>
-
+        <div class="row2">
+          <div class="fld"><label for="f-price">Price (₦)</label><input id="f-price" inputmode="numeric" placeholder="85,000,000" autocomplete="off"></div>
+          <div class="fld"><label for="f-period">Payment</label><select id="f-period"><option>Outright</option><option>Per Annum</option><option>Per Month</option><option>Per Night</option></select></div>
+        </div>
+        <div class="row2">
+          <div class="fld"><label for="f-beds">Bedrooms</label><input id="f-beds" inputmode="numeric" placeholder="4" autocomplete="off"></div>
+          <div class="fld"><label for="f-size">Size</label><input id="f-size" placeholder="400 sqm" autocomplete="off"></div>
+        </div>
+        <div class="fld"><label for="f-notes">Notes</label><textarea id="f-notes" placeholder="Title documents, finishes, access road, anything a buyer should know"></textarea></div>
+      </div>
+      <div class="fsec">
+        <div class="fsec-h"><h3>Agent</h3></div>
+        <div class="row2">
+          <div class="fld"><label for="f-agent">Name</label><input id="f-agent" placeholder="Agent name" autocomplete="off"></div>
+          <div class="fld"><label for="f-phone">Phone</label><input id="f-phone" type="tel" inputmode="tel" placeholder="0801 234 5678" autocomplete="off"></div>
+        </div>
       </div>
     </div>
-    <div class="modal-foot">
-      <button class="btn-cancel" onclick="closeM('m-add')">Cancel</button>
-      <button class="btn-save" id="btn-save" onclick="save()">Save Listing</button>
+    <div class="p-foot">
+      <button class="btn btn-g" data-close>Cancel</button>
+      <button class="btn btn-p" id="btn-save">Save listing</button>
     </div>
-  </div>
+  </section>
 </div>
 
-<!-- VIEW MODAL -->
-<div class="overlay" id="m-view">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-head">
-      <div class="modal-title" id="v-title">Details</div>
-      <button class="modal-close" onclick="closeM('m-view')">✕</button>
+<!-- PIN -->
+<div class="sheet dialog" id="sh-pin" aria-hidden="true">
+  <div class="sheet-bg" data-close></div>
+  <section class="panel" role="dialog" aria-modal="true" aria-labelledby="pin-t">
+    <div class="p-body" style="padding-top:18px">
+      <div class="pin-ico" id="pin-ico"></div>
+      <div class="pin-t" id="pin-t">Enter PIN</div>
+      <p class="pin-h" id="pin-h"></p>
+      <input id="pin-in" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="PIN">
+      <div class="pin-err" id="pin-err" role="alert"></div>
     </div>
-    <div class="modal-body" id="v-body"></div>
-    <div class="modal-foot"><button class="btn-save" style="flex:1" onclick="closeM('m-view')">Close</button></div>
-  </div>
+    <div class="p-foot">
+      <button class="btn btn-g" data-close>Cancel</button>
+      <button class="btn btn-p" id="pin-go">Continue</button>
+    </div>
+  </section>
 </div>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <button class="lightbox-prev" onclick="event.stopPropagation();shiftLight(-1)">‹</button>
-  <img id="lightbox-img" src="" alt="">
-  <button class="lightbox-next" onclick="event.stopPropagation();shiftLight(1)">›</button>
+<!-- Lightbox -->
+<div class="lb" id="lb" aria-hidden="true" role="dialog" aria-label="Photo viewer">
+  <div class="lb-bar"><span class="lb-count" id="lb-count">1 / 1</span><button class="lb-btn" data-lb="close" aria-label="Close photos" id="lb-x"></button></div>
+  <div class="lb-track" id="lb-track"></div>
+  <button class="lb-btn lb-nav p" data-lb="-1" aria-label="Previous photo" id="lb-p"></button>
+  <button class="lb-btn lb-nav n" data-lb="1" aria-label="Next photo" id="lb-n"></button>
+  <div class="lb-dots" id="lb-dots"></div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 const API = "https://script.google.com/macros/s/AKfycbwfZGPV6k3nBENtH9vvs87t8fNMs9_H7NfleaZS6X3Cz22VTF8EyD_4CY_sKmywKSYF/exec";
-const CLD_CLOUD = "dvqgqgo4c";
-const CLD_PRESET = "rex-listings";
+const CLD = { cloud: 'dvqgqgo4c', preset: 'rex-listings' };
 const PINS = { add: 'add', edit: 'edit', delete: '0704' };
-const PIN_LABELS = {
-  add: { title: 'Add Listing PIN', hint: 'Enter your PIN to add a new listing' },
-  edit: { title: 'Edit Listing PIN', hint: 'Enter your PIN to edit this listing' },
-  delete: { title: 'Delete Listing PIN', hint: 'Enter your PIN to permanently remove this listing' }
+const MAX_PHOTOS = 10;
+const STATUSES = ['For Sale', 'For Rent', 'Under Offer', 'Sold'];
+const TYPES = ['Residential', 'Commercial', 'Land', 'Short Let'];
+const ST_CLASS = { 'For Sale': 's-sale', 'For Rent': 's-rent', 'Under Offer': 's-offer', 'Sold': 's-sold' };
+
+const S = { data: [], status: 'all', type: 'all', q: '', editId: null, photos: [], pin: null, lb: { imgs: [], i: 0 } };
+const $ = s => document.querySelector(s);
+
+// ── Icons ─────────────────────────────────
+const sv = (w, d, extra = '') => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ${extra}>${d}</svg>`;
+const I = {
+  search: sv(18, '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>'),
+  plus: sv(20, '<path d="M12 5v14M5 12h14"/>', 'stroke-width="2.4"'),
+  x: sv(20, '<path d="M18 6L6 18M6 6l12 12"/>'),
+  l: sv(20, '<path d="M15 18l-6-6 6-6"/>', 'stroke-width="2.4"'),
+  r: sv(20, '<path d="M9 18l6-6-6-6"/>', 'stroke-width="2.4"'),
+  pin: sv(15, '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),
+  bed: sv(15, '<path d="M3 18v-7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7M3 14h18M7 9V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2"/>'),
+  size: sv(15, '<path d="M3 9V3h6M21 15v6h-6M3 3l7 7M21 21l-7-7"/>'),
+  home: sv(15, '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'),
+  edit: sv(18, '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>'),
+  trash: sv(18, '<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/>'),
+  cam: sv(13, '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>', 'stroke-width="2.2"'),
+  img: sv(30, '<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>', 'stroke-width="1.6"'),
+  addimg: sv(24, '<path d="M12 5v14M5 12h14"/>'),
+  star: sv(14, '<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/>'),
+  lock: sv(24, '<rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>', 'stroke-width="1.9"'),
+  phone: sv(19, '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>'),
+  wa: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.4 3.5 3.5 0 0 0-1.1 2.6 6 6 0 0 0 1.3 3.2 13.8 13.8 0 0 0 5.3 4.7c2 .8 2.7.9 3.7.7.6-.1 1.8-.7 2-1.5.3-.7.3-1.3.2-1.5l-.5-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>'
 };
+$('#i-search').innerHTML = I.search;
+$('#i-plus-top').innerHTML = I.plus;
+$('#i-plus-fab').innerHTML = I.plus;
+['#d-x', '#f-x', '#lb-x'].forEach(s => $(s).innerHTML = I.x);
+$('#lb-p').innerHTML = I.l; $('#lb-n').innerHTML = I.r;
+$('#pin-ico').innerHTML = I.lock;
 
-let data = [], editId = null, filter = 'all';
-let pinAction = null, pinTargetId = null;
-let uploadedUrls = []; // holds Cloudinary URLs for current form session
-let lightUrls = [], lightIdx = 0;
+// ── Helpers ───────────────────────────────
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const cld = (u, w) => (/res\.cloudinary\.com/.test(u) && u.includes('/upload/') && !/\/upload\/(f_|q_|w_|c_)/.test(u))
+  ? u.replace('/upload/', `/upload/f_auto,q_auto,c_limit,w_${w}/`) : u;
+const imgsOf = l => String(l.images || '').split(',').map(s => s.trim()).filter(Boolean);
+const find = id => S.data.find(x => String(x.id) === String(id));
+const money = p => {
+  const s = String(p ?? '').trim();
+  if (!s) return 'Price on request';
+  if (/^[\d,.\s]+$/.test(s)) { const n = Number(s.replace(/[,\s]/g, '')); if (n) return '₦' + n.toLocaleString('en-NG'); }
+  return '₦' + esc(s);
+};
+const per = p => ({ 'Per Annum': '/yr', 'Per Month': '/mo', 'Per Night': '/night' }[p] || '');
+const beds = b => { const s = String(b ?? '').trim(); return !s ? '' : /^\d+$/.test(s) ? `${s} bed${s === '1' ? '' : 's'}` : s; };
+const initials = n => String(n || '').trim().split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase();
+const fmtDate = d => { if (!d) return '—'; const t = new Date(d); return isNaN(t) ? esc(d) : t.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); };
+const waLink = ph => { let d = String(ph || '').replace(/\D/g, ''); if (d.startsWith('0')) d = '234' + d.slice(1); return 'https://wa.me/' + d; };
+const pill = s => `<span class="pill status ${ST_CLASS[s] || 's-sale'}">${esc(s || 'For Sale')}</span>`;
 
-// ── CLOUDINARY UPLOAD ─────────────────────
-async function uploadToCloudinary(file) {
-  const fd = new FormData();
-  fd.append('file', file);
-  fd.append('upload_preset', CLD_PRESET);
-  const r = await fetch(`https://api.cloudinary.com/v1_1/${CLD_CLOUD}/image/upload`, { method: 'POST', body: fd });
-  const j = await r.json();
-  if (j.secure_url) return j.secure_url;
-  throw new Error('Upload failed');
+let toastT;
+function toast(msg, err = false) {
+  const t = $('#toast'); t.textContent = msg; t.className = 'toast show' + (err ? ' err' : '');
+  clearTimeout(toastT); toastT = setTimeout(() => t.className = 'toast' + (err ? ' err' : ''), 2800);
+}
+function sync(state) {
+  $('#sync').className = 'sync' + (state === 'busy' ? ' busy' : state === 'err' ? ' err' : '');
+  $('#sync-t').textContent = state === 'busy' ? 'Syncing' : state === 'err' ? 'Offline' : 'Live';
 }
 
-async function handleFiles(files) {
-  const arr = Array.from(files);
-  const remaining = 6 - uploadedUrls.length;
-  if (remaining <= 0) { toast('Maximum 6 photos per listing', 'error'); return; }
-  const toUpload = arr.slice(0, remaining);
-
-  for (const file of toUpload) {
-    if (file.size > 10 * 1024 * 1024) { toast('Max file size is 10MB', 'error'); continue; }
-    const idx = uploadedUrls.length;
-    uploadedUrls.push(null); // placeholder
-    renderPreviews();
-
-    try {
-      const url = await uploadToCloudinary(file);
-      uploadedUrls[idx] = url;
-      renderPreviews();
-      toast('Photo uploaded ✓', 'success');
-    } catch {
-      uploadedUrls.splice(idx, 1);
-      renderPreviews();
-      toast('Upload failed — try again', 'error');
-    }
-  }
-}
-
-function handleDrag(e) { e.preventDefault(); document.getElementById('upload-area').classList.add('dragover'); }
-function handleDrop(e) {
-  e.preventDefault();
-  document.getElementById('upload-area').classList.remove('dragover');
-  handleFiles(e.dataTransfer.files);
-}
-
-function removeImg(idx) {
-  uploadedUrls.splice(idx, 1);
-  renderPreviews();
-}
-
-function renderPreviews() {
-  const wrap = document.getElementById('img-previews');
-  wrap.innerHTML = uploadedUrls.map((url, i) => url
-    ? `<div class="img-preview">
-        <img src="${url}" alt="Photo ${i+1}">
-        <button class="img-preview-remove" onclick="removeImg(${i})">✕</button>
-       </div>`
-    : `<div class="img-preview">
-        <div class="img-uploading"><div class="loader" style="width:20px;height:20px"></div></div>
-       </div>`
-  ).join('');
-}
-
-// ── PIN SYSTEM ────────────────────────────
-function askPin(action, targetId = null) {
-  pinAction = action; pinTargetId = targetId;
-  const cfg = PIN_LABELS[action];
-  document.getElementById('pin-title').textContent = cfg.title;
-  document.getElementById('pin-hint').textContent = cfg.hint;
-  document.getElementById('pin-input').value = '';
-  document.getElementById('pin-error').textContent = '';
-  const icon = document.getElementById('pin-icon');
-  icon.style.background = action === 'delete' ? 'rgba(196,90,58,0.1)' : 'var(--primary-dim)';
-  icon.querySelectorAll('path,rect,line,polyline').forEach(el => el.setAttribute('stroke', action === 'delete' ? '#C45A3A' : '#AA7C5B'));
-  document.getElementById('m-pin').classList.add('open');
-  setTimeout(() => document.getElementById('pin-input').focus(), 350);
-}
-
-function checkPin() {
-  const entered = document.getElementById('pin-input').value;
-  if (entered !== PINS[pinAction]) {
-    document.getElementById('pin-error').textContent = 'Incorrect PIN — try again';
-    const inp = document.getElementById('pin-input');
-    inp.value = '';
-    inp.classList.add('pin-shake');
-    inp.style.borderColor = 'var(--sold)';
-    inp.focus();
-    setTimeout(() => { inp.classList.remove('pin-shake'); inp.style.borderColor = ''; }, 500);
-    return;
-  }
-  closeM('m-pin');
-  if (pinAction === 'add') _openAdd();
-  if (pinAction === 'edit') _openEdit(pinTargetId);
-  if (pinAction === 'delete') _del(pinTargetId);
-}
-
-// ── TOAST & SYNC ──────────────────────────
-function toast(msg, type = 'success') {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.className = `toast ${type} show`;
-  setTimeout(() => t.className = 'toast', 3000);
-}
-function sync(s) {
-  const d = document.getElementById('sync-dot'), l = document.getElementById('sync-label');
-  d.className = 'sync-dot' + (s === 'syncing' ? ' syncing' : s === 'error' ? ' error' : '');
-  l.textContent = s === 'syncing' ? 'Syncing...' : s === 'error' ? 'Offline' : 'Live';
-}
-
-// ── LOAD ──────────────────────────────────
+// ── Data ──────────────────────────────────
 async function load() {
-  sync('syncing');
+  sync('busy');
   try {
-    const r = await fetch(API), j = await r.json();
-    if (j.success) {
-      data = j.data.filter(x => x.ID).map(x => ({
-        id: x.ID, name: x.Name, location: x.Location, type: x.Type,
-        status: x.Status, price: x.Price, period: x.Period,
-        beds: x.Beds, size: x.Size, agent: x.Agent,
-        phone: x.Phone, notes: x.Notes, date: x.Date,
-        images: x.Images || ''
-      }));
-      sync('live'); render();
-    } else throw new Error();
+    const r = await fetch(API); const j = await r.json();
+    if (!j.success) throw new Error();
+    S.data = j.data.filter(x => x.ID).map(x => ({
+      id: x.ID, name: x.Name, location: x.Location, type: x.Type, status: x.Status,
+      price: x.Price, period: x.Period, beds: x.Beds, size: x.Size, agent: x.Agent,
+      phone: x.Phone, notes: x.Notes, date: x.Date, images: x.Images || ''
+    })).reverse();
+    sync('ok'); render();
   } catch {
-    sync('error');
-    document.getElementById('cards').innerHTML = '<div class="state-box"><p>Could not load — check connection</p></div>';
-    toast('Connection error', 'error');
+    sync('err');
+    $('#sub').textContent = 'Listings could not load';
+    $('#grid').innerHTML = `<div class="empty"><h3>Couldn't reach the listings sheet</h3><p>Check your internet connection, then try again.</p><button class="btn btn-p" data-act="retry">Try again</button></div>`;
   }
 }
-
-async function callAPI(payload) {
-  sync('syncing');
+async function post(payload) {
+  sync('busy');
   const r = await fetch(API, { method: 'POST', body: JSON.stringify(payload) });
-  const j = await r.json();
-  sync(j.success ? 'live' : 'error');
-  return j;
+  const j = await r.json(); sync(j.success ? 'ok' : 'err'); return j;
 }
 
-// ── HELPERS ───────────────────────────────
-const fmtDate = d => { if (!d) return '—'; const dt = new Date(d); return isNaN(dt) ? d : dt.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); };
-const sBadge = s => { const m = { 'For Sale': 'b-sale', 'For Rent': 'b-rent', 'Sold': 'b-sold', 'Under Offer': 'b-offer' }; return `<span class="badge ${m[s] || 'b-sale'}">${s}</span>`; };
-const tBadge = t => { const m = { 'Residential': 'b-res', 'Commercial': 'b-com', 'Land': 'b-land', 'Short Let': 'b-sl' }; return `<span class="badge ${m[t] || 'b-res'}">${t}</span>`; };
-const getImgs = l => l.images ? l.images.split(',').map(u => u.trim()).filter(Boolean) : [];
-
-function updateStats() {
-  document.getElementById('s-total').textContent = data.length;
-  document.getElementById('s-sale').textContent = data.filter(x => x.status === 'For Sale').length;
-  document.getElementById('s-rent').textContent = data.filter(x => x.status === 'For Rent').length;
-  document.getElementById('s-closed').textContent = data.filter(x => x.status === 'Sold' || x.status === 'Under Offer').length;
-  document.getElementById('header-total').textContent = data.length;
-  if (data.length) document.getElementById('hp-total').style.display = 'flex';
+// ── Render ────────────────────────────────
+function skeleton() {
+  $('#grid').innerHTML = Array.from({ length: 6 }, () => `<div><div class="sk sk-img"></div><div class="sk sk-line" style="width:45%;height:18px;margin-top:14px"></div><div class="sk sk-line" style="width:75%"></div><div class="sk sk-line" style="width:55%"></div></div>`).join('');
 }
 
-function getFiltered() {
-  const q = document.getElementById('search').value.toLowerCase();
-  const tf = document.getElementById('type-f').value;
-  return data.filter(l => {
-    const ms = filter === 'all' || l.status === filter;
-    const mt = tf === 'all' || l.type === tf;
-    const mq = !q || (l.name || '').toLowerCase().includes(q) || (l.location || '').toLowerCase().includes(q) || (l.agent || '').toLowerCase().includes(q);
-    return ms && mt && mq;
-  });
+function carHTML(l, w, opts = {}) {
+  const imgs = imgsOf(l);
+  const badge = opts.badge === false ? '' : pill(l.status);
+  if (!imgs.length) return `<div class="car"><div class="car-empty">${I.img}<span>No photos yet</span></div>${badge}</div>`;
+  const multi = imgs.length > 1;
+  return `<div class="car" data-car="${esc(l.id)}">
+    <div class="car-track">${imgs.map((u, i) => `<img src="${esc(cld(u, w))}" alt="${esc(l.name)} photo ${i + 1}" loading="lazy" decoding="async" data-img="${i}" draggable="false">`).join('')}</div>
+    ${multi ? `<div class="car-dots">${imgs.map((_, i) => `<i class="${i ? '' : 'on'}"></i>`).join('')}</div>
+      <button class="car-nav p" data-nav="-1" aria-label="Previous photo">${I.l}</button>
+      <button class="car-nav n" data-nav="1" aria-label="Next photo">${I.r}</button>` : ''}
+    ${badge}
+    ${multi ? `<span class="car-count">${I.cam}${imgs.length}</span>` : ''}
+  </div>`;
 }
 
-function setF(f, btn) {
-  filter = f;
-  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active'); render();
+function cardHTML(l) {
+  const b = beds(l.beds);
+  return `<article class="card" data-open="${esc(l.id)}">
+    ${carHTML(l, 800)}
+    <div class="cb">
+      <div class="cb-row">
+        <div style="min-width:0;flex:1">
+          <div class="price">${money(l.price)}<small>${per(l.period)}</small></div>
+          <div class="name">${esc(l.name) || 'Untitled listing'}</div>
+          <div class="loc">${I.pin}<span>${esc(l.location) || '—'}</span></div>
+        </div>
+        <div class="acts">
+          <button class="ibtn" data-edit="${esc(l.id)}" aria-label="Edit listing">${I.edit}</button>
+          <button class="ibtn del" data-del="${esc(l.id)}" aria-label="Delete listing">${I.trash}</button>
+        </div>
+      </div>
+      <div class="facts">
+        <span>${I.home}${esc(l.type || 'Residential')}</span>
+        ${b ? `<span>${I.bed}${esc(b)}</span>` : ''}
+        ${l.size ? `<span>${I.size}${esc(l.size)}</span>` : ''}
+      </div>
+    </div>
+  </article>`;
+}
+
+function filtered() {
+  const q = S.q.toLowerCase();
+  return S.data.filter(l =>
+    (S.status === 'all' || l.status === S.status) &&
+    (S.type === 'all' || l.type === S.type) &&
+    (!q || [l.name, l.location, l.agent, l.notes].some(v => String(v || '').toLowerCase().includes(q))));
 }
 
 function render() {
-  updateStats();
-  const filtered = getFiltered();
-  const grid = document.getElementById('cards');
-  if (!filtered.length) { grid.innerHTML = `<div class="state-box"><p>${data.length ? 'No listings match filters' : 'No listings yet — add your first one'}</p></div>`; return; }
-  grid.innerHTML = filtered.map((l, i) => {
-    const imgs = getImgs(l);
-    const firstImg = imgs[0] || null;
-    return `
-      <div class="pcard" style="animation-delay:${i * .05}s" onclick="view('${l.id}')">
-        ${firstImg
-          ? `<div style="position:relative">
-               <img class="pcard-img" src="${firstImg}" alt="${l.name}" loading="lazy">
-               ${imgs.length > 1 ? `<span class="pcard-img-count">+${imgs.length - 1} more</span>` : ''}
-             </div>`
-          : `<div class="pcard-img-placeholder">
-               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#AA7C5B" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#AA7C5B"/><path d="M21 15l-5-5L5 21" stroke="#AA7C5B" stroke-width="1.5" stroke-linecap="round"/></svg>
-             </div>`
-        }
-        <div class="pcard-body">
-          <div class="pcard-top">
-            <div style="flex:1">
-              <div class="pcard-name">${l.name || 'Unnamed Property'}</div>
-              <div class="pcard-loc">
-                <svg width="9" height="10" viewBox="0 0 10 12" fill="none"><path d="M5 1C3 1 1 2.8 1 5c0 3 4 7 4 7s4-4 4-7c0-2.2-2-4-4-4z" stroke="#C4AA94" stroke-width="1.2" fill="none"/><circle cx="5" cy="5" r="1.2" fill="#C4AA94"/></svg>
-                ${l.location || '—'}
-              </div>
-            </div>
-            ${sBadge(l.status)}
-          </div>
-          <div class="pcard-badges">${tBadge(l.type)}${l.beds ? `<span class="badge b-meta">${l.beds}</span>` : ''}${l.size ? `<span class="badge b-meta">${l.size}</span>` : ''}</div>
-          <div class="pcard-price">₦${l.price || '—'}</div>
-          <div class="pcard-period">${l.period || ''}</div>
-          ${l.agent ? `<div class="pcard-agent"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2.5" stroke="#A8896E" stroke-width="1.2"/><path d="M1.5 11c0-2.485 2.015-4.5 4.5-4.5s4.5 2.015 4.5 4.5" stroke="#A8896E" stroke-width="1.2" stroke-linecap="round"/></svg>${l.agent}</div>` : ''}
-          <div class="pcard-actions" onclick="event.stopPropagation()">
-            <button class="btn-sm" onclick="view('${l.id}')">View</button>
-            <button class="btn-sm" onclick="askPin('edit','${l.id}')">Edit</button>
-            <button class="btn-sm del" onclick="askPin('delete','${l.id}')">Delete</button>
-          </div>
-        </div>
-      </div>`;
-  }).join('');
+  const count = s => S.data.filter(x => x.status === s).length;
+  const avail = count('For Sale') + count('For Rent');
+  $('#sub').textContent = S.data.length ? `${S.data.length} ${S.data.length === 1 ? 'property' : 'properties'}, ${avail} available` : 'No properties listed yet';
+
+  $('#chips-s').innerHTML = [['all', 'All', S.data.length], ...STATUSES.map(s => [s, s, count(s)])]
+    .map(([v, t, n]) => `<button class="chip${S.status === v ? ' on' : ''}" data-status="${esc(v)}" role="tab" aria-selected="${S.status === v}">${t}<em>${n}</em></button>`).join('');
+  $('#chips-t').innerHTML = [['all', 'All types'], ...TYPES.map(t => [t, t])]
+    .map(([v, t]) => `<button class="chip${S.type === v ? ' on' : ''}" data-type="${esc(v)}">${t}</button>`).join('');
+
+  const list = filtered();
+  const grid = $('#grid');
+  if (!S.data.length) {
+    grid.innerHTML = `<div class="empty"><h3>No listings yet</h3><p>Add your first property with photos, price and agent details.</p><button class="btn btn-p" data-act="add">${I.plus}Add listing</button></div>`;
+    return;
+  }
+  if (!list.length) {
+    grid.innerHTML = `<div class="empty"><h3>No matches</h3><p>Try a different search or clear the filters.</p><button class="btn btn-g" data-act="clear">Clear filters</button></div>`;
+    return;
+  }
+  grid.innerHTML = list.map(cardHTML).join('');
+  bindCars(grid);
 }
 
-// ── PRIVATE ACTIONS ───────────────────────
-function _openAdd() {
-  editId = null; uploadedUrls = [];
-  document.getElementById('m-title').textContent = 'Add Listing';
-  ['name', 'loc', 'price', 'beds', 'size', 'agent', 'phone', 'notes'].forEach(f => document.getElementById('f-' + f).value = '');
-  document.getElementById('f-type').value = 'Residential';
-  document.getElementById('f-status').value = 'For Sale';
-  document.getElementById('f-period').value = 'Outright';
-  document.getElementById('img-previews').innerHTML = '';
-  document.getElementById('img-input').value = '';
-  document.getElementById('m-add').classList.add('open');
+// Carousel dot syncing
+function bindCars(root) {
+  root.querySelectorAll('.car-track').forEach(t => {
+    if (t._bound) return; t._bound = true;
+    let raf;
+    t.addEventListener('scroll', () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const i = Math.round(t.scrollLeft / t.clientWidth);
+        t.parentElement.querySelectorAll('.car-dots i').forEach((d, k) => d.classList.toggle('on', k === i));
+      });
+    }, { passive: true });
+  });
+}
+function stepCar(track, dir) {
+  const n = track.children.length, w = track.clientWidth;
+  const i = (Math.round(track.scrollLeft / w) + dir + n) % n;
+  track.scrollTo({ left: i * w, behavior: 'smooth' });
 }
 
-function _openEdit(id) {
-  const l = data.find(x => String(x.id) === String(id)); if (!l) return;
-  editId = id;
-  uploadedUrls = getImgs(l);
-  document.getElementById('m-title').textContent = 'Edit Listing';
-  document.getElementById('f-name').value = l.name || '';
-  document.getElementById('f-loc').value = l.location || '';
-  document.getElementById('f-type').value = l.type || 'Residential';
-  document.getElementById('f-status').value = l.status || 'For Sale';
-  document.getElementById('f-price').value = l.price || '';
-  document.getElementById('f-period').value = l.period || 'Outright';
-  document.getElementById('f-beds').value = l.beds || '';
-  document.getElementById('f-size').value = l.size || '';
-  document.getElementById('f-agent').value = l.agent || '';
-  document.getElementById('f-phone').value = l.phone || '';
-  document.getElementById('f-notes').value = l.notes || '';
-  renderPreviews();
-  document.getElementById('m-add').classList.add('open');
+// ── Sheets ────────────────────────────────
+function openSheet(id) { const s = $('#' + id); s.classList.add('open'); s.setAttribute('aria-hidden', 'false'); lockScroll(); }
+function closeSheet(s) { if (!s) return; s.classList.remove('open'); s.setAttribute('aria-hidden', 'true'); lockScroll(); }
+function lockScroll() { document.documentElement.style.overflow = document.querySelector('.sheet.open, .lb.open') ? 'hidden' : ''; }
+
+// ── PIN ───────────────────────────────────
+const PIN_TXT = {
+  add: ['Add a listing', 'Enter the add PIN to create a new listing.'],
+  edit: ['Edit listing', 'Enter the edit PIN to change this listing.'],
+  delete: ['Delete listing', 'Enter the delete PIN. This removes the listing for everyone.']
+};
+function askPin(action, id = null) {
+  S.pin = { action, id };
+  $('#pin-t').textContent = PIN_TXT[action][0];
+  $('#pin-h').textContent = PIN_TXT[action][1];
+  $('#pin-go').textContent = action === 'delete' ? 'Delete' : 'Continue';
+  $('#pin-in').value = ''; $('#pin-err').textContent = '';
+  $('#sh-pin').classList.toggle('danger', action === 'delete');
+  openSheet('sh-pin');
+  setTimeout(() => $('#pin-in').focus(), 220);
+}
+function checkPin() {
+  const inp = $('#pin-in');
+  if (inp.value.trim() !== PINS[S.pin.action]) {
+    $('#pin-err').textContent = 'That PIN is incorrect. Try again.';
+    inp.value = ''; inp.classList.remove('bad'); void inp.offsetWidth; inp.classList.add('bad'); inp.focus();
+    return;
+  }
+  inp.blur(); closeSheet($('#sh-pin'));
+  const { action, id } = S.pin;
+  if (action !== 'add') closeSheet($('#sh-detail'));
+  if (action === 'add') openForm();
+  else if (action === 'edit') openForm(id);
+  else removeListing(id);
+}
+
+// ── Detail ────────────────────────────────
+function openDetail(id) {
+  const l = find(id); if (!l) return;
+  $('#d-title').textContent = l.name || 'Listing';
+  const b = beds(l.beds);
+  $('#d-body').innerHTML = `
+    ${imgsOf(l).length ? `<div class="d-car">${carHTML(l, 1200, { badge: false })}</div>` : ''}
+    <div class="d-top">
+      ${pill(l.status)}
+      <div class="d-price">${money(l.price)}<small>${per(l.period)}</small></div>
+      <div class="d-name">${esc(l.name) || 'Untitled listing'}</div>
+      <div class="loc">${I.pin}<span>${esc(l.location) || '—'}</span></div>
+    </div>
+    <div class="specs">
+      <div class="spec"><span>Type</span><b>${esc(l.type || '—')}</b></div>
+      <div class="spec"><span>Bedrooms</span><b>${esc(b || '—')}</b></div>
+      <div class="spec"><span>Size</span><b>${esc(l.size || '—')}</b></div>
+      <div class="spec"><span>Listed</span><b>${fmtDate(l.date)}</b></div>
+    </div>
+    ${l.notes ? `<div class="d-sec"><h3>Notes</h3><p>${esc(l.notes)}</p></div>` : ''}
+    ${l.agent || l.phone ? `<div class="agent">
+      <div class="av">${esc(initials(l.agent) || 'R')}</div>
+      <div class="agent-t"><b>${esc(l.agent || 'REX agent')}</b><span>${esc(l.phone || 'No phone added')}</span></div>
+      ${l.phone ? `<a href="tel:${esc(String(l.phone).replace(/\s/g, ''))}" aria-label="Call agent">${I.phone}</a><a class="wa" href="${waLink(l.phone)}" target="_blank" rel="noopener" aria-label="WhatsApp agent">${I.wa}</a>` : ''}
+    </div>` : ''}`;
+  $('#d-foot').innerHTML = `
+    <button class="btn btn-d" data-del="${esc(l.id)}">${I.trash}Delete</button>
+    <button class="btn btn-p" data-edit="${esc(l.id)}">${I.edit}Edit listing</button>`;
+  openSheet('sh-detail');
+  $('#d-body').scrollTop = 0;
+  bindCars($('#d-body'));
+}
+
+// ── Form ──────────────────────────────────
+const F = ['name', 'loc', 'type', 'status', 'price', 'period', 'beds', 'size', 'agent', 'phone', 'notes'];
+const KEY = { loc: 'location' };
+function openForm(id) {
+  const l = id ? find(id) : null;
+  S.editId = l ? l.id : null;
+  $('#f-title').textContent = l ? 'Edit listing' : 'New listing';
+  const defaults = { type: 'Residential', status: 'For Sale', period: 'Outright' };
+  F.forEach(f => { $('#f-' + f).value = l ? (l[KEY[f] || f] ?? '') : (defaults[f] || ''); });
+  S.photos = l ? imgsOf(l).map(url => ({ url })) : [];
+  renderPhotos();
+  openSheet('sh-form');
+  $('#f-body').scrollTop = 0;
+}
+
+function renderPhotos() {
+  $('#ph-count').textContent = `${S.photos.length} of ${MAX_PHOTOS}`;
+  $('#ph-grid').innerHTML = S.photos.map((p, i) => `<div class="ph">
+      <img src="${esc(p.url ? cld(p.url, 300) : p.local)}" alt="Photo ${i + 1}">
+      ${p.busy ? '<div class="ph-busy"><div class="spin"></div></div>' : `
+        <button type="button" class="ph-x" data-rm="${i}" aria-label="Remove photo">${I.x.replace(/width="20" height="20"/, 'width="14" height="14"')}</button>
+        ${i === 0 ? '<span class="ph-cover">Cover</span>' : `<button type="button" class="ph-star" data-cover="${i}" aria-label="Make cover photo">${I.star}</button>`}`}
+    </div>`).join('')
+    + (S.photos.length < MAX_PHOTOS ? `<label class="ph ph-add">${I.addimg}<span>Add photos</span><input type="file" id="ph-in" accept="image/*" multiple hidden></label>` : '');
+  const inp = $('#ph-in'); if (inp) inp.onchange = e => { addFiles(e.target.files); e.target.value = ''; };
+}
+
+async function compress(file) {
+  try {
+    const bmp = await createImageBitmap(file, { imageOrientation: 'from-image' });
+    const s = Math.min(1, 2000 / Math.max(bmp.width, bmp.height));
+    if (s === 1 && file.size < 2.5e6) return file;
+    const c = document.createElement('canvas');
+    c.width = Math.round(bmp.width * s); c.height = Math.round(bmp.height * s);
+    c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+    return await new Promise(res => c.toBlob(b => res(b || file), 'image/jpeg', .85));
+  } catch { return file; }
+}
+async function uploadPhoto(file) {
+  const fd = new FormData();
+  fd.append('file', await compress(file));
+  fd.append('upload_preset', CLD.preset);
+  const r = await fetch(`https://api.cloudinary.com/v1_1/${CLD.cloud}/image/upload`, { method: 'POST', body: fd });
+  const j = await r.json();
+  if (!j.secure_url) throw new Error(j.error?.message || 'Upload failed');
+  return j.secure_url;
+}
+function addFiles(files) {
+  const room = MAX_PHOTOS - S.photos.length;
+  const list = [...files].filter(f => f.type.startsWith('image/') || /\.(heic|heif)$/i.test(f.name));
+  if (list.length > room) toast(`Only ${MAX_PHOTOS} photos per listing. Extra photos were skipped.`, true);
+  list.slice(0, room).forEach(async f => {
+    const p = { local: URL.createObjectURL(f), busy: true };
+    S.photos.push(p); renderPhotos();
+    try { p.url = await uploadPhoto(f); p.busy = false; }
+    catch { S.photos.splice(S.photos.indexOf(p), 1); toast(`${f.name} didn't upload. Try it again.`, true); }
+    URL.revokeObjectURL(p.local);
+    renderPhotos();
+  });
 }
 
 async function save() {
-  const name = document.getElementById('f-name').value.trim();
-  const loc = document.getElementById('f-loc').value.trim();
-  if (!name || !loc) { toast('Name and Location required', 'error'); return; }
-  if (uploadedUrls.includes(null)) { toast('Please wait for uploads to finish', 'error'); return; }
-  const btn = document.getElementById('btn-save');
-  btn.disabled = true; btn.textContent = 'Saving...';
+  if (S.photos.some(p => p.busy)) return toast('Photos are still uploading. Save once they finish.', true);
+  const v = f => $('#f-' + f).value.trim();
+  if (!v('name')) { $('#f-name').focus(); return toast('Add a property name to save.', true); }
+  if (!v('loc')) { $('#f-loc').focus(); return toast('Add a location to save.', true); }
+  const existing = S.editId ? find(S.editId) : null;
+  const btn = $('#btn-save'); btn.disabled = true; btn.textContent = 'Saving…';
   const payload = {
-    id: editId || Date.now().toString(), name, location: loc,
-    type: document.getElementById('f-type').value,
-    status: document.getElementById('f-status').value,
-    price: document.getElementById('f-price').value.trim(),
-    period: document.getElementById('f-period').value,
-    beds: document.getElementById('f-beds').value.trim(),
-    size: document.getElementById('f-size').value.trim(),
-    agent: document.getElementById('f-agent').value.trim(),
-    phone: document.getElementById('f-phone').value.trim(),
-    notes: document.getElementById('f-notes').value.trim(),
-    date: new Date().toISOString().split('T')[0],
-    images: uploadedUrls.filter(Boolean).join(','),
-    action: editId ? 'edit' : 'add'
+    action: S.editId ? 'edit' : 'add',
+    id: S.editId || Date.now().toString(),
+    name: v('name'), location: v('loc'), type: v('type'), status: v('status'),
+    price: v('price'), period: v('period'), beds: v('beds'), size: v('size'),
+    agent: v('agent'), phone: v('phone'), notes: v('notes'),
+    date: existing?.date || new Date().toISOString().split('T')[0],
+    images: S.photos.map(p => p.url).filter(Boolean).join(',')
   };
   try {
-    const r = await callAPI(payload);
-    if (r.success) { toast(editId ? 'Listing updated ✓' : 'Listing added ✓', 'success'); closeM('m-add'); await load(); }
-    else toast('Error saving', 'error');
-  } catch { toast('Connection error', 'error'); }
-  btn.disabled = false; btn.textContent = 'Save Listing';
+    const r = await post(payload);
+    if (!r.success) throw new Error();
+    closeSheet($('#sh-form'));
+    toast(S.editId ? 'Listing saved' : 'Listing added');
+    await load();
+  } catch { toast("The listing didn't save. Check your connection and try again.", true); }
+  btn.disabled = false; btn.textContent = 'Save listing';
 }
 
-async function _del(id) {
+async function removeListing(id) {
+  toast('Deleting listing…');
   try {
-    const r = await callAPI({ action: 'delete', id });
-    if (r.success) { toast('Listing removed', 'success'); await load(); }
-    else toast('Could not delete', 'error');
-  } catch { toast('Connection error', 'error'); }
+    const r = await post({ action: 'delete', id });
+    if (!r.success) throw new Error();
+    toast('Listing deleted'); await load();
+  } catch { toast("The listing wasn't deleted. Try again.", true); }
 }
 
-function view(id) {
-  const l = data.find(x => String(x.id) === String(id)); if (!l) return;
-  const imgs = getImgs(l);
-  document.getElementById('v-title').textContent = l.name || 'Property Details';
-  document.getElementById('v-body').innerHTML = `
-    ${imgs.length ? `<div class="img-gallery">${imgs.map((u, i) => `<img src="${u}" alt="Photo ${i+1}" onclick="openLight(${JSON.stringify(imgs)},${i})" loading="lazy">`).join('')}</div>` : ''}
-    <div class="drow"><span class="dlabel">Location</span><span class="dval">${l.location || '—'}</span></div>
-    <div class="drow"><span class="dlabel">Type</span><span class="dval">${tBadge(l.type)}</span></div>
-    <div class="drow"><span class="dlabel">Status</span><span class="dval">${sBadge(l.status)}</span></div>
-    <div class="drow"><span class="dlabel">Price</span><span class="dval" style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--primary)">₦${l.price || '—'}<span style="font-size:9px;color:var(--text-4);margin-left:6px">${l.period || ''}</span></span></div>
-    <div class="drow"><span class="dlabel">Bedrooms</span><span class="dval">${l.beds || '—'}</span></div>
-    <div class="drow"><span class="dlabel">Size</span><span class="dval">${l.size || '—'}</span></div>
-    <div class="drow"><span class="dlabel">Agent</span><span class="dval">${l.agent || '—'}</span></div>
-    <div class="drow"><span class="dlabel">Phone</span><span class="dval">${l.phone || '—'}</span></div>
-    <div class="drow"><span class="dlabel">Listed</span><span class="dval">${fmtDate(l.date)}</span></div>
-    ${l.notes ? `<div class="drow"><span class="dlabel">Notes</span><span class="dval" style="max-width:65%;text-align:right;color:var(--text-2);font-size:11px">${l.notes}</span></div>` : ''}
-  `;
-  document.getElementById('m-view').classList.add('open');
+// ── Lightbox ──────────────────────────────
+function openLB(id, i) {
+  const l = find(id); const imgs = l ? imgsOf(l) : [];
+  if (!imgs.length) return;
+  S.lb = { imgs, i };
+  $('#lb-track').innerHTML = imgs.map((u, k) => `<div class="lb-slide"><img src="${esc(cld(u, 2000))}" alt="Photo ${k + 1} of ${imgs.length}" draggable="false" ${Math.abs(k - i) > 1 ? 'loading="lazy"' : ''}></div>`).join('');
+  $('#lb-dots').innerHTML = imgs.length > 1 ? imgs.map(() => '<i></i>').join('') : '';
+  $('#lb-p').style.visibility = $('#lb-n').style.visibility = imgs.length > 1 ? 'visible' : 'hidden';
+  const lb = $('#lb'); lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false'); lockScroll();
+  requestAnimationFrame(() => { const t = $('#lb-track'); t.scrollLeft = i * t.clientWidth; lbSync(); });
 }
+function lbSync() {
+  const t = $('#lb-track'); const i = Math.round(t.scrollLeft / (t.clientWidth || 1));
+  S.lb.i = i;
+  $('#lb-count').textContent = `${i + 1} / ${S.lb.imgs.length}`;
+  document.querySelectorAll('#lb-dots i').forEach((d, k) => d.classList.toggle('on', k === i));
+}
+function lbStep(dir) {
+  const t = $('#lb-track'), n = S.lb.imgs.length;
+  const i = (S.lb.i + dir + n) % n;
+  t.scrollTo({ left: i * t.clientWidth, behavior: 'smooth' });
+}
+function closeLB() {
+  const lb = $('#lb'); lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); lockScroll();
+  setTimeout(() => { if (!lb.classList.contains('open')) $('#lb-track').innerHTML = ''; }, 260);
+}
+let lbRaf;
+$('#lb-track').addEventListener('scroll', () => { cancelAnimationFrame(lbRaf); lbRaf = requestAnimationFrame(lbSync); }, { passive: true });
+// swipe down to close
+(() => {
+  let y0 = null, x0 = null; const lb = $('#lb');
+  lb.addEventListener('touchstart', e => { if (e.touches.length === 1) { y0 = e.touches[0].clientY; x0 = e.touches[0].clientX; } else y0 = null; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    if (y0 == null) return; const t = e.changedTouches[0];
+    if (t.clientY - y0 > 90 && Math.abs(t.clientX - x0) < 50) closeLB(); y0 = null;
+  }, { passive: true });
+})();
+window.addEventListener('resize', () => { if ($('#lb').classList.contains('open')) { const t = $('#lb-track'); t.scrollLeft = S.lb.i * t.clientWidth; } });
 
-// ── LIGHTBOX ──────────────────────────────
-function openLight(urls, idx) {
-  lightUrls = urls; lightIdx = idx;
-  document.getElementById('lightbox-img').src = lightUrls[lightIdx];
-  document.getElementById('lightbox').classList.add('open');
-  document.querySelector('.lightbox-prev').style.display = lightUrls.length > 1 ? 'flex' : 'none';
-  document.querySelector('.lightbox-next').style.display = lightUrls.length > 1 ? 'flex' : 'none';
-}
-function shiftLight(dir) {
-  lightIdx = (lightIdx + dir + lightUrls.length) % lightUrls.length;
-  document.getElementById('lightbox-img').src = lightUrls[lightIdx];
-}
-function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
-
-function closeM(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.overlay').forEach(o => {
-  o.addEventListener('click', function (e) { if (e.target === this) this.classList.remove('open'); });
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeLightbox(); }
-  if (document.getElementById('lightbox').classList.contains('open')) {
-    if (e.key === 'ArrowLeft') shiftLight(-1);
-    if (e.key === 'ArrowRight') shiftLight(1);
+// ── Events ────────────────────────────────
+document.addEventListener('click', e => {
+  const t = e.target; let el;
+  if ((el = t.closest('[data-lb]'))) { const a = el.dataset.lb; return a === 'close' ? closeLB() : lbStep(+a); }
+  if ((el = t.closest('[data-close]'))) return closeSheet(el.closest('.sheet'));
+  if ((el = t.closest('[data-act]'))) {
+    const a = el.dataset.act;
+    if (a === 'add') return askPin('add');
+    if (a === 'retry') { skeleton(); return load(); }
+    if (a === 'clear') { S.status = 'all'; S.type = 'all'; S.q = ''; $('#q').value = ''; return render(); }
   }
+  if ((el = t.closest('[data-edit]'))) return askPin('edit', el.dataset.edit);
+  if ((el = t.closest('[data-del]'))) return askPin('delete', el.dataset.del);
+  if ((el = t.closest('[data-nav]'))) return stepCar(el.parentElement.querySelector('.car-track'), +el.dataset.nav);
+  if ((el = t.closest('[data-img]'))) { const car = el.closest('[data-car]'); if (car) return openLB(car.dataset.car, +el.dataset.img); }
+  if ((el = t.closest('[data-status]'))) { S.status = el.dataset.status; return render(); }
+  if ((el = t.closest('[data-type]'))) { S.type = el.dataset.type; return render(); }
+  if ((el = t.closest('[data-rm]'))) { S.photos.splice(+el.dataset.rm, 1); return renderPhotos(); }
+  if ((el = t.closest('[data-cover]'))) { const [p] = S.photos.splice(+el.dataset.cover, 1); S.photos.unshift(p); return renderPhotos(); }
+  if ((el = t.closest('[data-open]'))) return openDetail(el.dataset.open);
 });
 
+let qT;
+$('#q').addEventListener('input', e => { clearTimeout(qT); qT = setTimeout(() => { S.q = e.target.value.trim(); render(); }, 140); });
+$('#pin-go').addEventListener('click', checkPin);
+$('#pin-in').addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
+$('#pin-in').addEventListener('input', () => { $('#pin-err').textContent = ''; });
+$('#btn-save').addEventListener('click', save);
+
+document.addEventListener('keydown', e => {
+  if ($('#lb').classList.contains('open')) {
+    if (e.key === 'Escape') return closeLB();
+    if (e.key === 'ArrowLeft') return lbStep(-1);
+    if (e.key === 'ArrowRight') return lbStep(1);
+    return;
+  }
+  if (e.key === 'Escape') { const open = [...document.querySelectorAll('.sheet.open')].pop(); if (open) closeSheet(open); }
+});
+
+// border under sticky tools once scrolled
+new IntersectionObserver(([en]) => $('#tools').classList.toggle('stuck', !en.isIntersecting), { rootMargin: '-61px 0px 0px 0px' })
+  .observe($('.intro'));
+
+skeleton();
 load();
 </script>
 </body>
