@@ -3,8 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#FFFFFF" id="meta-theme">
 <title>Listings · REX RealtyCo</title>
+<script>
+(function(){var t;try{t=localStorage.getItem('rex_theme')}catch(e){}
+if(t!=='dark'&&t!=='light')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+document.documentElement.dataset.theme=t;
+if(t==='dark')document.getElementById('meta-theme').content='#141110';})();
+</script>
 <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773854552/Logo_SVG_s6giav.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,16 +18,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --brand:#AA7C5B;--brand-d:#8E6446;--brand-50:#F6EFE9;--brand-100:#EBDCCF;
-  --ink:#1D1814;--ink-2:#574C44;--ink-3:#8F847B;
-  --bg:#FFFFFF;--soft:#F5F3F1;--line:#ECE8E4;
+  --brand:#AA7C5B;--brand-d:#8E6446;--brand-t:#8E6446;--brand-50:#F6EFE9;--brand-100:#EBDCCF;
+  --ink:#1D1814;--ink-2:#574C44;--ink-3:#8F847B;--on-ink:#FFFFFF;
+  --bg:#FFFFFF;--surface:#FFFFFF;--soft:#F5F3F1;--line:#ECE8E4;--line-2:#DCD4CD;
+  --glass:rgba(255,255,255,.88);--scrim:rgba(22,16,11,.45);
   --sale:#1F8A5B;--rent:#2B6CB0;--offer:#7A55B8;--sold:#B8452C;
+  --danger-50:#FBEDE9;--rent-50:#EAF1F9;--sk1:#F1EEEB;--sk2:#F8F6F4;
+  --shadow:0 30px 80px -20px rgba(30,20,12,.35);
   --safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+[data-theme="dark"]{
+  --brand:#B48562;--brand-d:#9C6F4F;--brand-t:#DDB392;--brand-50:#2B221C;--brand-100:#3F3128;
+  --ink:#F3EDE7;--ink-2:#CFC4BA;--ink-3:#9A8E84;--on-ink:#171310;
+  --bg:#141110;--surface:#1D1916;--soft:#26211D;--line:#332C27;--line-2:#473E37;
+  --glass:rgba(20,17,16,.86);--scrim:rgba(0,0,0,.62);
+  --sale:#46B987;--rent:#6CA6E6;--offer:#AD8DE1;--sold:#E47C60;
+  --danger-50:#3A231C;--rent-50:#1C2836;--sk1:#221E1B;--sk2:#2D2723;
+  --shadow:0 30px 80px -20px rgba(0,0,0,.75);
+  color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none!important}
-html{-webkit-text-size-adjust:100%}
-body{font-family:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100dvh}
+html{-webkit-text-size-adjust:100%;background:var(--bg)}
+body{font-family:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100dvh;transition:background .2s,color .2s}
 button,input,select,textarea{font:inherit;color:inherit}
 button{background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent;text-align:inherit}
 a{color:inherit;text-decoration:none}
@@ -31,39 +51,41 @@ img{display:block;max-width:100%}
 @media(min-width:720px){.hide-sm{display:inline-flex}.hide-lg{display:none!important}}
 
 /* Login */
-.login{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:calc(24px + var(--safe-t)) 18px calc(24px + var(--safe-b));background:var(--soft)}
-.login-card{width:100%;max-width:400px;background:#fff;border-radius:24px;padding:32px 24px 26px;box-shadow:0 24px 60px -28px rgba(40,28,18,.3)}
+.login{position:relative;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:calc(24px + var(--safe-t)) 18px calc(24px + var(--safe-b));background:var(--soft)}
+.login-card{width:100%;max-width:400px;background:var(--surface);border-radius:24px;padding:32px 24px 26px;box-shadow:var(--shadow)}
 .login-card .logo{height:30px;margin-bottom:26px}
 .login-card h1{font-size:25px;font-weight:800;letter-spacing:-.02em}
 .login-card .lead{font-size:15px;color:var(--ink-3);margin:6px 0 22px;line-height:1.45}
+.login .theme-btn{position:absolute;top:calc(14px + var(--safe-t));right:14px;background:var(--surface)}
 .pw{position:relative}
 .pw input{padding-right:70px!important}
-.pw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);height:36px;padding:0 12px;border-radius:9px;font-size:13px;font-weight:700;color:var(--brand-d)}
+.pw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);height:36px;padding:0 12px;border-radius:9px;font-size:13px;font-weight:700;color:var(--brand-t)}
 .form-err{min-height:20px;font-size:14px;color:var(--sold);font-weight:600;margin:2px 0 12px}
 .btn-block{width:100%}
 
 /* Header */
-.top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.88);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line);padding-top:var(--safe-t)}
-.top-in{max-width:1200px;margin:0 auto;height:60px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top{position:sticky;top:0;z-index:40;background:var(--glass);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line);padding-top:var(--safe-t)}
+.top-in{max-width:1200px;margin:0 auto;height:60px;padding:0 12px 0 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .logo{height:26px;width:auto}
-.top-r{display:flex;align-items:center;gap:12px}
-.sync{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--ink-3)}
-.sync i{width:8px;height:8px;border-radius:50%;background:var(--sale);box-shadow:0 0 0 3px rgba(31,138,91,.15)}
-.sync.busy i{background:var(--brand);box-shadow:0 0 0 3px rgba(170,124,91,.18);animation:blink 1s infinite}
-.sync.err i{background:var(--sold);box-shadow:0 0 0 3px rgba(184,69,44,.15)}
+.top-r{display:flex;align-items:center;gap:6px}
+.sync{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--ink-3);margin-right:4px}
+.sync i{width:8px;height:8px;border-radius:50%;background:var(--sale);box-shadow:0 0 0 3px color-mix(in srgb,var(--sale) 18%,transparent)}
+.sync.busy i{background:var(--brand);animation:blink 1s infinite}
+.sync.err i{background:var(--sold)}
+@media(max-width:380px){.sync span{display:none}}
 @keyframes blink{50%{opacity:.35}}
-.me-btn{width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;font-size:14px;font-weight:700;display:grid;place-items:center;text-align:center}
+.me-btn{width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--on-ink);font-size:14px;font-weight:700;display:grid;place-items:center;margin-left:4px}
 
 /* Page */
 .wrap{max-width:1200px;margin:0 auto;padding:22px 16px calc(120px + var(--safe-b))}
-@media(min-width:720px){.wrap{padding:30px 24px 80px}.top-in{padding:0 24px}}
+@media(min-width:720px){.wrap{padding:30px 24px 80px}.top-in{padding:0 20px 0 24px}}
 .intro h1{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
 .intro p{font-size:15px;color:var(--ink-3);margin-top:6px;max-width:60ch;line-height:1.45}
 @media(min-width:720px){.intro h1{font-size:38px}}
 .tabs{display:inline-flex;gap:4px;padding:4px;background:var(--soft);border-radius:14px;margin-bottom:18px;max-width:100%;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tab{height:38px;padding:0 16px;border-radius:10px;font-size:14px;font-weight:600;color:var(--ink-2);white-space:nowrap;display:inline-flex;align-items:center;gap:7px;transition:background .15s}
-.tab.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(30,20,12,.1)}
+.tab.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
 .tab em{font-style:normal;font-size:11px;font-weight:700;min-width:20px;height:20px;padding:0 6px;border-radius:99px;background:var(--sold);color:#fff;display:inline-grid;place-items:center}
 
 .tools{position:sticky;top:calc(60px + var(--safe-t));z-index:30;background:var(--bg);margin:18px -16px 0;padding:10px 16px 12px;border-bottom:1px solid transparent;transition:border-color .2s}
@@ -73,18 +95,18 @@ img{display:block;max-width:100%}
 .search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--ink-3);pointer-events:none}
 .search input{width:100%;height:48px;border:1px solid var(--line);background:var(--soft);border-radius:14px;padding:0 16px 0 44px;font-size:16px;outline:none;transition:border-color .15s,background .15s;-webkit-appearance:none}
 .search input::placeholder{color:var(--ink-3)}
-.search input:focus{background:#fff;border-color:var(--brand)}
+.search input:focus{background:var(--surface);border-color:var(--brand)}
 .chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:10px -16px 0;padding:0 16px}
 .chips::-webkit-scrollbar{display:none}
 @media(min-width:720px){.chips{margin:12px 0 0;padding:0}}
-.chip{flex:0 0 auto;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:14px;font-weight:600;color:var(--ink-2);white-space:nowrap;display:inline-flex;align-items:center;gap:6px;transition:background .15s,color .15s,border-color .15s}
+.chip{flex:0 0 auto;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-size:14px;font-weight:600;color:var(--ink-2);white-space:nowrap;display:inline-flex;align-items:center;gap:6px;transition:background .15s,color .15s,border-color .15s}
 .chip em{font-style:normal;font-weight:500;font-size:12px;color:var(--ink-3)}
-.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
-.chip.on em{color:rgba(255,255,255,.6)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--on-ink)}
+.chip.on em{color:inherit;opacity:.6}
 .chips.t .chip{height:32px;font-size:13px;font-weight:500}
-.chips.t .chip.on{background:var(--brand-50);border-color:var(--brand-100);color:var(--brand-d)}
+.chips.t .chip.on{background:var(--brand-50);border-color:var(--brand-100);color:var(--brand-t)}
 
-/* Listing cards */
+/* Cards */
 .grid{display:grid;grid-template-columns:1fr;gap:28px 20px;margin-top:18px}
 @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
@@ -93,16 +115,18 @@ img{display:block;max-width:100%}
 .car-track{display:flex;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
 .car-track::-webkit-scrollbar{display:none}
 .car-track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;scroll-snap-stop:always;user-select:none;-webkit-user-drag:none;background:var(--soft)}
+.card .car-track img{cursor:pointer}
+.d-car .car-track img{cursor:zoom-in}
 .car-empty{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink-3);font-size:13px}
 .car-dots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:5px;pointer-events:none;z-index:2}
 .car-dots i{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.6);transition:width .2s,background .2s}
 .car-dots i.on{width:18px;background:#fff}
 .car .status{position:absolute;top:12px;left:12px;z-index:2}
 .car-count{position:absolute;top:12px;right:12px;z-index:2;display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 9px;border-radius:99px;background:rgba(20,15,11,.55);color:#fff;font-size:12px;font-weight:600;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.car-nav{position:absolute;top:50%;z-index:2;width:34px;height:34px;margin-top:-17px;border-radius:50%;background:rgba(255,255,255,.95);color:var(--ink);display:none;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.15);opacity:0;transition:opacity .2s}
+.car-nav{position:absolute;top:50%;z-index:2;width:34px;height:34px;margin-top:-17px;border-radius:50%;background:rgba(255,255,255,.95);color:#1D1814;display:none;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.2);opacity:0;transition:opacity .2s}
 .car-nav.p{left:10px}.car-nav.n{right:10px}
 @media(hover:hover){.car-nav{display:grid}.car:hover .car-nav{opacity:1}}
-.pill{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:99px;background:#fff;font-size:12px;font-weight:700}
+.pill{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:99px;background:var(--surface);font-size:12px;font-weight:700}
 .pill::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor}
 .s-sale{color:var(--sale)}.s-rent{color:var(--rent)}.s-offer{color:var(--offer)}.s-sold{color:var(--sold)}
 .cb{padding:12px 2px 0}
@@ -117,31 +141,30 @@ img{display:block;max-width:100%}
 .facts span{display:inline-flex;align-items:center;gap:5px}
 .facts svg{color:var(--ink-3)}
 .acts{display:flex;gap:4px;flex-shrink:0;margin-top:-4px;margin-right:-6px}
-.ibtn{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:var(--ink-3);transition:background .15s,color .15s}
+.ibtn{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:var(--ink-3);transition:background .15s,color .15s;flex-shrink:0}
 .ibtn:hover{background:var(--soft);color:var(--ink)}
-.ibtn.del:hover{background:#FBEDE9;color:var(--sold)}
+.ibtn.del:hover{background:var(--danger-50);color:var(--sold)}
 
-/* Rows (team, trash) */
-.list{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
+/* Rows */
+.list{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface)}
 .row{display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;border-top:1px solid var(--line)}
 .row:first-child{border-top:0}
 button.row{transition:background .15s}
-button.row:hover{background:#FBFAF9}
+button.row:hover{background:var(--soft)}
 .row-t{flex:1;min-width:0}
 .row-t b{display:block;font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .row-t span{display:block;font-size:13px;color:var(--ink-3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.row .chev{color:#C9C0B8;flex-shrink:0}
+.row .chev{color:var(--ink-3);flex-shrink:0}
 .av{width:40px;height:40px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px;flex-shrink:0}
-.row.off .av{background:#CFC7C0}
+.row.off .av{background:var(--line-2)}
 .row.off .row-t b{color:var(--ink-3)}
 .role{font-size:12px;font-weight:700;padding:5px 10px;border-radius:99px;white-space:nowrap;flex-shrink:0}
-.r-super_admin{background:var(--ink);color:#fff}
-.r-admin{background:var(--brand-50);color:var(--brand-d)}
-.r-sales_rep{background:#EAF1F9;color:var(--rent)}
+.r-super_admin{background:var(--ink);color:var(--on-ink)}
+.r-admin{background:var(--brand-50);color:var(--brand-t)}
+.r-sales_rep{background:var(--rent-50);color:var(--rent)}
 .r-off{background:var(--soft);color:var(--ink-3)}
 .note{margin-top:14px;font-size:14px;color:var(--ink-3);line-height:1.55;max-width:62ch}
 .note b{color:var(--ink-2);font-weight:600}
-
 .tr{display:flex;gap:14px;padding:14px;border-top:1px solid var(--line)}
 .tr:first-child{border-top:0}
 .tr-thumb{width:92px;height:74px;border-radius:12px;overflow:hidden;background:var(--soft);flex-shrink:0;display:grid;place-items:center;color:var(--ink-3)}
@@ -152,8 +175,8 @@ button.row:hover{background:#FBFAF9}
 .tr-acts{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .tr-acts .btn{height:38px;font-size:13px;padding:0 14px;border-radius:10px}
 
-/* Skeleton / states */
-.sk{background:linear-gradient(90deg,#F1EEEB 25%,#F8F6F4 45%,#F1EEEB 65%);background-size:300% 100%;animation:sh 1.3s ease-in-out infinite;border-radius:8px}
+/* States */
+.sk{background:linear-gradient(90deg,var(--sk1) 25%,var(--sk2) 45%,var(--sk1) 65%);background-size:300% 100%;animation:sh 1.3s ease-in-out infinite;border-radius:8px}
 @keyframes sh{0%{background-position:100% 0}100%{background-position:0 0}}
 .sk-img{aspect-ratio:4/3;border-radius:18px}
 .sk-line{height:14px;margin-top:10px}
@@ -169,9 +192,8 @@ button.row:hover{background:#FBFAF9}
 .btn-p{background:var(--brand);color:#fff}
 .btn-p:hover{background:var(--brand-d)}
 .btn-g{background:var(--soft);color:var(--ink-2)}
-.btn-g:hover{background:#EDE9E5}
-.btn-d{background:#FBEDE9;color:var(--sold)}
-.btn-d:hover{background:#F6DED7}
+.btn-g:hover{background:var(--line)}
+.btn-d{background:var(--danger-50);color:var(--sold)}
 .btn-x{background:var(--sold);color:#fff}
 .btn-sm{height:42px;font-size:14px;border-radius:12px}
 .fab{position:fixed;right:16px;bottom:calc(18px + var(--safe-b));z-index:35;height:56px;padding:0 22px 0 18px;border-radius:99px;background:var(--brand);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;box-shadow:0 10px 28px -8px rgba(142,100,70,.55)}
@@ -180,26 +202,26 @@ button.row:hover{background:#FBFAF9}
 /* Sheets */
 .sheet{position:fixed;inset:0;z-index:100;visibility:hidden;transition:visibility 0s .32s}
 .sheet.open{visibility:visible;transition:none}
-.sheet-bg{position:absolute;inset:0;background:rgba(22,16,11,.45);opacity:0;transition:opacity .3s}
+.sheet-bg{position:absolute;inset:0;background:var(--scrim);opacity:0;transition:opacity .3s}
 .sheet.open .sheet-bg{opacity:1}
-.panel{position:absolute;left:0;right:0;bottom:0;max-height:calc(100dvh - 20px - var(--safe-t));background:#fff;border-radius:24px 24px 0 0;display:flex;flex-direction:column;transform:translateY(102%);transition:transform .34s cubic-bezier(.2,.8,.2,1)}
+.panel{position:absolute;left:0;right:0;bottom:0;max-height:calc(100dvh - 20px - var(--safe-t));background:var(--surface);border-radius:24px 24px 0 0;display:flex;flex-direction:column;transform:translateY(102%);transition:transform .34s cubic-bezier(.2,.8,.2,1)}
 .sheet.open .panel{transform:none}
-.grab{width:40px;height:5px;border-radius:99px;background:#DCD6D0;margin:9px auto 0;flex-shrink:0}
+.grab{width:40px;height:5px;border-radius:99px;background:var(--line-2);margin:9px auto 0;flex-shrink:0}
 .p-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px 10px 20px;flex-shrink:0}
 .p-head h2{font-size:19px;font-weight:800;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .p-body{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:4px 20px 22px}
-.p-foot{display:flex;gap:10px;padding:12px 20px calc(12px + var(--safe-b));border-top:1px solid var(--line);flex-shrink:0;background:#fff}
+.p-foot{display:flex;gap:10px;padding:12px 20px calc(12px + var(--safe-b));border-top:1px solid var(--line);flex-shrink:0;background:var(--surface)}
 .p-foot .btn{flex:1}
 .p-foot .btn-p,.p-foot .btn-x{flex:1.6}
 @media(min-width:720px){
-  .panel{left:50%;right:auto;bottom:auto;top:50%;width:min(600px,calc(100vw - 48px));max-height:min(90dvh,920px);border-radius:24px;transform:translate(-50%,-47%) scale(.98);opacity:0;transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .2s;box-shadow:0 30px 80px -20px rgba(30,20,12,.35)}
+  .panel{left:50%;right:auto;bottom:auto;top:50%;width:min(600px,calc(100vw - 48px));max-height:min(90dvh,940px);border-radius:24px;transform:translate(-50%,-47%) scale(.98);opacity:0;transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .2s;box-shadow:var(--shadow)}
   .sheet.open .panel{transform:translate(-50%,-50%);opacity:1}
   .grab{display:none}
   .p-head{padding:18px 20px 10px 24px}.p-body{padding:4px 24px 24px}.p-foot{padding:14px 24px}
   .sheet.wide .panel{width:min(720px,calc(100vw - 48px))}
   .sheet.small .panel{width:min(420px,calc(100vw - 48px))}
 }
-.sheet.dialog .panel{left:50%;right:auto;bottom:auto;top:40%;width:min(400px,calc(100vw - 32px));border-radius:24px;transform:translate(-50%,-46%) scale(.97);opacity:0;transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .2s;box-shadow:0 30px 80px -20px rgba(30,20,12,.35)}
+.sheet.dialog .panel{left:50%;right:auto;bottom:auto;top:40%;width:min(400px,calc(100vw - 32px));border-radius:24px;transform:translate(-50%,-46%) scale(.97);opacity:0;transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .2s;box-shadow:var(--shadow)}
 .sheet.dialog.open .panel{transform:translate(-50%,-50%);opacity:1}
 .sheet.dialog .p-foot{border-top:0;padding-top:4px;padding-bottom:20px}
 .dlg-t{font-size:19px;font-weight:800;letter-spacing:-.02em;margin-top:10px}
@@ -213,45 +235,59 @@ button.row:hover{background:#FBFAF9}
 /* Form */
 .fsec{padding-top:18px}
 .fsec+.fsec{margin-top:6px;border-top:1px solid var(--line)}
-.fsec-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.fsec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px}
 .fsec-h h3{font-size:15px;font-weight:700}
 .fsec-h span{font-size:13px;color:var(--ink-3)}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;column-gap:12px}
+.fgrid>.fld{grid-column:span 1}
+.fgrid>.fld.full{grid-column:1/-1}
 .fld{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;min-width:0}
 .fld label{font-size:13px;font-weight:600;color:var(--ink-2)}
 .fld input,.fld select,.fld textarea{width:100%;height:48px;border:1px solid var(--line);background:var(--soft);border-radius:12px;padding:0 14px;font-size:16px;outline:none;transition:border-color .15s,background .15s;-webkit-appearance:none;appearance:none}
 .fld input:disabled{color:var(--ink-3)}
 .fld textarea{height:auto;min-height:92px;padding:12px 14px;resize:vertical;line-height:1.5}
 .fld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%238F847B' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
-.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--brand);background:#fff}
-.fld input::placeholder,.fld textarea::placeholder{color:#B3A9A1}
+.fld select option{background:var(--surface);color:var(--ink)}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--brand);background:var(--surface)}
+.fld input::placeholder,.fld textarea::placeholder{color:var(--ink-3);opacity:.75}
 .fld small{font-size:13px;color:var(--ink-3);line-height:1.4}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.hint{font-size:13px;color:var(--ink-3);margin-top:10px}
+.money{position:relative}
+.money span{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--ink-3);pointer-events:none}
+.money input{padding-left:32px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.price-words{font-weight:600;color:var(--brand-t)!important}
+.hint{font-size:13px;color:var(--ink-3);margin-top:10px;line-height:1.4}
 .gen{display:flex;gap:8px}
 .gen input{flex:1}
 .gen .btn{height:48px;flex-shrink:0;font-size:14px}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:400px){.seg{grid-template-columns:repeat(2,1fr)}}
+.seg button{height:68px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:13px;font-weight:700;color:var(--ink-2);text-align:center;transition:border-color .15s,background .15s,color .15s}
+.seg button svg{color:var(--ink-3);transition:color .15s}
+.seg button.on{border-color:var(--brand);background:var(--brand-50);color:var(--brand-t)}
+.seg button.on svg{color:var(--brand)}
+.seg-sm{grid-template-columns:1fr 1fr!important}
+.seg-sm button{height:46px;flex-direction:row;font-size:14px}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px;border-radius:14px;background:var(--soft);margin-bottom:14px}
 .toggle-row b{display:block;font-size:15px;font-weight:700}
 .toggle-row span{display:block;font-size:13px;color:var(--ink-3);margin-top:2px;line-height:1.4}
 .switch{position:relative;width:50px;height:30px;flex-shrink:0}
 .switch input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;z-index:1}
-.switch i{position:absolute;inset:0;border-radius:99px;background:#D6CEC7;transition:background .2s}
-.switch i::after{content:'';position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}
+.switch i{position:absolute;inset:0;border-radius:99px;background:var(--line-2);transition:background .2s}
+.switch i::after{content:'';position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
 .switch input:checked+i{background:var(--sale)}
 .switch input:checked+i::after{transform:translateX(20px)}
 .switch input:focus-visible+i{outline:2px solid var(--brand);outline-offset:2px}
-
 .ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 @media(min-width:520px){.ph-grid{grid-template-columns:repeat(4,1fr)}}
 .ph{position:relative;aspect-ratio:1;border-radius:14px;overflow:hidden;background:var(--soft)}
 .ph img{width:100%;height:100%;object-fit:cover}
-.ph-busy{position:absolute;inset:0;background:rgba(255,255,255,.6);display:grid;place-items:center}
-.spin{width:22px;height:22px;border:2.5px solid rgba(170,124,91,.25);border-top-color:var(--brand);border-radius:50%;animation:rot .8s linear infinite}
+.ph-busy{position:absolute;inset:0;background:color-mix(in srgb,var(--surface) 60%,transparent);display:grid;place-items:center}
+.spin{width:22px;height:22px;border:2.5px solid color-mix(in srgb,var(--brand) 25%,transparent);border-top-color:var(--brand);border-radius:50%;animation:rot .8s linear infinite}
 @keyframes rot{to{transform:rotate(360deg)}}
 .ph-x,.ph-star{position:absolute;top:6px;width:28px;height:28px;border-radius:50%;background:rgba(20,15,11,.6);color:#fff;display:grid;place-items:center;backdrop-filter:blur(4px)}
 .ph-x{right:6px}.ph-star{left:6px}
-.ph-cover{position:absolute;left:6px;bottom:6px;height:22px;padding:0 8px;border-radius:99px;background:#fff;color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center}
-.ph-add{border:1.5px dashed #D6CCC3;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--brand-d);font-size:13px;font-weight:600;cursor:pointer;transition:background .15s,border-color .15s}
+.ph-cover{position:absolute;left:6px;bottom:6px;height:22px;padding:0 8px;border-radius:99px;background:#fff;color:#1D1814;font-size:11px;font-weight:700;display:flex;align-items:center}
+.ph-add{border:1.5px dashed var(--line-2);background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--brand-t);font-size:13px;font-weight:600;cursor:pointer;transition:background .15s,border-color .15s}
 .ph-add:hover{background:var(--brand-50);border-color:var(--brand)}
 
 /* Detail */
@@ -264,31 +300,33 @@ button.row:hover{background:#FBFAF9}
 .d-name{font-size:18px;font-weight:700;margin-top:4px;line-height:1.3}
 .d-top .loc{font-size:15px;margin-top:4px}
 .d-top .loc span{white-space:normal}
-.specs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:18px}
-@media(min-width:520px){.specs{grid-template-columns:repeat(3,1fr)}}
-.spec{background:#fff;padding:12px 14px;min-width:0}
-.spec span{display:block;font-size:12px;color:var(--ink-3);font-weight:500}
-.spec b{display:block;font-size:15px;font-weight:700;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.d-sec{margin-top:20px}
-.d-sec h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.specs{border:1px solid var(--line);border-radius:16px;margin-top:18px;overflow:hidden}
+.spec{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 14px;border-top:1px solid var(--line);font-size:15px}
+.spec:first-child{border-top:0}
+.spec span{color:var(--ink-3);flex-shrink:0}
+.spec b{font-weight:700;text-align:right;min-width:0;overflow-wrap:anywhere}
+.d-sec{margin-top:22px}
+.d-sec h3{font-size:15px;font-weight:700;margin-bottom:8px}
 .d-sec p{font-size:15px;line-height:1.6;color:var(--ink-2);white-space:pre-line;max-width:62ch}
-.agent{display:flex;align-items:center;gap:12px;margin-top:20px;padding:14px;border-radius:16px;background:var(--soft)}
-.agent .av{width:44px;height:44px;font-size:15px}
-.agent-t{flex:1;min-width:0}
-.agent-t b{display:block;font-size:15px;font-weight:700}
-.agent-t span{display:block;font-size:13px;color:var(--ink-3);margin-top:1px}
-.agent a{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--ink);border:1px solid var(--line);flex-shrink:0}
-.agent a.wa{color:#1FA855}
+.person{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:var(--soft)}
+.person .av{width:44px;height:44px;font-size:15px}
+.person.contact .av{background:var(--ink);color:var(--on-ink)}
+.person-t{flex:1;min-width:0}
+.person-t b{display:block;font-size:15px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.person-t span{display:block;font-size:13px;color:var(--ink-3);margin-top:1px}
+.person a{width:44px;height:44px;border-radius:50%;background:var(--surface);display:grid;place-items:center;color:var(--ink);border:1px solid var(--line);flex-shrink:0}
+.person a.wa{color:#1FA855}
 
-/* Account menu */
+/* Account */
 .me-card{display:flex;align-items:center;gap:14px;padding:6px 0 18px}
-.me-card .av{width:52px;height:52px;font-size:18px;background:var(--ink)}
+.me-card .av{width:52px;height:52px;font-size:18px;background:var(--ink);color:var(--on-ink)}
 .me-card b{display:block;font-size:17px;font-weight:800}
 .me-card span{display:block;font-size:14px;color:var(--ink-3);margin-top:1px;word-break:break-all}
 .me-card .role{display:inline-block;margin-top:6px}
-.mbtn{display:flex;align-items:center;gap:12px;width:100%;height:52px;padding:0 12px;border-radius:14px;font-size:15px;font-weight:600;transition:background .15s}
+.mbtn{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:0 12px;border-radius:14px;font-size:15px;font-weight:600;transition:background .15s}
 .mbtn:hover{background:var(--soft)}
-.mbtn svg{color:var(--ink-3)}
+.mbtn>svg,.mbtn>span>svg{color:var(--ink-3)}
+.mbtn .grow{flex:1}
 .mbtn.out{color:var(--sold)}
 .mbtn.out svg{color:var(--sold)}
 
@@ -311,12 +349,10 @@ button.row:hover{background:#FBFAF9}
 .lb-dots i{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.35);transition:width .2s,background .2s}
 .lb-dots i.on{width:18px;background:#fff}
 
-/* Toast */
-.toast{position:fixed;left:50%;bottom:calc(88px + var(--safe-b));z-index:400;transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;font-weight:600;width:max-content;max-width:calc(100vw - 32px);text-align:center;line-height:1.4;transition:opacity .22s,transform .22s;box-shadow:0 12px 30px -10px rgba(0,0,0,.4)}
+.toast{position:fixed;left:50%;bottom:calc(88px + var(--safe-b));z-index:400;transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:var(--on-ink);padding:12px 18px;border-radius:14px;font-size:14px;font-weight:600;width:max-content;max-width:calc(100vw - 32px);text-align:center;line-height:1.4;transition:opacity .22s,transform .22s;box-shadow:0 12px 30px -10px rgba(0,0,0,.4)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-.toast.err{background:var(--sold)}
+.toast.err{background:var(--sold);color:#fff}
 @media(min-width:720px){.toast{bottom:28px}}
-
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -324,6 +360,7 @@ button.row:hover{background:#FBFAF9}
 
 <!-- LOGIN -->
 <div class="login" id="login" hidden>
+  <button class="ibtn theme-btn" data-act="theme" aria-label="Switch to dark mode"></button>
   <div class="login-card">
     <img class="logo" src="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773853343/REX_Brown_Logo_zwsavl.svg" alt="REX RealtyCo">
     <h1>Log in</h1>
@@ -342,7 +379,8 @@ button.row:hover{background:#FBFAF9}
       <img class="logo" src="https://res.cloudinary.com/dvqgqgo4c/image/upload/v1773853343/REX_Brown_Logo_zwsavl.svg" alt="REX RealtyCo">
       <div class="top-r">
         <span class="sync" id="sync"><i></i><span id="sync-t">Live</span></span>
-        <button class="btn btn-p btn-sm hide-sm" data-act="primary"><span class="ico-plus"></span><span class="lbl">Add listing</span></button>
+        <button class="btn btn-p btn-sm hide-sm" data-act="primary" style="margin-right:4px"><span class="ico-plus"></span><span class="lbl">Add listing</span></button>
+        <button class="ibtn theme-btn" data-act="theme" aria-label="Switch to dark mode"></button>
         <button class="me-btn" id="me-btn" data-act="menu" aria-label="Your account"></button>
       </div>
     </div>
@@ -359,7 +397,7 @@ button.row:hover{background:#FBFAF9}
       <div class="tools" id="tools">
         <div class="search">
           <span class="ico-search"></span>
-          <input id="q" type="search" placeholder="Search property, area or agent" autocomplete="off" enterkeyhint="search" aria-label="Search listings">
+          <input id="q" type="search" placeholder="Search property, area, agent or contact" autocomplete="off" enterkeyhint="search" aria-label="Search listings">
         </div>
         <div class="chips" id="chips-s" aria-label="Filter by status"></div>
         <div class="chips t" id="chips-t" aria-label="Filter by type"></div>
@@ -367,9 +405,7 @@ button.row:hover{background:#FBFAF9}
       <div class="grid" id="grid"></div>
     </section>
 
-    <section id="v-trash" hidden>
-      <div id="trash-list" style="margin-top:18px"></div>
-    </section>
+    <section id="v-trash" hidden><div id="trash-list" style="margin-top:18px"></div></section>
 
     <section id="v-team" hidden>
       <div class="list" id="team-list" style="margin-top:18px"></div>
@@ -399,33 +435,53 @@ button.row:hover{background:#FBFAF9}
     <div class="p-head"><h2 id="f-title">New listing</h2><button class="ibtn ico-x" data-close aria-label="Close"></button></div>
     <div class="p-body" id="f-body">
       <div class="fsec" style="padding-top:6px">
+        <div class="fsec-h"><h3>Property type</h3></div>
+        <div class="seg" id="f-seg" role="radiogroup" aria-label="Property type"></div>
+      </div>
+
+      <div class="fsec">
         <div class="fsec-h"><h3>Photos</h3><span id="ph-count">0 of 10</span></div>
         <div class="ph-grid" id="ph-grid"></div>
         <p class="hint">The first photo is the cover. Tap the star on any photo to make it the cover.</p>
       </div>
+
       <div class="fsec">
-        <div class="fsec-h"><h3>Property</h3></div>
-        <div class="fld"><label for="f-name">Property name</label><input id="f-name" placeholder="e.g. 4-bed terrace, Jahi" autocomplete="off"></div>
-        <div class="fld"><label for="f-loc">Location</label><input id="f-loc" placeholder="e.g. Jahi, Abuja" autocomplete="off"></div>
-        <div class="row2">
-          <div class="fld"><label for="f-type">Type</label><select id="f-type"><option>Residential</option><option>Commercial</option><option>Land</option><option>Short Let</option></select></div>
-          <div class="fld"><label for="f-status">Status</label><select id="f-status"><option>For Sale</option><option>For Rent</option><option>Under Offer</option><option>Sold</option></select></div>
+        <div class="fsec-h"><h3>Details</h3></div>
+        <div class="fgrid" id="f-grid">
+          <div class="fld full"><label for="f-name">Property name</label><input id="f-name" autocomplete="off"></div>
+          <div class="fld full"><label for="f-loc">Location</label><input id="f-loc" placeholder="e.g. Jahi, Abuja" autocomplete="off"></div>
+          <div class="fld half" id="w-status"><label for="f-status">Status</label><select id="f-status"></select></div>
+          <div class="fld half" id="w-period"><label for="f-period">Payment</label><select id="f-period"></select></div>
+          <div class="fld full"><label for="f-price" id="f-price-l">Price</label>
+            <div class="money"><span>₦</span><input id="f-price" inputmode="numeric" autocomplete="off" placeholder="0"></div>
+            <small class="price-words" id="f-price-w"></small>
+          </div>
+          <div class="fld full" id="w-kind"><label for="f-kind" id="f-kind-l">Building type</label><select id="f-kind"></select></div>
+          <div class="fld half" id="w-beds"><label for="f-beds">Bedrooms</label><input id="f-beds" inputmode="numeric" placeholder="e.g. 4" autocomplete="off"></div>
+          <div class="fld half" id="w-baths"><label for="f-baths">Bathrooms</label><input id="f-baths" inputmode="numeric" placeholder="e.g. 5" autocomplete="off"></div>
+          <div class="fld half" id="w-size"><label for="f-size" id="f-size-l">Size (sqm)</label><input id="f-size" inputmode="decimal" placeholder="e.g. 450" autocomplete="off"></div>
+          <div class="fld half" id="w-parking"><label for="f-parking">Parking spaces</label><input id="f-parking" inputmode="numeric" placeholder="e.g. 20" autocomplete="off"></div>
+          <div class="fld half" id="w-guests"><label for="f-guests">Max guests</label><input id="f-guests" inputmode="numeric" placeholder="e.g. 6" autocomplete="off"></div>
+          <div class="fld full" id="w-title"><label for="f-title-doc">Title document</label><select id="f-title-doc"></select></div>
+          <div class="fld full"><label for="f-notes">Notes</label><textarea id="f-notes"></textarea></div>
         </div>
-        <div class="row2">
-          <div class="fld"><label for="f-price">Price (₦)</label><input id="f-price" inputmode="numeric" placeholder="85,000,000" autocomplete="off"></div>
-          <div class="fld"><label for="f-period">Payment</label><select id="f-period"><option>Outright</option><option>Per Annum</option><option>Per Month</option><option>Per Night</option></select></div>
-        </div>
-        <div class="row2">
-          <div class="fld"><label for="f-beds">Bedrooms</label><input id="f-beds" inputmode="numeric" placeholder="4" autocomplete="off"></div>
-          <div class="fld"><label for="f-size">Size</label><input id="f-size" placeholder="400 sqm" autocomplete="off"></div>
-        </div>
-        <div class="fld"><label for="f-notes">Notes</label><textarea id="f-notes" placeholder="Title documents, finishes, access road, anything a buyer should know"></textarea></div>
       </div>
+
       <div class="fsec">
-        <div class="fsec-h"><h3>Agent</h3></div>
-        <div class="row2">
-          <div class="fld"><label for="f-agent">Name</label><input id="f-agent" placeholder="Agent name" autocomplete="off"></div>
-          <div class="fld"><label for="f-phone">Phone</label><input id="f-phone" type="tel" inputmode="tel" placeholder="0801 234 5678" autocomplete="off"></div>
+        <div class="fsec-h"><h3>Person of contact</h3></div>
+        <p class="hint" style="margin:-4px 0 14px">The owner, or someone the owner has mandated. REX calls this person to confirm the property is still available or to arrange viewings.</p>
+        <div class="seg seg-sm" id="c-seg" role="radiogroup" aria-label="Relationship to property" style="margin-bottom:14px"></div>
+        <div class="fgrid">
+          <div class="fld half"><label for="c-name">Name</label><input id="c-name" placeholder="Full name" autocomplete="off"></div>
+          <div class="fld half"><label for="c-phone">Phone</label><input id="c-phone" type="tel" inputmode="tel" placeholder="0801 234 5678" autocomplete="off"></div>
+        </div>
+      </div>
+
+      <div class="fsec">
+        <div class="fsec-h"><h3>REX agent</h3></div>
+        <div class="fgrid">
+          <div class="fld half"><label for="f-agent">Name</label><input id="f-agent" placeholder="Agent name" autocomplete="off"></div>
+          <div class="fld half"><label for="f-phone">Phone</label><input id="f-phone" type="tel" inputmode="tel" placeholder="0801 234 5678" autocomplete="off"></div>
         </div>
       </div>
     </div>
@@ -490,6 +546,7 @@ button.row:hover{background:#FBFAF9}
     <div class="p-head"><h2>Account</h2><button class="ibtn ico-x" data-close aria-label="Close"></button></div>
     <div class="p-body" style="padding-bottom:calc(18px + var(--safe-b))">
       <div class="me-card" id="me-card"></div>
+      <label class="mbtn" for="dark-sw"><span class="ico-moon"></span><span class="grow">Dark mode</span><span class="switch"><input type="checkbox" id="dark-sw"><i></i></span></label>
       <button class="mbtn" data-act="pass"><span class="ico-lock"></span>Change password</button>
       <button class="mbtn out" data-act="logout"><span class="ico-out"></span>Log out</button>
     </div>
@@ -530,17 +587,46 @@ const STATUSES = ['For Sale', 'For Rent', 'Under Offer', 'Sold'];
 const TYPES = ['Residential', 'Commercial', 'Land', 'Short Let'];
 const ST_CLASS = { 'For Sale': 's-sale', 'For Rent': 's-rent', 'Under Offer': 's-offer', 'Sold': 's-sold' };
 const ROLE = { super_admin: 'Super admin', admin: 'Admin', sales_rep: 'Sales rep' };
-const TOKEN_KEY = 'rex_token';
+const CONTACT_ROLES = ['Owner', 'Mandated by owner'];
+const TITLES = ['Certificate of Occupancy (C of O)', 'Right of Occupancy (R of O)', "Governor's Consent", 'Deed of Assignment', 'Gazette', 'Excision', 'Survey plan', 'Other'];
+const HOMES = ['Detached duplex', 'Semi-detached duplex', 'Terrace', 'Flat / apartment', 'Penthouse', 'Maisonette', 'Bungalow', 'Mini flat', 'Self-contained'];
+
+/* Which fields each property type uses */
+const TYPE_CFG = {
+  'Residential': {
+    fields: ['kind', 'beds', 'baths', 'size', 'title'], kindLabel: 'Building type', kinds: HOMES,
+    sizeLabel: 'Size (sqm)', statuses: STATUSES, periods: ['Outright', 'Per Annum'],
+    namePh: 'e.g. 4-bed terrace, Jahi', notesPh: 'Finishes, fittings, estate facilities, access road'
+  },
+  'Commercial': {
+    fields: ['kind', 'size', 'parking', 'title'], kindLabel: 'Use',
+    kinds: ['Office', 'Shop / retail', 'Plaza', 'Warehouse', 'Hotel', 'Event centre', 'Filling station', 'School', 'Hospital / clinic', 'Mixed use'],
+    sizeLabel: 'Floor area (sqm)', statuses: STATUSES, periods: ['Outright', 'Per Annum', 'Per Month'],
+    namePh: 'e.g. 3-floor office building, Wuse II', notesPh: 'Floors, power, frontage, traffic, current tenants'
+  },
+  'Land': {
+    fields: ['kind', 'size', 'title'], kindLabel: 'Land use',
+    kinds: ['Residential', 'Commercial', 'Mixed use', 'Industrial', 'Agricultural'],
+    sizeLabel: 'Plot size (sqm)', statuses: ['For Sale', 'Under Offer', 'Sold'], periods: ['Outright'],
+    namePh: 'e.g. Corner plot, Katampe Extension', notesPh: 'Topography, road access, corner piece, fencing'
+  },
+  'Short Let': {
+    fields: ['kind', 'beds', 'baths', 'guests'], kindLabel: 'Building type', kinds: HOMES,
+    sizeLabel: 'Size (sqm)', statuses: ['For Rent', 'Under Offer'], periods: ['Per Night'],
+    namePh: 'e.g. 2-bed serviced apartment, Maitama', notesPh: 'Amenities, power, check-in rules, caution fee'
+  }
+};
+const OPTIONAL = ['kind', 'beds', 'baths', 'size', 'parking', 'guests', 'title'];
 
 const store = {
-  get() { try { return localStorage.getItem(TOKEN_KEY) || ''; } catch { return ''; } },
-  set(v) { try { v ? localStorage.setItem(TOKEN_KEY, v) : localStorage.removeItem(TOKEN_KEY); } catch {} }
+  get(k) { try { return localStorage.getItem(k) || ''; } catch { return ''; } },
+  set(k, v) { try { v ? localStorage.setItem(k, v) : localStorage.removeItem(k); } catch {} }
 };
 const S = {
-  token: store.get(), user: null, view: 'listings',
+  token: store.get('rex_token'), user: null, view: 'listings',
   data: null, trash: null, users: null,
   status: 'all', type: 'all', q: '',
-  editId: null, photos: [], editUserId: null,
+  editId: null, photos: [], ftype: 'Residential', crole: 'Owner', editUserId: null,
   lb: { imgs: [], i: 0 }, sigP: null, sigAt: 0, dlg: null, lastLoad: 0
 };
 const can = {
@@ -561,8 +647,21 @@ const I = {
   r: sv(20, '<path d="M9 18l6-6-6-6"/>', 'stroke-width="2.4"'),
   pin: sv(15, '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),
   bed: sv(15, '<path d="M3 18v-7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7M3 14h18M7 9V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2"/>'),
+  bath: sv(15, '<path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4zM6 12V6a2 2 0 0 1 3.5-1.3M7 19l-1 2M17 19l1 2"/>'),
   size: sv(15, '<path d="M3 9V3h6M21 15v6h-6M3 3l7 7M21 21l-7-7"/>'),
+  users: sv(15, '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/>'),
+  car: sv(15, '<path d="M5 17h14M5 17v2M19 17v2M3 13l2-6h14l2 6v4H3z"/><circle cx="7.5" cy="14" r=".6"/><circle cx="16.5" cy="14" r=".6"/>'),
+  doc: sv(15, '<path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>'),
   home: sv(15, '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'),
+  homeL: sv(22, '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'),
+  bldg: sv(15, '<rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/>'),
+  bldgL: sv(22, '<rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M10 21v-4h4v4"/>'),
+  land: sv(15, '<path d="M3 8l9-4 9 4-9 4z"/><path d="M3 13l9 4 9-4M3 18l9 4 9-4"/>'),
+  landL: sv(22, '<path d="M3 8l9-4 9 4-9 4z"/><path d="M3 13l9 4 9-4M3 18l9 4 9-4"/>'),
+  key: sv(15, '<circle cx="8" cy="15" r="4.5"/><path d="M11.2 11.8L20 3M16 7l3 3M14 9l2 2"/>'),
+  keyL: sv(22, '<circle cx="8" cy="15" r="4.5"/><path d="M11.2 11.8L20 3M16 7l3 3M14 9l2 2"/>'),
+  user: sv(18, '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'),
+  shield: sv(18, '<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/>'),
   edit: sv(18, '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>'),
   trash: sv(18, '<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/>'),
   restore: sv(16, '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>'),
@@ -571,15 +670,30 @@ const I = {
   star: sv(14, '<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/>'),
   lock: sv(20, '<rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>'),
   out: sv(20, '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>'),
+  moon: sv(20, '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>'),
+  sun: sv(20, '<circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'),
   phone: sv(19, '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>'),
   wa: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.4 3.5 3.5 0 0 0-1.1 2.6 6 6 0 0 0 1.3 3.2 13.8 13.8 0 0 0 5.3 4.7c2 .8 2.7.9 3.7.7.6-.1 1.8-.7 2-1.5.3-.7.3-1.3.2-1.5l-.5-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>'
 };
+const TYPE_ICON = { 'Residential': I.homeL, 'Commercial': I.bldgL, 'Land': I.landL, 'Short Let': I.keyL };
 $$('.ico-search').forEach(e => e.innerHTML = I.search);
 $$('.ico-plus').forEach(e => e.innerHTML = I.plus);
 $$('.ico-x').forEach(e => e.innerHTML = I.x);
 $$('.ico-lock').forEach(e => e.innerHTML = I.lock);
 $$('.ico-out').forEach(e => e.innerHTML = I.out);
+$$('.ico-moon').forEach(e => e.innerHTML = I.moon);
 $('#lb-p').innerHTML = I.l; $('#lb-n').innerHTML = I.r;
+
+/* ── Theme ── */
+function setTheme(t) {
+  document.documentElement.dataset.theme = t;
+  store.set('rex_theme', t);
+  $('#meta-theme').content = t === 'dark' ? '#141110' : '#FFFFFF';
+  $$('.theme-btn').forEach(b => { b.innerHTML = t === 'dark' ? I.sun : I.moon; b.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'); });
+  $('#dark-sw').checked = t === 'dark';
+}
+setTheme(document.documentElement.dataset.theme || 'light');
+$('#dark-sw').addEventListener('change', e => setTheme(e.target.checked ? 'dark' : 'light'));
 
 /* ── Helpers ── */
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -587,17 +701,31 @@ const cld = (u, w) => (/res\.cloudinary\.com/.test(u) && u.includes('/upload/') 
   ? u.replace('/upload/', `/upload/f_auto,q_auto,c_limit,w_${w}/`) : u;
 const imgsOf = l => String(l.images || '').split(',').map(s => s.trim()).filter(Boolean);
 const find = id => (S.data || []).find(x => String(x.id) === String(id)) || (S.trash || []).find(x => String(x.id) === String(id));
+const cfgOf = l => TYPE_CFG[l.type] || TYPE_CFG.Residential;
+const commas = d => String(d).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 const money = p => {
   const s = String(p ?? '').trim();
   if (!s) return 'Price on request';
   if (/^[\d,.\s]+$/.test(s)) { const n = Number(s.replace(/[,\s]/g, '')); if (n) return '₦' + n.toLocaleString('en-NG'); }
   return '₦' + esc(s);
 };
+function priceWords(digits) {
+  const n = Number(digits); if (!n) return '';
+  const f = (v, u) => `₦${(Math.round(v * 100) / 100).toLocaleString('en-NG', { maximumFractionDigits: 2 })} ${u}`;
+  if (n >= 1e9) return f(n / 1e9, n / 1e9 === 1 ? 'billion' : 'billion');
+  if (n >= 1e6) return f(n / 1e6, 'million');
+  if (n >= 1e3) return f(n / 1e3, 'thousand');
+  return `₦${n}`;
+}
 const per = p => ({ 'Per Annum': '/yr', 'Per Month': '/mo', 'Per Night': '/night' }[p] || '');
-const beds = b => { const s = String(b ?? '').trim(); return !s ? '' : /^\d+$/.test(s) ? `${s} bed${s === '1' ? '' : 's'}` : s; };
+const num = v => String(v ?? '').trim();
+const beds = b => { const s = num(b); return !s ? '' : /^\d+$/.test(s) ? `${s} bed${s === '1' ? '' : 's'}` : s; };
+const baths = b => { const s = num(b); return !s ? '' : /^\d+$/.test(s) ? `${s} bath${s === '1' ? '' : 's'}` : s; };
+const sqm = v => { const s = num(v); return !s ? '' : /^[\d,.]+$/.test(s) ? `${commas(s.replace(/,/g, ''))} sqm` : s; };
+const shortTitle = t => { const m = String(t || '').match(/\(([^)]+)\)/); return m ? m[1] : t; };
 const initials = n => String(n || '').trim().split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase() || '?';
 const fmtDate = d => { if (!d) return '—'; const t = new Date(d); return isNaN(t) ? esc(d) : t.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); };
-const waLink = ph => { let d = String(ph || '').replace(/\D/g, ''); if (d.startsWith('0')) d = '234' + d.slice(1); return 'https://wa.me/' + d; };
+const intl = ph => { let d = String(ph || '').replace(/\D/g, ''); if (d.startsWith('0')) d = '234' + d.slice(1); return d; };
 const pill = s => `<span class="pill status ${ST_CLASS[s] || 's-sale'}">${esc(s || 'For Sale')}</span>`;
 const plural = (n, a, b) => `${n} ${n === 1 ? a : b}`;
 
@@ -635,8 +763,7 @@ async function api(action, params = {}) {
 /* ── Session ── */
 async function boot() {
   if (!S.token) return showLogin();
-  $('#app').hidden = false;
-  skeleton();
+  $('#app').hidden = false; skeleton();
   try { const r = await api('me'); S.user = r.user; startApp(); }
   catch (e) { if (e.code !== 'AUTH') showLogin(e.message); }
 }
@@ -651,9 +778,8 @@ async function doLogin() {
   const b = $('#l-go'); b.disabled = true; b.textContent = 'Logging in…'; $('#l-err').textContent = '';
   try {
     const r = await api('login', { email, password });
-    S.token = r.token; store.set(r.token); S.user = r.user;
-    $('#l-pass').value = '';
-    startApp();
+    S.token = r.token; store.set('rex_token', r.token); S.user = r.user;
+    $('#l-pass').value = ''; startApp();
   } catch (e) { $('#l-err').textContent = e.message; }
   b.disabled = false; b.textContent = 'Log in';
 }
@@ -661,12 +787,11 @@ function startApp() {
   $('#login').hidden = true; $('#app').hidden = false;
   S.view = 'listings'; S.data = null; S.trash = null; S.users = null;
   $('#me-btn').textContent = initials(S.user.name);
-  renderShell(); skeleton();
-  loadListings();
+  renderShell(); skeleton(); loadListings();
   if (can.super()) loadTrash();
 }
 function endSession(msg) {
-  S.token = ''; store.set(''); S.user = null;
+  S.token = ''; store.set('rex_token', ''); S.user = null;
   $$('.sheet.open').forEach(s => closeSheet(s)); closeLB();
   showLogin(msg || '');
 }
@@ -685,33 +810,27 @@ async function loadListings() {
   } catch (e) {
     if (e.code === 'AUTH' || S.view !== 'listings') return;
     $('#sub').textContent = 'Listings could not load';
-    $('#grid').innerHTML = errBox(e.message, 'reload');
+    $('#grid').innerHTML = errBox(e.message);
   }
 }
 async function loadTrash() {
-  try {
-    const r = await api('trash'); S.trash = r.listings.reverse();
-    renderTabs(); if (S.view === 'trash') renderTrash();
-  } catch (e) { if (e.code !== 'AUTH' && S.view === 'trash') $('#trash-list').innerHTML = errBox(e.message, 'reload'); }
+  try { const r = await api('trash'); S.trash = r.listings.reverse(); renderTabs(); if (S.view === 'trash') renderTrash(); }
+  catch (e) { if (e.code !== 'AUTH' && S.view === 'trash') $('#trash-list').innerHTML = errBox(e.message); }
 }
 async function loadUsers() {
-  try {
-    const r = await api('users'); S.users = r.users;
-    if (S.view === 'team') renderTeam();
-  } catch (e) { if (e.code !== 'AUTH' && S.view === 'team') $('#team-list').innerHTML = errBox(e.message, 'reload'); }
+  try { const r = await api('users'); S.users = r.users; if (S.view === 'team') renderTeam(); }
+  catch (e) { if (e.code !== 'AUTH' && S.view === 'team') $('#team-list').innerHTML = errBox(e.message); }
 }
 function reloadView() {
   if (S.view === 'listings') { skeleton(); loadListings(); }
   if (S.view === 'trash') { S.trash = null; renderTrash(); loadTrash(); }
   if (S.view === 'team') { S.users = null; renderTeam(); loadUsers(); }
 }
-const errBox = (msg, act) => `<div class="empty"><h3>Couldn't load this page</h3><p>${esc(msg)}</p><button class="btn btn-p" data-act="${act}">Try again</button></div>`;
+const errBox = msg => `<div class="empty"><h3>Couldn't load this page</h3><p>${esc(msg)}</p><button class="btn btn-p" data-act="reload">Try again</button></div>`;
 
-/* ── Shell & views ── */
+/* ── Shell ── */
 function renderTabs() {
-  const t = $('#tabs');
-  t.hidden = !can.super();
-  if (!can.super()) return;
+  const t = $('#tabs'); t.hidden = !can.super(); if (!can.super()) return;
   const n = S.trash ? S.trash.length : 0;
   t.innerHTML = [['listings', 'Listings'], ['trash', 'Trash', n], ['team', 'Team']]
     .map(([v, l, c]) => `<button class="tab${S.view === v ? ' on' : ''}" data-view="${v}" aria-current="${S.view === v}">${l}${c ? `<em>${c}</em>` : ''}</button>`).join('');
@@ -721,7 +840,7 @@ function renderShell() {
   ['listings', 'trash', 'team'].forEach(v => $('#v-' + v).hidden = S.view !== v);
   $('#h1').textContent = { listings: 'Property listings', trash: 'Trash', team: 'Team' }[S.view];
   const prim = { listings: 'Add listing', team: 'Add member' }[S.view] || '';
-  $$('[data-act="primary"]').forEach(b => { b.hidden = !prim; b.querySelector('.lbl').textContent = prim; });
+  $$('[data-act="primary"]').forEach(b => { b.hidden = !prim; const l = b.querySelector('.lbl'); if (l) l.textContent = prim; });
 }
 function setView(v) {
   if (v === S.view) return;
@@ -731,13 +850,12 @@ function setView(v) {
   if (v === 'team') { renderTeam(); loadUsers(); }
 }
 
-/* Listings */
+/* ── Listings ── */
 function skeleton() {
   $('#grid').innerHTML = Array.from({ length: 6 }, () => `<div><div class="sk sk-img"></div><div class="sk sk-line" style="width:45%;height:18px;margin-top:14px"></div><div class="sk sk-line" style="width:75%"></div><div class="sk sk-line" style="width:55%"></div></div>`).join('');
 }
 function carHTML(l, w, badge = true) {
-  const imgs = imgsOf(l);
-  const b = badge ? pill(l.status) : '';
+  const imgs = imgsOf(l), b = badge ? pill(l.status) : '';
   if (!imgs.length) return `<div class="car"><div class="car-empty">${I.img}<span>No photos yet</span></div>${b}</div>`;
   const multi = imgs.length > 1;
   return `<div class="car" data-car="${esc(l.id)}">
@@ -749,8 +867,29 @@ function carHTML(l, w, badge = true) {
     ${b}
   </div>`;
 }
+function factsOf(l) {
+  const t = l.type || 'Residential', f = [];
+  if (t === 'Land') {
+    f.push([I.land, l.kind ? `${l.kind} land` : 'Land']);
+    if (l.size) f.push([I.size, sqm(l.size)]);
+    if (l.title) f.push([I.doc, shortTitle(l.title)]);
+  } else if (t === 'Commercial') {
+    f.push([I.bldg, l.kind || 'Commercial']);
+    if (l.size) f.push([I.size, sqm(l.size)]);
+    if (l.parking) f.push([I.car, `${l.parking} parking`]);
+  } else if (t === 'Short Let') {
+    f.push([I.key, 'Short let']);
+    if (l.beds) f.push([I.bed, beds(l.beds)]);
+    if (l.guests) f.push([I.users, `${l.guests} guests`]);
+  } else {
+    f.push([I.home, l.kind || 'Residential']);
+    if (l.beds) f.push([I.bed, beds(l.beds)]);
+    if (l.baths) f.push([I.bath, baths(l.baths)]);
+    if (l.size) f.push([I.size, sqm(l.size)]);
+  }
+  return f.map(([i, v]) => `<span>${i}${esc(v)}</span>`).join('');
+}
 function cardHTML(l) {
-  const b = beds(l.beds);
   return `<article class="card" data-open="${esc(l.id)}">
     ${carHTML(l, 800)}
     <div class="cb">
@@ -765,11 +904,7 @@ function cardHTML(l) {
           <button class="ibtn del" data-del="${esc(l.id)}" aria-label="Move listing to trash">${I.trash}</button>
         </div>` : ''}
       </div>
-      <div class="facts">
-        <span>${I.home}${esc(l.type || 'Residential')}</span>
-        ${b ? `<span>${I.bed}${esc(b)}</span>` : ''}
-        ${l.size ? `<span>${I.size}${esc(l.size)}</span>` : ''}
-      </div>
+      <div class="facts">${factsOf(l)}</div>
     </div>
   </article>`;
 }
@@ -782,19 +917,18 @@ function renderListings() {
     .map(([v, t, n]) => `<button class="chip${S.status === v ? ' on' : ''}" data-status="${esc(v)}" aria-pressed="${S.status === v}">${t}<em>${n}</em></button>`).join('');
   $('#chips-t').innerHTML = [['all', 'All types'], ...TYPES.map(t => [t, t])]
     .map(([v, t]) => `<button class="chip${S.type === v ? ' on' : ''}" data-type="${esc(v)}" aria-pressed="${S.type === v}">${t}</button>`).join('');
-
   const q = S.q.toLowerCase();
   const list = data.filter(l =>
     (S.status === 'all' || l.status === S.status) && (S.type === 'all' || l.type === S.type) &&
-    (!q || [l.name, l.location, l.agent, l.notes, l.addedBy].some(v => String(v || '').toLowerCase().includes(q))));
+    (!q || [l.name, l.location, l.agent, l.notes, l.addedBy, l.contactName, l.kind].some(v => String(v || '').toLowerCase().includes(q))));
   const grid = $('#grid');
-  if (!data.length) { grid.innerHTML = `<div class="empty"><h3>No listings yet</h3><p>Add your first property with photos, price and agent details.</p><button class="btn btn-p" data-act="primary">${I.plus}Add listing</button></div>`; return; }
+  if (!data.length) { grid.innerHTML = `<div class="empty"><h3>No listings yet</h3><p>Add your first property with photos, price and a person of contact.</p><button class="btn btn-p" data-act="primary">${I.plus}Add listing</button></div>`; return; }
   if (!list.length) { grid.innerHTML = `<div class="empty"><h3>No matches</h3><p>Try a different search or clear the filters.</p><button class="btn btn-g" data-act="clear">Clear filters</button></div>`; return; }
   grid.innerHTML = list.map(cardHTML).join('');
   bindCars(grid);
 }
 
-/* Trash */
+/* ── Trash ── */
 function renderTrash() {
   const box = $('#trash-list');
   if (!S.trash) { $('#sub').textContent = 'Loading trash…'; box.className = 'list'; box.innerHTML = Array.from({ length: 3 }, () => `<div class="tr"><div class="tr-thumb sk"></div><div class="tr-body"><div class="sk sk-line" style="width:60%;margin-top:4px"></div><div class="sk sk-line" style="width:40%"></div></div></div>`).join(''); return; }
@@ -819,7 +953,7 @@ function renderTrash() {
   }).join('');
 }
 
-/* Team */
+/* ── Team ── */
 function renderTeam() {
   const box = $('#team-list');
   if (!S.users) { $('#sub').textContent = 'Loading team…'; box.innerHTML = Array.from({ length: 3 }, () => `<div class="row"><div class="av sk"></div><div class="row-t"><div class="sk sk-line" style="width:50%;margin:0"></div><div class="sk sk-line" style="width:70%;margin-top:8px"></div></div></div>`).join(''); return; }
@@ -875,10 +1009,33 @@ function dialog({ title, text = '', html = '', ok = 'OK', cancel = 'Cancel', dan
 function answer(v) { const r = S.dlg; S.dlg = null; closeSheet($('#sh-dialog')); if (r) r(v); }
 
 /* ── Detail ── */
+function personHTML(name, phone, label, cls, msg) {
+  const tel = String(phone || '').replace(/\s/g, '');
+  return `<div class="person ${cls}">
+    <div class="av">${esc(initials(name))}</div>
+    <div class="person-t"><b>${esc(name || 'No name added')}</b><span>${esc(label)}${phone ? ` · ${esc(phone)}` : ''}</span></div>
+    ${phone ? `<a href="tel:${esc(tel)}" aria-label="Call ${esc(name)}">${I.phone}</a>
+      <a class="wa" href="https://wa.me/${intl(phone)}${msg ? `?text=${encodeURIComponent(msg)}` : ''}" target="_blank" rel="noopener" aria-label="WhatsApp ${esc(name)}">${I.wa}</a>` : ''}
+  </div>`;
+}
 function openDetail(id) {
   const l = find(id); if (!l) return;
-  const b = beds(l.beds);
+  const c = cfgOf(l), has = f => c.fields.includes(f);
   $('#d-title').textContent = l.name || 'Listing';
+  const specs = [
+    ['Type', l.type || 'Residential'],
+    has('kind') && [c.kindLabel, l.kind],
+    has('beds') && ['Bedrooms', l.beds],
+    has('baths') && ['Bathrooms', l.baths],
+    has('guests') && ['Max guests', l.guests],
+    has('size') && [c.sizeLabel.replace(' (sqm)', ''), sqm(l.size)],
+    has('parking') && ['Parking spaces', l.parking],
+    has('title') && ['Title document', l.title],
+    ['Payment', l.period],
+    ['Listed', fmtDate(l.date)],
+    ['Added by', l.addedBy]
+  ].filter(x => x && num(x[1]));
+  const msg = `Hello${l.contactName ? ' ' + String(l.contactName).split(' ')[0] : ''}, this is REX RealtyCo about "${l.name}" in ${l.location}. Is it still available?`;
   $('#d-body').innerHTML = `
     ${imgsOf(l).length ? `<div class="d-car">${carHTML(l, 1200, false)}</div>` : ''}
     <div class="d-top">
@@ -887,20 +1044,10 @@ function openDetail(id) {
       <div class="d-name">${esc(l.name) || 'Untitled listing'}</div>
       <div class="loc">${I.pin}<span>${esc(l.location) || '—'}</span></div>
     </div>
-    <div class="specs">
-      <div class="spec"><span>Type</span><b>${esc(l.type || '—')}</b></div>
-      <div class="spec"><span>Bedrooms</span><b>${esc(b || '—')}</b></div>
-      <div class="spec"><span>Size</span><b>${esc(l.size || '—')}</b></div>
-      <div class="spec"><span>Payment</span><b>${esc(l.period || 'Outright')}</b></div>
-      <div class="spec"><span>Listed</span><b>${fmtDate(l.date)}</b></div>
-      <div class="spec"><span>Added by</span><b>${esc(l.addedBy || '—')}</b></div>
-    </div>
+    <div class="specs">${specs.map(([k, v]) => `<div class="spec"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('')}</div>
     ${l.notes ? `<div class="d-sec"><h3>Notes</h3><p>${esc(l.notes)}</p></div>` : ''}
-    ${l.agent || l.phone ? `<div class="agent">
-      <div class="av">${esc(initials(l.agent))}</div>
-      <div class="agent-t"><b>${esc(l.agent || 'REX agent')}</b><span>${esc(l.phone || 'No phone added')}</span></div>
-      ${l.phone ? `<a href="tel:${esc(String(l.phone).replace(/\s/g, ''))}" aria-label="Call agent">${I.phone}</a><a class="wa" href="${waLink(l.phone)}" target="_blank" rel="noopener" aria-label="WhatsApp agent">${I.wa}</a>` : ''}
-    </div>` : ''}`;
+    ${l.contactName || l.contactPhone ? `<div class="d-sec"><h3>Person of contact</h3>${personHTML(l.contactName, l.contactPhone, l.contactRole || 'Owner', 'contact', msg)}</div>` : ''}
+    ${l.agent || l.phone ? `<div class="d-sec"><h3>REX agent</h3>${personHTML(l.agent, l.phone, 'Agent', '', '')}</div>` : ''}`;
   $('#d-foot').innerHTML = can.edit()
     ? `<button class="btn btn-d" data-del="${esc(l.id)}">${I.trash}Delete</button><button class="btn btn-p" data-edit="${esc(l.id)}">${I.edit}Edit listing</button>`
     : `<button class="btn btn-g" data-close>Close</button>`;
@@ -908,14 +1055,62 @@ function openDetail(id) {
 }
 
 /* ── Listing form ── */
-const F = ['name', 'loc', 'type', 'status', 'price', 'period', 'beds', 'size', 'agent', 'phone', 'notes'];
-const KEY = { loc: 'location' };
+function fillSelect(sel, opts, value, placeholder) {
+  const list = [...opts];
+  if (value && !list.includes(value)) list.push(value);
+  $(sel).innerHTML = (placeholder ? `<option value="">${esc(placeholder)}</option>` : '') + list.map(o => `<option>${esc(o)}</option>`).join('');
+  $(sel).value = value && list.includes(value) ? value : (placeholder ? '' : list[0]);
+}
+function renderSeg() {
+  $('#f-seg').innerHTML = TYPES.map(t => `<button type="button" role="radio" aria-checked="${S.ftype === t}" class="${S.ftype === t ? 'on' : ''}" data-ftype="${esc(t)}">${TYPE_ICON[t]}${esc(t)}</button>`).join('');
+  $('#c-seg').innerHTML = CONTACT_ROLES.map(r => `<button type="button" role="radio" aria-checked="${S.crole === r}" class="${S.crole === r ? 'on' : ''}" data-crole="${esc(r)}">${r === 'Owner' ? I.user : I.shield}${esc(r)}</button>`).join('');
+}
+function applyType(t, keep = {}) {
+  S.ftype = TYPE_CFG[t] ? t : 'Residential';
+  const c = TYPE_CFG[S.ftype];
+  renderSeg();
+  fillSelect('#f-status', c.statuses, keep.status ?? $('#f-status').value);
+  fillSelect('#f-period', c.periods, keep.period ?? $('#f-period').value);
+  fillSelect('#f-kind', c.kinds, keep.kind ?? '', `Select ${c.kindLabel.toLowerCase()}`);
+  fillSelect('#f-title-doc', TITLES, keep.title ?? $('#f-title-doc').value, 'Select title document');
+  $('#f-kind-l').textContent = c.kindLabel;
+  $('#f-size-l').textContent = c.sizeLabel;
+  $('#f-name').placeholder = c.namePh;
+  $('#f-notes').placeholder = c.notesPh;
+  $('#f-price-l').textContent = c.periods.length === 1 && c.periods[0] === 'Per Night' ? 'Price per night' : 'Price';
+  $('#w-period').hidden = c.periods.length < 2;
+  OPTIONAL.forEach(f => $('#w-' + f).hidden = !c.fields.includes(f));
+  // tidy the two-column grid: a lone half-width field stretches to full width
+  const halves = [...$$('#f-grid > .fld.half')].filter(el => !el.hidden);
+  halves.forEach(el => el.classList.remove('full'));
+  if (halves.length % 2) halves[halves.length - 1].classList.add('full');
+  const st = $('#w-status'); if (!$('#w-period').hidden) st.classList.remove('full');
+}
+function formatPrice(el) {
+  const caret = el.selectionStart ?? el.value.length;
+  const digitsBefore = el.value.slice(0, caret).replace(/\D/g, '').length;
+  const digits = el.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 15);
+  el.value = digits ? commas(digits) : '';
+  let pos = 0, seen = 0;
+  while (pos < el.value.length && seen < digitsBefore) { if (/\d/.test(el.value[pos])) seen++; pos++; }
+  if (document.activeElement === el) el.setSelectionRange(pos, pos);
+  $('#f-price-w').textContent = priceWords(digits);
+}
 function openForm(id) {
   const l = id ? find(id) : null;
   S.editId = l ? l.id : null;
   $('#f-title').textContent = l ? 'Edit listing' : 'New listing';
-  const def = { type: 'Residential', status: 'For Sale', period: 'Outright', agent: S.user.name };
-  F.forEach(f => { $('#f-' + f).value = l ? (l[KEY[f] || f] ?? '') : (def[f] || ''); });
+  const v = k => l ? num(l[k]) : '';
+  $('#f-name').value = v('name'); $('#f-loc').value = v('location');
+  $('#f-price').value = v('price'); $('#f-beds').value = v('beds'); $('#f-baths').value = v('baths');
+  $('#f-size').value = v('size'); $('#f-parking').value = v('parking'); $('#f-guests').value = v('guests');
+  $('#f-notes').value = v('notes');
+  $('#f-agent').value = l ? v('agent') : S.user.name; $('#f-phone').value = v('phone');
+  $('#c-name').value = v('contactName'); $('#c-phone').value = v('contactPhone');
+  S.crole = CONTACT_ROLES.includes(v('contactRole')) ? v('contactRole') : 'Owner';
+  const p = $('#f-price');
+  if (/^[\d,.\s]*$/.test(p.value)) formatPrice(p); else $('#f-price-w').textContent = '';
+  applyType(l ? l.type : 'Residential', { status: l ? l.status : 'For Sale', period: l ? l.period : '', kind: v('kind'), title: v('title') });
   S.photos = l ? imgsOf(l).map(url => ({ url })) : [];
   renderPhotos(); closeSheet($('#sh-detail')); openSheet('sh-form'); $('#f-body').scrollTop = 0;
 }
@@ -973,13 +1168,21 @@ function addFiles(files) {
 }
 async function saveListing() {
   if (S.photos.some(p => p.busy)) return toast('Photos are still uploading. Save once they finish.', true);
-  const v = f => $('#f-' + f).value.trim();
-  if (!v('name')) { $('#f-name').focus(); return toast('Add a property name to save.', true); }
-  if (!v('loc')) { $('#f-loc').focus(); return toast('Add a location to save.', true); }
+  const c = TYPE_CFG[S.ftype], has = f => c.fields.includes(f);
+  const v = sel => $(sel).value.trim();
+  if (!v('#f-name')) { $('#f-name').focus(); return toast('Add a property name to save.', true); }
+  if (!v('#f-loc')) { $('#f-loc').focus(); return toast('Add a location to save.', true); }
+  if (v('#c-phone') && !v('#c-name')) { $('#c-name').focus(); return toast("Add the contact person's name.", true); }
   const b = $('#f-save'); b.disabled = true; b.textContent = 'Saving…';
   const listing = {
-    name: v('name'), location: v('loc'), type: v('type'), status: v('status'), price: v('price'), period: v('period'),
-    beds: v('beds'), size: v('size'), agent: v('agent'), phone: v('phone'), notes: v('notes'),
+    type: S.ftype, name: v('#f-name'), location: v('#f-loc'), status: v('#f-status'),
+    period: c.periods.length > 1 ? v('#f-period') : c.periods[0],
+    price: v('#f-price'),
+    kind: has('kind') ? v('#f-kind') : '', beds: has('beds') ? v('#f-beds') : '', baths: has('baths') ? v('#f-baths') : '',
+    size: has('size') ? v('#f-size') : '', parking: has('parking') ? v('#f-parking') : '',
+    guests: has('guests') ? v('#f-guests') : '', title: has('title') ? v('#f-title-doc') : '',
+    notes: v('#f-notes'), agent: v('#f-agent'), phone: v('#f-phone'),
+    contactName: v('#c-name'), contactPhone: v('#c-phone'), contactRole: v('#c-name') || v('#c-phone') ? S.crole : '',
     images: S.photos.map(p => p.url).filter(Boolean).join(',')
   };
   try {
@@ -999,16 +1202,14 @@ async function softDelete(id) {
   try {
     await api('deleteListing', { id });
     S.data = S.data.filter(x => String(x.id) !== String(id)); renderListings();
-    toast('Moved to trash');
-    if (can.super()) loadTrash();
+    toast('Moved to trash'); if (can.super()) loadTrash();
   } catch (e) { if (e.code !== 'AUTH') toast(e.message, true); }
 }
 async function restore(id) {
   try {
     await api('restoreListing', { id });
     S.trash = S.trash.filter(x => String(x.id) !== String(id));
-    renderTabs(); renderTrash(); toast('Listing restored');
-    loadListings();
+    renderTabs(); renderTrash(); toast('Listing restored'); loadListings();
   } catch (e) { if (e.code !== 'AUTH') toast(e.message, true); }
 }
 async function purge(id) {
@@ -1059,8 +1260,7 @@ async function saveUser() {
   try {
     if (editing) await api('updateUser', { id: S.editUserId, name, role, active: $('#u-active').checked, password: password || undefined });
     else await api('createUser', { name, email, role, password });
-    closeSheet($('#sh-user'));
-    loadUsers();
+    closeSheet($('#sh-user')); loadUsers();
     if (!editing || password) {
       const link = location.origin + location.pathname;
       const copy = await dialog({
@@ -1069,10 +1269,8 @@ async function saveUser() {
         html: `<div class="cred"><div><span>Link</span><b>${esc(link)}</b></div><div><span>Email</span><b>${esc(email)}</b></div><div><span>Password</span><b>${esc(password)}</b></div></div>`,
         ok: 'Copy details', cancel: 'Done'
       });
-      if (copy) {
-        const txt = `REX listings login\nLink: ${link}\nEmail: ${email}\nPassword: ${password}`;
-        navigator.clipboard.writeText(txt).then(() => toast('Login details copied')).catch(() => toast("Couldn't copy. Select the details and copy them manually.", true));
-      }
+      if (copy) navigator.clipboard.writeText(`REX listings login\nLink: ${link}\nEmail: ${email}\nPassword: ${password}`)
+        .then(() => toast('Login details copied')).catch(() => toast("Couldn't copy. Select the details and copy them manually.", true));
     } else toast('Changes saved');
   } catch (e) { if (e.code !== 'AUTH') toast(e.message, true); }
   b.disabled = false; b.textContent = editing ? 'Save changes' : 'Add member';
@@ -1081,6 +1279,7 @@ async function saveUser() {
 /* ── Account ── */
 function openMenu() {
   $('#me-card').innerHTML = `<div class="av">${esc(initials(S.user.name))}</div><div style="min-width:0"><b>${esc(S.user.name)}</b><span>${esc(S.user.email)}</span><span class="role r-${S.user.role}">${ROLE[S.user.role]}</span></div>`;
+  $('#dark-sw').checked = document.documentElement.dataset.theme === 'dark';
   openSheet('sh-menu');
 }
 function openPass() {
@@ -1140,6 +1339,7 @@ document.addEventListener('click', e => {
   if ((el = t.closest('[data-act]'))) {
     const a = el.dataset.act;
     if (a === 'primary') return S.view === 'team' ? openUserForm() : openForm();
+    if (a === 'theme') return setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
     if (a === 'menu') return openMenu();
     if (a === 'logout') return logout();
     if (a === 'pass') return openPass();
@@ -1147,6 +1347,8 @@ document.addEventListener('click', e => {
     if (a === 'reload') return reloadView();
     if (a === 'clear') { S.status = 'all'; S.type = 'all'; S.q = ''; $('#q').value = ''; return renderListings(); }
   }
+  if ((el = t.closest('[data-ftype]'))) return applyType(el.dataset.ftype);
+  if ((el = t.closest('[data-crole]'))) { S.crole = el.dataset.crole; return renderSeg(); }
   if ((el = t.closest('[data-view]'))) return setView(el.dataset.view);
   if ((el = t.closest('[data-edit]'))) return openForm(el.dataset.edit);
   if ((el = t.closest('[data-del]'))) return softDelete(el.dataset.del);
@@ -1155,7 +1357,8 @@ document.addEventListener('click', e => {
   if ((el = t.closest('[data-thumb]'))) return openLB(el.dataset.thumb, 0);
   if ((el = t.closest('[data-user]'))) return openUserForm(el.dataset.user);
   if ((el = t.closest('[data-nav]'))) return stepCar(el.parentElement.querySelector('.car-track'), +el.dataset.nav);
-  if ((el = t.closest('[data-img]'))) { const car = el.closest('[data-car]'); if (car) return openLB(car.dataset.car, +el.dataset.img); }
+  // Photos inside the details view open full screen; photos on listing cards open the details (handled below)
+  if ((el = t.closest('[data-img]')) && !el.closest('.card')) { const car = el.closest('[data-car]'); if (car) return openLB(car.dataset.car, +el.dataset.img); }
   if ((el = t.closest('[data-status]'))) { S.status = el.dataset.status; return renderListings(); }
   if ((el = t.closest('[data-type]'))) { S.type = el.dataset.type; return renderListings(); }
   if ((el = t.closest('[data-rm]'))) { S.photos.splice(+el.dataset.rm, 1); return renderPhotos(); }
@@ -1163,6 +1366,7 @@ document.addEventListener('click', e => {
   if ((el = t.closest('[data-open]'))) return openDetail(el.dataset.open);
 });
 
+$('#f-price').addEventListener('input', e => formatPrice(e.target));
 $('#l-go').addEventListener('click', doLogin);
 ['#l-email', '#l-pass'].forEach(s => $(s).addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); }));
 $('#f-save').addEventListener('click', saveListing);
